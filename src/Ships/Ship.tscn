@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/Ships/Ship.gd" type="Script" id=1]
+[ext_resource path="res://assets/a_wing/model/scene.gltf" type="PackedScene" id=2]
+[ext_resource path="res://src/Ships/ShipShooting.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=5]
+[ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=6]
+[ext_resource path="res://src/Ships/Input/ShipInput.gd" type="Script" id=7]
+[ext_resource path="res://src/Ships/Input/ShipPlayerInput.gd" type="Script" id=8]
+[ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/HealthSystem/ShieldSystem.gd" type="Script" id=10]
+[ext_resource path="res://src/Ships/VehicleNetwork.gd" type="Script" id=11]
+[ext_resource path="res://src/Ships/UI/ShipPlayerHUD.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Ships/ShipAIInput.gd" type="Script" id=13]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 6.5, 2.5, 9.6 )
+
+[node name="Ship" type="RigidBody" groups=["Ships"]]
+pause_mode = 1
+collision_layer = 4
+mode = 3
+gravity_scale = 0.0
+continuous_cd = true
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="ShipMesh" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, -0.2, 0, -1.5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Tail" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -1.5, 0 )
+
+[node name="CameraPosition" type="Position3D" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, -30 )
+
+[node name="LeaveTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="Shooting" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="Shooting"]
+stream = ExtResource( 4 )
+
+[node name="Audio2" type="AudioStreamPlayer" parent="Shooting"]
+stream = ExtResource( 5 )
+
+[node name="Physics" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Tween" type="Tween" parent="Physics"]
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="Player" type="Node" parent="Input"]
+script = ExtResource( 8 )
+
+[node name="AI" type="Node" parent="Input"]
+script = ExtResource( 13 )
+
+[node name="HealthSystem" parent="." instance=ExtResource( 9 )]
+script = ExtResource( 10 )
+MAX_SHIELD = 300.0
+MAX_HEALTH = 1200
+
+[node name="ShieldTimer" type="Timer" parent="HealthSystem"]
+wait_time = 7.0
+one_shot = true
+
+[node name="VehicleNetwork" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="PlayerHUD" parent="." instance=ExtResource( 12 )]
+
+[connection signal="timeout" from="LeaveTimer" to="." method="_on_LeaveTimer_timeout"]
+[connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]
+[connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
+[connection signal="timeout" from="HealthSystem/ShieldTimer" to="HealthSystem" method="_on_ShieldTimer_timeout"]
+
+[editable path="ShipMesh"]
