@@ -59,7 +59,6 @@ func _process(delta : float) -> void:
 			$LifeBar.hide()
 	"""
 
-
 func _physics_process(delta : float) -> void:
 	if $Center.visible:
 		$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * ship_sensitivity

@@ -11,6 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(get_node("ShipMesh").rotation_degrees)
 	# no cal fer tot açò si no ets server
 	# match
 	if not input: # s'ha de desassignar, llavors; o fer-ho per senyals

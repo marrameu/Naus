@@ -54,46 +54,27 @@ func _physics_process(delta : float) -> void:
 func move_camera(delta : float) -> void:
 	if not target:
 		return
+	global_transform.origin = target.global_transform.origin
 	
-	if true: #not Input.is_action_pressed(look_behind_action):
-		global_transform.origin = target.global_transform.origin
-	else:
-		global_transform.origin = target.get_parent().global_transform.origin + target.get_parent().global_transform.basis.xform(Vector3(target.translation.x, target.translation.y, -target.translation.z))
-	
-	if false: #Input.is_action_pressed(look_behind_action):
-		target.rotation_degrees = Vector3.ZERO
-		global_transform.basis = target.global_transform.basis.get_euler()
-	else:
-		target.rotation_degrees = Vector3(0, 180, 0)
-		global_transform.basis = target.global_transform.basis.get_euler()
+	target.rotation_degrees = Vector3(0, 180, 0)
+	global_transform.basis = target.global_transform.basis.get_euler()
 	
 	# té cap effecte açò?, potser s'hauria de fer diferent l'acció de mirar enrere
 	global_transform.basis = Quat(global_transform.basis).slerp(Quat(target.global_transform.basis), rotate_speed * delta)
 	update_target(delta)
-	
-	# global_transform.origin = global_transform.origin.slerp(target.global_transform.origin, move_speed_test * delta)
-	# var a : Vector3 = target.global_transform.basis.get_euler()
-	# Cambiar para hacer compatible con el look behind
-	# rotation_degrees = rotation_degrees.slerp(Vector3(rad2deg(a.x), rad2deg(a.y), rad2deg(a.z)), rotate_speed_test * delta)
+
 
 func update_target(delta : float):
-	"""
-	# Mirar si la nau esta en moviment, si no ho està, restablir la posició del target i no fer-hi res més
-	if target.get_parent().state != target.get_parent().State.FLYING:
-		# target.global_transform.origin = target.global_transform.origin.linear_interpolate(target.get_parent().to_local(starter_target_position), delta)
-		target.translation = target.translation.linear_interpolate(Vector3(0, 6, -30), delta)
-		horizontal_lean(target.get_node("../ShipMesh"), 0.0)
-		return
-	"""
-	
 	var input := Vector2()
 	
-	input.x = target.get_node("../PlayerHUD").cursor_input.x 
+	input.x = target.get_node("../PlayerHUD").cursor_input.x
 	input.y = target.get_node("../PlayerHUD").cursor_input.y
-	var viewport_size = get_tree().root.get_visible_rect().size
+	# var viewport_size = get_tree().root.get_visible_rect().size
 	
 	input.x = clamp(input.x, -1, 1)
 	input.y = clamp(input.y, -1, 1)
+	
+	print(input)
 	
 	horizontal_lean(target.get_node("../ShipMesh"), input.x)
 	
@@ -106,6 +87,7 @@ func update_target(delta : float):
 	
 	var desired_position = starter_target_position + Vector3(-horizontal, vertical, 0.0)
 	target.translation = target.translation.linear_interpolate(desired_position, delta)
+
 
 func horizontal_lean(target : Spatial, x_input : float, lean_limit : float = 45 , time : float = 0.03) -> void:
 	var target_rotation : Vector3 = target.rotation_degrees
