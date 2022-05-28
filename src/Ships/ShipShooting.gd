@@ -20,16 +20,6 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	time_now += delta
 	
-	if not get_parent().is_player or not get_parent().state == get_parent().State.FLYING:
-		return
-	
-	# Passar també el jugador?
-	if get_tree().has_network_peer():
-		if not get_parent().is_player:
-			return
-		elif not get_parent().is_network_master():
-			return
-	
 	if Input.is_action_pressed(shoot_action) and time_now >= next_times_to_fire[0]:
 		next_times_to_fire[0] = time_now + 1.0 / fire_rates[0]
 		if get_tree().has_network_peer():
@@ -46,7 +36,7 @@ func _process(delta : float) -> void:
 
 func shoot_target() -> Vector3:
 	# Camera
-	var current_cam : Camera = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].ship_camera
+	var current_cam : Camera = get_node("/root/Level/Camera")
 	var space_state = get_parent().get_world().direct_space_state
 	
 	var camera_width_center := 0.0
@@ -56,11 +46,13 @@ func shoot_target() -> Vector3:
 	var shoot_target := Vector3()
 	
 	if current_cam:
-		var viewport : Viewport
+		var viewport : Viewport = get_viewport()
+		"""
 		if get_tree().has_network_peer():
 			viewport = get_node("/root/Main/Splitscreen")._renders[0].viewport
 		else:
 			viewport = get_node("/root/Main/Splitscreen")._renders[get_parent().number_of_player - 1].viewport
+		"""
 		camera_width_center = viewport.get_visible_rect().size.x / 2
 		camera_height_center = viewport.get_visible_rect().size.y / 2
 		
@@ -97,7 +89,7 @@ sync func shoot(bullet_type : int, shoot_target) -> void:
 		bullet = bullet_scene.instance()
 	elif bullet_type == 1:
 		bullet = secondary_bullet_scene.instance()
-	get_node("/root/Main").add_child(bullet)
+	get_node("/root/Level").add_child(bullet)
 	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = (shoot_target - shoot_from).normalized() 

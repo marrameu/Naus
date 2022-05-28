@@ -74,8 +74,6 @@ func update_target(delta : float):
 	input.x = clamp(input.x, -1, 1)
 	input.y = clamp(input.y, -1, 1)
 	
-	print(input)
-	
 	horizontal_lean(target.get_node("../ShipMesh"), input.x)
 	
 	var horizontal := horizontal_turn_move * input.x
