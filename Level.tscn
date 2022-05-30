@@ -42,8 +42,12 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Asteroide" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1531.67, 0, 0 )
+transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, 1531.67, 0, 0 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 4 )]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.817007, 0.103469, -0.567268, 0.504482, 0.348209, 0.790094, 0.279278, -0.931689, 0.232291, 0, 57.0278, 0 )
+shadow_enabled = true
 
 [editable path="Ship"]
