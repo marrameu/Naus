@@ -2,7 +2,6 @@ extends CanvasLayer
 
 # Tots els nodes de la nau agafen l'input des d'aquí, millor que l'agafin des del node PlayerInput
 var cursor_input := Vector2()
-var ship_sensitivity := 75.0
 
 var _cursor_visible := false
 var _cursor_limit := 450
@@ -61,7 +60,7 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	if $Center.visible:
-		$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * ship_sensitivity
+		$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * Utilities.ship_sensitivity
 		$Center/CursorPivot/Cursor.rect_position = $Center/CursorPivot/Cursor.rect_position.clamped(_cursor_limit)
 		
 		if $Center/CursorPivot/Cursor.rect_position.length() > _min_position:
