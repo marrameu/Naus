@@ -1,13 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BigShip.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Hdri/starfield.hdr" type="Texture" id=6]
 
 [sub_resource type="PrismMesh" id=1]
 size = Vector3( 50, 50, 50 )
+
+[sub_resource type="PanoramaSky" id=2]
+panorama = ExtResource( 6 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+ambient_light_sky_contribution = 0.0
+dof_blur_near_distance = 20.2
+dof_blur_near_transition = 3.14
 
 [node name="Level" type="Spatial"]
 
@@ -39,6 +50,10 @@ transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.817007, 0.103469, -0.567268, 0.504482, 0.348209, 0.790094, 0.279278, -0.931689, 0.232291, 0, 57.0278, 0 )
+light_energy = 3.0
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
 
 [editable path="Ship"]
