@@ -19,7 +19,6 @@ extents = Vector3( 6.5, 2.5, 9.6 )
 
 [node name="Ship" type="RigidBody" groups=["Ships"]]
 pause_mode = 1
-collision_layer = 4
 mode = 3
 gravity_scale = 0.0
 continuous_cd = true

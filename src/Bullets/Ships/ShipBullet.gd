@@ -35,7 +35,7 @@ func _process(delta : float) -> void:
 	
 	if result:
 		# Explosió, overlap_shpere()
-		if result.collider.is_in_group("Ships"):
+		if result.collider.is_in_group("Damagable"):
 			var ship = result.collider # : Ship
 			if get_tree().has_network_peer():
 				if get_tree().is_network_server():
