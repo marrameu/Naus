@@ -1,9 +1,13 @@
 extends Camera
 
-export var target_path : NodePath
+export var tp_target_path : NodePath
+export var fp_target_path : NodePath
 var target : Position3D
 var starter_target_position := Vector3()
 var rotate_speed := 90.0
+
+var tp_rotate_speed := 90.0
+var fp_rotate_speed := 90.0 *2
 
 # var move_speed_slerp := 90.0
 # var rotate_speedslerp := 80.0
@@ -11,6 +15,15 @@ var rotate_speed := 90.0
 var horizontal_turn_move := 6.0
 var vertical_turn_up_move := 6.0
 var vertical_turn_down_move := 3.0
+
+var tp_horizontal_turn_move := 6.0
+var tp_vertical_turn_up_move := 6.0
+var tp_vertical_turn_down_move := 3.0
+
+var fp_horizontal_turn_move := 3.0
+var fp_vertical_turn_up_move := 3.0
+var fp_vertical_turn_down_move := 1.5
+
 
 var zooming := false
 
@@ -23,15 +36,37 @@ var camera_left_action := "camera_left"
 var camera_up_action := "camera_up"
 var camera_down_action := "camera_down"
 
+
 func _ready():
+	init_cam()
+	make_current()
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("change_cam"):
+		Utilities.first_person = !Utilities.first_person
+		init_cam()
+
+
+func init_cam():
+	if  Utilities.first_person:
+		target = get_node(fp_target_path)
+		rotate_speed = fp_rotate_speed
+		horizontal_turn_move = fp_horizontal_turn_move
+		vertical_turn_up_move = fp_vertical_turn_up_move
+		vertical_turn_down_move = fp_vertical_turn_down_move
+		
+	else:
+		target = get_node(tp_target_path)
+		rotate_speed = tp_rotate_speed
+		horizontal_turn_move = tp_horizontal_turn_move
+		vertical_turn_up_move = tp_vertical_turn_up_move
+		vertical_turn_down_move = tp_vertical_turn_down_move
 	
-	target = get_node(target_path)
 	global_transform.origin = target.global_transform.origin
 	global_transform.basis = target.global_transform.basis.get_euler()
 	starter_target_position = target.translation
-	
-	
-	make_current()
+
 
 func _physics_process(delta : float) -> void:
 	if not target:
