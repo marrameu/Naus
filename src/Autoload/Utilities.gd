@@ -9,6 +9,8 @@ var ship_sensitivity := 75.0
 # Time
 var time := 0.0
 
+var first_person := false
+
 func play_button_audio() -> void:
 	var button_audio : AudioStreamPlayer = AudioStreamPlayer.new()
 	button_audio.set_stream(preload("res://assets/audio/button_sfx.wav"))

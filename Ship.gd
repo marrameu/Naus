@@ -19,3 +19,8 @@ func _process(delta):
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)
 	$Physics.set_physics_input(final_linear_input, final_angular_input)
+
+
+func _on_HealthSystem_die():
+	print("i die")
+	translation = Vector3.ZERO
