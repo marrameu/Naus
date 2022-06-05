@@ -7,7 +7,7 @@ var starter_target_position := Vector3()
 var rotate_speed := 90.0
 
 var tp_rotate_speed := 90.0
-var fp_rotate_speed := 90.0 *2
+var fp_rotate_speed := 90 * 2
 
 # var move_speed_slerp := 90.0
 # var rotate_speedslerp := 80.0
@@ -20,9 +20,9 @@ var tp_horizontal_turn_move := 6.0
 var tp_vertical_turn_up_move := 6.0
 var tp_vertical_turn_down_move := 3.0
 
-var fp_horizontal_turn_move := 3.0
-var fp_vertical_turn_up_move := 3.0
-var fp_vertical_turn_down_move := 1.5
+var fp_horizontal_turn_move := 0
+var fp_vertical_turn_up_move := 0
+var fp_vertical_turn_down_move := 0
 
 
 var zooming := false
