@@ -40,3 +40,9 @@ func _on_CheckVsync_toggled(button_pressed):
 		OS.vsync_enabled = true
 	else:
 		OS.vsync_enabled = false
+
+
+func _on_Atrs_pressed():
+	$"../".show()
+	self.hide()
+	

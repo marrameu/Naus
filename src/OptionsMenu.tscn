@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/OptionsMenu.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/interface/Fonts/Manrope/static/Manrope-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.219608, 0.219608, 0.219608, 0.498039 )
 
 [node name="OptionsMenu" type="Control"]
 anchor_right = 1.0
@@ -157,15 +167,28 @@ margin_top = -8.0
 margin_right = 1138.0
 margin_bottom = 608.0
 
+[node name="Atrás" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 26.0
+margin_top = 562.0
+margin_right = -1018.0
+margin_bottom = -28.0
+text = "Atrás"
+
 [node name="FpsNode" type="Node" parent="."]
 
 [node name="FPS" type="Label" parent="FpsNode"]
 visible = false
 margin_right = 92.0
 margin_bottom = 47.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 text = "FPS"
+align = 1
 
 [connection signal="toggled" from="TabContainer/Graphics/GridContainer/CheckVsync" to="." method="_on_CheckVsync_toggled"]
 [connection signal="toggled" from="TabContainer/Graphics/GridContainer/CheckDisplayFps" to="." method="_on_CheckDisplayFps_toggled"]
 [connection signal="value_changed" from="TabContainer/Audio/GridContainer/MasterVolumSlider" to="." method="_on_MasterVolumSlider_value_changed"]
 [connection signal="value_changed" from="TabContainer/Controls/GridContainer/SensibilitySlider" to="." method="_on_SensibilitySlider_value_changed"]
+[connection signal="pressed" from="Atrás" to="." method="_on_Atrs_pressed"]
