@@ -23,11 +23,13 @@ background_sky = SubResource( 2 )
 background_energy = 0.7
 ambient_light_energy = 0.0
 ambient_light_sky_contribution = 0.0
-fog_color = Color( 0.368627, 0.392157, 0.478431, 1 )
-fog_depth_begin = 500.0
-fog_depth_end = 2000.0
-dof_blur_near_distance = 20.2
-dof_blur_near_transition = 3.14
+tonemap_mode = 4
+glow_enabled = true
+glow_intensity = 0.65
+glow_strength = 0.89
+glow_bloom = 0.79
+glow_blend_mode = 1
+glow_bicubic_upscale = true
 
 [node name="Level" type="Spatial"]
 
@@ -75,15 +77,15 @@ transform = Transform( 0.279008, -0.793125, -0.541394, -0.464626, 0.381903, -0.7
 light_energy = 0.15
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
-
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 bus = "Music"
 script = ExtResource( 8 )
 audio_sfx1 = ExtResource( 10 )
 audio_sfx2 = ExtResource( 7 )
 audio_sfx3 = ExtResource( 9 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
 
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 
