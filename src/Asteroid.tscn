@@ -22,7 +22,7 @@ surfaces/0 = {
 [sub_resource type="SphereShape" id=4]
 radius = 29.3927
 
-[node name="Asteroid" type="StaticBody" groups=["Damagable", "Ships"]]
+[node name="Asteroid" type="StaticBody" groups=["Damagable"]]
 script = ExtResource( 2 )
 
 [node name="Meteoritlod0" type="MeshInstance" parent="."]

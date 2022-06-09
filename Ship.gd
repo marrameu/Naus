@@ -19,8 +19,22 @@ func _process(delta):
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)
 	$Physics.set_physics_input(final_linear_input, final_angular_input)
+	
+	if get_colliding_bodies().size() > 0:
+		for body in get_colliding_bodies():
+			#if not body.is_in_group("Bullets"):
+			Input.start_joy_vibration(0, 0, 1, 1)
+			$HealthSystem.take_damage(INF, true)
+	
+	if Utilities.first_person:
+		$ShipMesh.visible = false
+		$PlayerShipInterior.visible = true
+	else:
+		$ShipMesh.visible = true
+		$PlayerShipInterior.visible = false
 
 
 func _on_HealthSystem_die():
 	print("i die")
+	$HealthSystem.heal(1000)
 	translation = Vector3.ZERO
