@@ -20,7 +20,7 @@ panorama = ExtResource( 6 )
 [sub_resource type="Environment" id=3]
 background_mode = 2
 background_sky = SubResource( 2 )
-background_energy = 0.7
+background_energy = 5.23
 ambient_light_energy = 0.0
 ambient_light_sky_contribution = 0.0
 tonemap_mode = 4
@@ -74,7 +74,7 @@ directional_shadow_max_distance = 200.0
 
 [node name="DirectionalLight2" type="DirectionalLight" parent="."]
 transform = Transform( 0.279008, -0.793125, -0.541394, -0.464626, 0.381903, -0.79892, 0.840403, 0.47445, -0.261952, 0, 61.3448, 0 )
-light_energy = 0.15
+light_energy = 0.4
 shadow_enabled = true
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
