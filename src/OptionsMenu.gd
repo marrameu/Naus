@@ -1,10 +1,10 @@
 extends Control
 
 #Controls
-onready var SensiblitySlider = $TabContainer/Controls/GridContainer/SensibilitySlider
+onready var SensiblitySlider = $MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider
 
 #Audio
-onready var MasterAudioSlider = $TabContainer/Audio/GridContainer/MasterVolumSlider
+onready var MasterAudioSlider = $MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
