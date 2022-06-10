@@ -7,6 +7,7 @@ onready var ship = get_parent()
 var force_multiplier := 1.0
 
 var linear_force := Vector3(0, 0, 200)
+var linear_force_turbo := Vector3(0, 0, 400)
 var angular_force := Vector3(90, 90, 175) / 100.0
 
 var applied_linear_force := Vector3()
@@ -24,6 +25,8 @@ var stabilized := false
 var descense_vel := 0.0
 var DESIRED_DESCENSE_VEL := 5.0
 
+var turbo := false
+
 
 func _process(delta : float) -> void:
 	add_force(applied_linear_force * force_multiplier, delta)
@@ -32,7 +35,10 @@ func _process(delta : float) -> void:
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3):
 	applied_angular_force = angular_input * angular_force
-	applied_linear_force = linear_input * linear_force
+	if turbo:
+		applied_linear_force = linear_force_turbo
+	else:
+		applied_linear_force = linear_input * linear_force
 
 
 func add_force(force : Vector3, delta : float):

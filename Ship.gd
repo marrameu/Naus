@@ -2,7 +2,7 @@ extends RigidBody
 
 
 var input : Node # class per al input
-
+var physics : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,10 +15,14 @@ func _process(delta):
 	# match
 	if not input: # s'ha de desassignar, llavors; o fer-ho per senyals
 		input = $PlayerInput # export var
+	if not physics:
+		physics = $Physics
+	
+	physics.turbo = Input.is_action_pressed(input.turbo_action)
 	
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)
-	$Physics.set_physics_input(final_linear_input, final_angular_input)
+	physics.set_physics_input(final_linear_input, final_angular_input)
 	
 	if get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():

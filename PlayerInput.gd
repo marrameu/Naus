@@ -29,6 +29,7 @@ var camera_up_action := "camera_up"
 var camera_left_action := "camera_left"
 var camera_right_action := "camera_right"
 
+var turbo_action := "turbo"
 
 func _ready() -> void:
 	pass
@@ -51,6 +52,7 @@ func update_yaw_and_ptich() -> void:
 
 func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:
 	var target := throttle
+	# min throttle
 	target = clamp(Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action), min_throttle, 1)
 	# Change to move_towards
 	throttle = clamp(lerp(throttle, target, delta * THROTTLE_SPEED), -1, 1)
