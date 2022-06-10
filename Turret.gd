@@ -3,9 +3,11 @@ extends Spatial
 var enemies = []
 const bullet_scene : PackedScene = preload("res://src/Bullets/Ships/ShipBullet.tscn")
 
-var fire_rate := 1.0
+var fire_rate := 2.0
 var next_time_to_fire := 0.0
 var time_now := 0.0
+
+onready var ray : RayCast = $Spatial/RayCast
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,19 +28,21 @@ func _physics_process(delta):
 func _process(delta):
 	time_now += delta
 	
+	# raycast
 	if enemies:
-		if time_now >= next_time_to_fire:
-			next_time_to_fire = time_now + 1.0 / fire_rate
-			if get_tree().has_network_peer():
-				rpc("shoot")
-			else:
-				shoot()
+		if ray.is_colliding() and ray.get_collider() == enemies[0]:
+			if time_now >= next_time_to_fire:
+				next_time_to_fire = time_now + 1.0 / fire_rate
+				if get_tree().has_network_peer():
+					rpc("shoot")
+				else:
+					shoot()
 
 
 func _on_Area_body_entered(body):
 	print(body)
 	if body.is_in_group("Ships"):
-		enemies.append(body)
+		enemies.push_back(body)
 		print(name + " a matar " + body.name)
 
 
@@ -53,4 +57,14 @@ sync func shoot() -> void:
 	var shoot_from : Vector3 = global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = -$Spatial.global_transform.basis.z
+	bullet.look_at($Spatial.global_transform.origin + -$Spatial.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()
+
+
+func _on_Area_body_exited(body):
+	var a := 0
+	for enemie in enemies:
+		if enemie == body:
+			enemies.remove(a)
+			break
+		a += 1

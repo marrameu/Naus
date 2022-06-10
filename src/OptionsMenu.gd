@@ -20,7 +20,7 @@ func _process(delta):
 
 
 func _on_SensibilitySlider_value_changed(value):
-	Utilities.ship_sensitivity = value
+	Settings.mouse_sensitivity = value
 
 
 func _on_MasterVolumSlider_value_changed(value):

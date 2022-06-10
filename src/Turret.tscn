@@ -35,16 +35,21 @@ mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
 
+[node name="RayCast" type="RayCast" parent="Spatial"]
+enabled = true
+cast_to = Vector3( 0, 0, -300 )
+debug_shape_custom_color = Color( 0.992157, 0, 1, 1 )
+debug_shape_thickness = 5
+
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-priority = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( -50, 4.37114e-06, 0, -4.37114e-06, -50, 0, 0, 0, 50, 0, 46.1708, 0 )
+transform = Transform( -200, 3.01992e-05, 0, -3.01992e-05, -200, 0, 0, 0, 200, 0, 163.317, 5.12065e-06 )
 shape = ExtResource( 2 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

@@ -7,7 +7,7 @@ var starter_target_position := Vector3()
 var rotate_speed := 90.0
 
 var tp_rotate_speed := 90.0
-var fp_rotate_speed := 90 * 2
+var fp_rotate_speed := 90.0 * 100
 
 # var move_speed_slerp := 90.0
 # var rotate_speedslerp := 80.0
@@ -20,9 +20,9 @@ var tp_horizontal_turn_move := 6.0
 var tp_vertical_turn_up_move := 6.0
 var tp_vertical_turn_down_move := 3.0
 
-var fp_horizontal_turn_move := 0
-var fp_vertical_turn_up_move := 0
-var fp_vertical_turn_down_move := 0
+var fp_horizontal_turn_move := 0.1
+var fp_vertical_turn_up_move := 0.1
+var fp_vertical_turn_down_move := 0.1
 
 
 var zooming := false
@@ -46,9 +46,15 @@ func _process(delta):
 	if Input.is_action_just_pressed("change_cam"):
 		Utilities.first_person = !Utilities.first_person
 		init_cam()
+	
+	if  Utilities.first_person:
+		global_transform.origin = target.global_transform.origin # si és realitzat al physics prcess triga una mica a sguir la nau
 
 
 func init_cam():
+	if target: # si no, l'starter position es va canviant tota l'estona
+		target.translation = starter_target_position
+	
 	if  Utilities.first_person:
 		target = get_node(fp_target_path)
 		rotate_speed = fp_rotate_speed
@@ -109,6 +115,7 @@ func update_target(delta : float):
 	input.x = clamp(input.x, -1, 1)
 	input.y = clamp(input.y, -1, 1)
 	
+	horizontal_lean(target.get_node("../PlayerShipInterior"), -input.x, 5)
 	horizontal_lean(target.get_node("../ShipMesh"), input.x)
 	
 	var horizontal := horizontal_turn_move * input.x
@@ -120,6 +127,10 @@ func update_target(delta : float):
 	
 	var desired_position = starter_target_position + Vector3(-horizontal, vertical, 0.0)
 	target.translation = target.translation.linear_interpolate(desired_position, delta)
+	
+	# temporal
+	if not Utilities.first_person:
+		global_transform.origin = target.global_transform.origin # si és realitzat al physics prcess triga una mica a sguir la nau
 
 
 func horizontal_lean(target : Spatial, x_input : float, lean_limit : float = 45 , time : float = 0.03) -> void:
