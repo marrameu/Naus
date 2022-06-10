@@ -54,6 +54,7 @@ margin_bottom = 750.0
 rect_min_size = Vector2( 0, 750 )
 
 [node name="GRAPHICS" type="Tabs" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -218,7 +219,6 @@ margin_right = 1138.0
 margin_bottom = 608.0
 
 [node name="CONTROLS" type="Tabs" parent="MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -242,18 +242,33 @@ custom_constants/hseparation = 539
 columns = 2
 
 [node name="Sensibilitat" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer"]
-margin_right = 118.0
+margin_right = 140.0
 margin_bottom = 30.0
 text = "Sensibilitat"
 
 [node name="SensibilitySlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer"]
-margin_left = 657.0
-margin_right = 957.0
+margin_left = 679.0
+margin_right = 979.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 300, 0 )
 min_value = 50.0
 max_value = 150.0
 value = 50.0
+
+[node name="Sensibilitat2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer"]
+margin_top = 34.0
+margin_right = 140.0
+margin_bottom = 64.0
+text = "Control mode"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer"]
+margin_left = 679.0
+margin_top = 34.0
+margin_right = 979.0
+margin_bottom = 64.0
+text = "Keyboard + Mouse"
+items = [ "Keyboard + Mouse", null, false, 0, null, "Controller", null, false, 1, null ]
+selected = 0
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/CONTROLS"]
 margin_left = 1061.0
