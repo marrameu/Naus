@@ -108,8 +108,9 @@ func move_camera(delta : float) -> void:
 func update_target(delta : float):
 	var input := Vector2()
 	
-	input.x = target.get_node("../PlayerHUD").cursor_input.x
-	input.y = target.get_node("../PlayerHUD").cursor_input.y
+	input.x = target.get_node("../PlayerHUD").cursor_input.x if not Settings.controller_input else Input.get_action_strength(camera_right_action) - Input.get_action_strength(camera_left_action)
+	input.y = target.get_node("../PlayerHUD").cursor_input.y if not Settings.controller_input else Input.get_action_strength(camera_up_action) - Input.get_action_strength(camera_down_action)
+	
 	# var viewport_size = get_tree().root.get_visible_rect().size
 	
 	input.x = clamp(input.x, -1, 1)

@@ -303,4 +303,5 @@ align = 1
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/Display FPS/CheckDisplayFps" to="." method="_on_CheckDisplayFps_toggled"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider" to="." method="_on_MasterVolumSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider" to="." method="_on_SensibilitySlider_value_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Atrás" to="." method="_on_Atrs_pressed"]

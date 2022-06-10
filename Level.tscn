@@ -65,6 +65,7 @@ transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.3490
 transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 128.879, -250.502 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 5 )]
+layer = 5
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.70866, 0.457789, 0.53687, -0.635008, 0.0821853, 0.768122, 0.307515, -0.885254, 0.348941, 0, 57.0278, 0 )

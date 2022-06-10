@@ -43,6 +43,13 @@ func _on_CheckVsync_toggled(button_pressed):
 
 
 func _on_Atrs_pressed():
-	$"../".show()
+	$"../MenuPrincipal".show()
 	self.hide()
 	
+
+
+func _on_OptionButton_item_selected(index):
+	if index == 0:
+		Settings.controller_input = false
+	else:
+		Settings.controller_input = true
