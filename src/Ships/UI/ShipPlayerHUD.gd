@@ -60,11 +60,15 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	if $Center.visible:
-		$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * Settings.mouse_sensitivity
-		$Center/CursorPivot/Cursor.rect_position = $Center/CursorPivot/Cursor.rect_position.clamped(_cursor_limit)
-		
-		if $Center/CursorPivot/Cursor.rect_position.length() > _min_position:
-			cursor_input.x = $Center/CursorPivot/Cursor.rect_position.x / _cursor_limit
-			cursor_input.y = -$Center/CursorPivot/Cursor.rect_position.y / _cursor_limit
+		if not Settings.controller_input:
+			$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * Settings.mouse_sensitivity
+			$Center/CursorPivot/Cursor.rect_position = $Center/CursorPivot/Cursor.rect_position.clamped(_cursor_limit)
+			
+			if $Center/CursorPivot/Cursor.rect_position.length() > _min_position:
+				cursor_input.x = $Center/CursorPivot/Cursor.rect_position.x / _cursor_limit
+				cursor_input.y = -$Center/CursorPivot/Cursor.rect_position.y / _cursor_limit
+			else:
+				cursor_input = Vector2()
 		else:
+			$Center/CursorPivot/Cursor.rect_position = Vector2()
 			cursor_input = Vector2()
