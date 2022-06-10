@@ -4,7 +4,6 @@ extends Node
 var mouse_position := Vector2()
 var mouse_movement := Vector2()
 var mouse_acceleration := Vector2() # Not ready
-var ship_sensitivity := 75.0
 
 # Time
 var time := 0.0

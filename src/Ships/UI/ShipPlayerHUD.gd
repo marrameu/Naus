@@ -60,7 +60,7 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	if $Center.visible:
-		$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * Utilities.ship_sensitivity
+		$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * Settings.mouse_sensitivity
 		$Center/CursorPivot/Cursor.rect_position = $Center/CursorPivot/Cursor.rect_position.clamped(_cursor_limit)
 		
 		if $Center/CursorPivot/Cursor.rect_position.length() > _min_position:
