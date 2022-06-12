@@ -45,7 +45,7 @@ func _process(delta : float) -> void:
 	
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)
-	$Physics.set_physics_input(final_linear_input, final_angular_input)
+	$Physics.set_physics_input(final_linear_input, final_angular_input, delta)
 	
 	if state == State.FLYING and get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():

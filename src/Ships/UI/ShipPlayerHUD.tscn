@@ -99,8 +99,15 @@ rect_pivot_offset = Vector2( 1.5, 1.5 )
 texture = ExtResource( 5 )
 expand = true
 
+[node name="TurboBar" parent="." instance=ExtResource( 6 )]
+margin_left = 72.0
+margin_top = 996.0
+margin_right = 197.0
+margin_bottom = 1016.0
+rect_rotation = -90.0
+tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
+
 [node name="LifeBar" parent="." instance=ExtResource( 6 )]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

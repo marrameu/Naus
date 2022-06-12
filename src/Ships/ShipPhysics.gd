@@ -2,9 +2,12 @@ extends Node
 
 class_name ShipPhysics
 
+signal started_turboing
+signal stopped_turboing
+
 onready var ship = get_parent()
 
-var force_multiplier := 1.0
+var force_multiplier := 1.0 # cal?
 
 var linear_force := Vector3(0, 0, 200)
 var linear_force_turbo := Vector3(0, 0, 400)
@@ -25,20 +28,36 @@ var stabilized := false
 var descense_vel := 0.0
 var DESIRED_DESCENSE_VEL := 5.0
 
-var turbo := false
+var MAX_TURBO_TIME := 5.0
+var turbo_time := MAX_TURBO_TIME
+
+var wants_turbo := false
+var can_turbo := true
+var turboing = false
 
 
 func _process(delta : float) -> void:
 	add_force(applied_linear_force * force_multiplier, delta)
 	add_torque(applied_angular_force * force_multiplier, delta)
+	
+	if can_turbo and turbo_time <= 0:
+		can_turbo = false
+	elif not can_turbo and turbo_time > MAX_TURBO_TIME/2:
+		can_turbo = true
 
 
-func set_physics_input(linear_input : Vector3, angular_input : Vector3):
+func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	applied_angular_force = angular_input * angular_force
-	if turbo:
+	if wants_turbo and can_turbo:
+		turboing = true
+		emit_signal("started_turboing")
 		applied_linear_force = linear_force_turbo
+		turbo_time = clamp(turbo_time - delta, 0, MAX_TURBO_TIME)
 	else:
+		turboing = false
+		emit_signal("stopped_turboing")
 		applied_linear_force = linear_input * linear_force
+		turbo_time = clamp(turbo_time + delta, 0, MAX_TURBO_TIME)
 
 
 func add_force(force : Vector3, delta : float):

@@ -88,6 +88,8 @@ audio_sfx3 = ExtResource( 9 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
+[connection signal="started_turboing" from="Ship/Physics" to="Camera" method="_on_Physics_started_turboing"]
+[connection signal="stopped_turboing" from="Ship/Physics" to="Camera" method="_on_Physics_stopped_turboing"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 
 [editable path="Ship"]

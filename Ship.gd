@@ -18,11 +18,11 @@ func _process(delta):
 	if not physics:
 		physics = $Physics
 	
-	physics.turbo = Input.is_action_pressed(input.turbo_action)
+	physics.wants_turbo = Input.is_action_pressed(input.turbo_action)
 	
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)
-	physics.set_physics_input(final_linear_input, final_angular_input)
+	physics.set_physics_input(final_linear_input, final_angular_input, delta)
 	
 	if get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():
@@ -40,5 +40,5 @@ func _process(delta):
 
 func _on_HealthSystem_die():
 	print("i die")
-	$HealthSystem.heal(1000)
+	$HealthSystem.heal(500)
 	translation = Vector3.ZERO

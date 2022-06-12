@@ -43,7 +43,8 @@ func _process(delta : float) -> void:
 	
 	$Center.visible = true # is_player
 	$LifeBar.show()
-	$LifeBar.value = 100 # float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
+	$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
+	$TurboBar.value = float(get_node("../Physics").turbo_time) / float(get_node("../Physics").MAX_TURBO_TIME) * 100
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
 	if get_parent().is_player:
