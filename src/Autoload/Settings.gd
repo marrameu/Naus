@@ -14,3 +14,6 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("change_input"):
 		controller_input = !controller_input
+
+func toggle_fullscreen(toggle):
+	OS.window_fullscreen = toggle
