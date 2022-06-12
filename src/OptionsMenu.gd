@@ -8,10 +8,11 @@ onready var MasterAudioSlider = $MarginContainer/VBoxContainer/TabContainer/AUDI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
+	pass
 	#default sensibility
-	SensiblitySlider.value = 75
-	MasterAudioSlider.value = 0
+	#SensiblitySlider.value = 75
+	#MasterAudioSlider.value = 0
+	AudioServer.set_bus_volume_db(0, MasterAudioSlider.value)
 
 
 

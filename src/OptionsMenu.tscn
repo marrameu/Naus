@@ -54,7 +54,6 @@ margin_bottom = 750.0
 rect_min_size = Vector2( 0, 750 )
 
 [node name="GRAPHICS" type="Tabs" parent="MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -211,6 +210,7 @@ rect_min_size = Vector2( 300, 0 )
 min_value = -72.0
 max_value = 0.0
 step = 5.0
+value = -25.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/AUDIO"]
 margin_left = 1061.0
@@ -219,6 +219,7 @@ margin_right = 1138.0
 margin_bottom = 608.0
 
 [node name="CONTROLS" type="Tabs" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -253,7 +254,7 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 300, 0 )
 min_value = 50.0
 max_value = 150.0
-value = 50.0
+value = 75.0
 
 [node name="Sensibilitat2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer"]
 margin_top = 34.0
