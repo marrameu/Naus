@@ -17,4 +17,4 @@ func _ready():
 
 
 func _on_HealthSystem_die():
-	queue_free()
+	$Destruction.destroy()
