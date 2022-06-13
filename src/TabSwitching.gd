@@ -18,5 +18,7 @@ func _unhandled_input(event):
 		
 		elif event.is_action_pressed("right_tab"):
 			self.current_tab = current_tab+1
+	else:
+		current_tab = 0
 
 
