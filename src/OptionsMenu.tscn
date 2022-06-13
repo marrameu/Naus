@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/OptionsMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=2]
+[ext_resource path="res://src/TabSwitching.gd" type="Script" id=3]
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.442623, 0.967213 )
@@ -52,6 +53,7 @@ custom_constants/separation = 40
 margin_right = 1620.0
 margin_bottom = 750.0
 rect_min_size = Vector2( 0, 750 )
+script = ExtResource( 3 )
 
 [node name="GRAPHICS" type="Tabs" parent="MarginContainer/VBoxContainer/TabContainer"]
 anchor_right = 1.0
@@ -300,6 +302,7 @@ custom_styles/normal = SubResource( 3 )
 text = "FPS"
 align = 1
 
+[connection signal="tab_changed" from="MarginContainer/VBoxContainer/TabContainer" to="." method="_on_TabContainer_tab_changed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2" to="." method="_on_DisplayMode2_item_selected"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Vsync/CheckVsync" to="." method="_on_CheckVsync_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/Display FPS/CheckDisplayFps" to="." method="_on_CheckDisplayFps_toggled"]

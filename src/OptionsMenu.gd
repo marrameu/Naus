@@ -23,6 +23,12 @@ func _ready():
 func _process(delta):
 	$FpsNode/FPS.text = str(Engine.get_frames_per_second())
 
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		$"../MenuPrincipal".show()
+		$"../MenuPrincipal/Opcions".grab_focus()
+		self.hide()
+
 
 func _on_SensibilitySlider_value_changed(value):
 	Settings.mouse_sensitivity = value
@@ -62,3 +68,12 @@ func _on_OptionButton_item_selected(index):
 
 func _on_DisplayMode2_item_selected(index):
 	Settings.toggle_fullscreen(true if index == 1 else false)
+
+
+func _on_TabContainer_tab_changed(tab):
+	if tab == 0:
+		$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2.grab_focus()
+	elif tab == 1:
+		$MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider.grab_focus()
+	elif tab == 2:
+		$MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider.grab_focus()

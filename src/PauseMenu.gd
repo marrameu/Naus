@@ -12,6 +12,9 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
 		self.is_paused = !is_paused
+	
+	if event.is_action_pressed("ui_cancel"):
+		self.is_paused = false
 
 
 func set_is_paused(value):
@@ -22,6 +25,7 @@ func set_is_paused(value):
 	
 	if get_tree().paused:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$Control/MenuPrincipal/Reprendre.grab_focus()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -34,6 +38,7 @@ func _on_Reprendre_pressed():
 func _on_Opcions_pressed():
 	$Control/MenuPrincipal.hide()
 	$Control/OptionsMenu.show()
+	$Control/OptionsMenu/MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2.grab_focus()
 
 
 func _on_Sortir_pressed():
