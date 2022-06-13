@@ -1,5 +1,9 @@
 extends Control
 
+
+#Video Settings
+onready var display_options = $MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2
+
 #Controls
 onready var SensiblitySlider = $MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider
 
@@ -54,3 +58,7 @@ func _on_OptionButton_item_selected(index):
 		Settings.controller_input = false
 	else:
 		Settings.controller_input = true
+
+
+func _on_DisplayMode2_item_selected(index):
+	Settings.toggle_fullscreen(true if index == 1 else false)
