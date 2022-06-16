@@ -18,3 +18,7 @@ func _ready():
 func _on_HealthSystem_die():
 	emit_signal("destroyed", team_blue)
 	queue_free()
+
+
+func _on_HealthSystem_shield_die():
+	$ShieldMesh.hide()
