@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "HealthSystem",
+"language": "GDScript",
+"path": "res://src/HealthSystem/HealthSystem.gd"
+}, {
+"base": "Node",
 "class": "InputManager",
 "language": "GDScript",
 "path": "res://src/Troops/Player/InputManager.gd"
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://src/Ships/ShipPhysics.gd"
 } ]
 _global_script_class_icons={
+"HealthSystem": "",
 "InputManager": "",
 "Ship": "",
 "ShipBullet": "",

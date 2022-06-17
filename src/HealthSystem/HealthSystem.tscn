@@ -4,3 +4,8 @@
 
 [node name="HealthSystem" type="Node"]
 script = ExtResource( 1 )
+
+[node name="ShieldTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
