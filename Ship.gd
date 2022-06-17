@@ -5,6 +5,8 @@ signal player_died
 var input : Node # class per al input
 var physics : Node
 
+var team_blue := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

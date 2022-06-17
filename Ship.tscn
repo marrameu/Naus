@@ -15,6 +15,7 @@
 extents = Vector3( 6.5, 2.5, 9.6 )
 
 [node name="Ship" type="RigidBody" groups=["Damagable", "Ships"]]
+mass = 5000.0
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )

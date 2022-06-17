@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
+[ext_resource path="res://SuportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BigShip.tscn" type="PackedScene" id=4]
@@ -57,6 +58,9 @@ team_blue = true
 
 [node name="Mesh" parent="BigShipBlue" index="1"]
 material/0 = SubResource( 5 )
+
+[node name="SuportShip" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.646273, 0.259072, 0.717784, -0.17335, 0.965858, -0.192531, -0.743156, 0, 0.669118, -1634.1, 330.563, 1054.42 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, -29.6491 )
