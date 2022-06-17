@@ -61,5 +61,6 @@ transform = Transform( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336,
 [node name="Turret7" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
 
+[connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="shield_die" from="HealthSystem" to="." method="_on_HealthSystem_shield_die"]
 [connection signal="shield_recovered" from="HealthSystem" to="." method="_on_HealthSystem_shield_recovered"]

@@ -9,12 +9,9 @@ func _ready():
 	hide_default()
 
 
-func _unhandled_input(event):
-	if event.is_action_pressed("pause"):
+func _process(delta):
+	if Input.is_action_just_pressed("pause"):
 		self.is_paused = !is_paused
-	
-	if event.is_action_pressed("ui_cancel"):
-		self.is_paused = false
 
 
 func set_is_paused(value):
@@ -23,11 +20,9 @@ func set_is_paused(value):
 	hide_default()
 	$Control.visible = is_paused
 	
-	if get_tree().paused:
+	if is_paused:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		$Control/MenuPrincipal/Reprendre.grab_focus()
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 

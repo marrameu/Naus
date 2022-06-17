@@ -1,5 +1,6 @@
 extends RigidBody
 
+signal player_died
 
 var input : Node # class per al input
 var physics : Node
@@ -40,5 +41,11 @@ func _process(delta):
 
 func _on_HealthSystem_die():
 	print("i die")
-	$HealthSystem.heal(500)
-	translation = Vector3.ZERO
+	
+	# animacions
+	
+	emit_signal("player_died")
+	
+	queue_free()
+	
+	

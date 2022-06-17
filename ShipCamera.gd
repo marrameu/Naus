@@ -46,6 +46,7 @@ var camera_left_action := "camera_left"
 var camera_up_action := "camera_up"
 var camera_down_action := "camera_down"
 
+var wr
 
 func _ready():
 	init_cam()
@@ -53,6 +54,9 @@ func _ready():
 
 
 func _process(delta):
+	if wr and not wr.get_ref():
+		return
+	
 	if Input.is_action_just_pressed("change_cam"):
 		Utilities.first_person = !Utilities.first_person
 		init_cam()
@@ -69,9 +73,10 @@ func _process(delta):
 
 
 func _physics_process(delta : float) -> void:
-	if not target:
-		fov = 40 # Si al final trec l'efecte, canviar el nombre a 70
+	if wr and not wr.get_ref():
 		return
+		
+		# fov = 40 ??? # Si al final trec l'efecte, canviar el nombre a 70
 	
 	"""
 	if Input.is_action_just_pressed(zoom_ship_action) and target.get_parent().state == target.get_parent().State.FLYING:
@@ -88,7 +93,7 @@ func _physics_process(delta : float) -> void:
 
 
 func init_cam():
-	if target: # si no, l'starter position es va canviant tota l'estona
+	if wr and wr.get_ref(): # si no, l'starter position es va canviant tota l'estona
 		target.translation = starter_target_position
 	
 	# això es deu poder fer una mica millor
@@ -110,6 +115,11 @@ func init_cam():
 		forward_speed_divider = tp_forward_speed_divider
 		shake_amount = tp_shake_amount
 	
+	wr = weakref(target);
+	
+	if not wr.get_ref():
+		return
+	
 	global_transform.origin = target.global_transform.origin
 	global_transform.basis = target.global_transform.basis.get_euler()
 	starter_target_position = target.translation
@@ -121,8 +131,6 @@ func shake_cam():
 
 
 func move_camera(delta : float) -> void:
-	if not target:
-		return
 	global_transform.origin = target.global_transform.origin
 	
 	target.rotation_degrees = Vector3(0, 180, 0)
