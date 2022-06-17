@@ -3,6 +3,7 @@ extends Node
 var input_manager : InputManager
 var input_map : Dictionary
 
+
 func _ready() -> void:
 	$Player.set_process(false)
 	$AI.set_process(false)

@@ -4,7 +4,7 @@ extends Spatial
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const ship_scene : PackedScene = preload("res://Ship.tscn")
+const ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

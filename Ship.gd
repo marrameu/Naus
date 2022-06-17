@@ -17,11 +17,11 @@ func _process(delta):
 	# no cal fer tot açò si no ets server
 	# match
 	if not input: # s'ha de desassignar, llavors; o fer-ho per senyals
-		input = $PlayerInput # export var
+		input = $Input # export var
 	if not physics:
 		physics = $Physics
 	
-	physics.wants_turbo = Input.is_action_pressed(input.turbo_action)
+	physics.wants_turbo = input.wants_turbo
 	
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)

@@ -54,7 +54,7 @@ func _ready():
 
 
 func _process(delta):
-	if wr and not wr.get_ref():
+	if not wr or not wr.get_ref():
 		return
 	
 	if Input.is_action_just_pressed("change_cam"):
@@ -73,7 +73,7 @@ func _process(delta):
 
 
 func _physics_process(delta : float) -> void:
-	if wr and not wr.get_ref():
+	if not wr or not wr.get_ref():
 		return
 		
 		# fov = 40 ??? # Si al final trec l'efecte, canviar el nombre a 70
@@ -93,6 +93,9 @@ func _physics_process(delta : float) -> void:
 
 
 func init_cam():
+	if not tp_target_path and not fp_target_path:
+		return
+	
 	if wr and wr.get_ref(): # si no, l'starter position es va canviant tota l'estona
 		target.translation = starter_target_position
 	

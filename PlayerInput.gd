@@ -1,15 +1,4 @@
-extends Node
-
-
-onready var physics : ShipPhysics = get_node("../../Physics") # ¿?
-onready var ship = get_node("../") # ¿?
-
-var pitch := 0.0
-var yaw := 0.0
-var roll := 0.0
-var strafe := 0.0
-var throttle := 0.0
-export(float, -1, 1) var min_throttle := 0.3
+extends "res://ShipInput.gd"
 
 # How quickly reacts to input
 # Move Towards 0.5
@@ -31,12 +20,15 @@ var camera_right_action := "camera_right"
 
 var turbo_action := "turbo"
 
+
 func _ready() -> void:
 	pass
 
 
 func _process(delta : float) -> void:
 	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
+	
+	wants_turbo = Input.is_action_pressed(turbo_action)
 	
 	update_yaw_and_ptich()
 	update_throttle(move_forward_action, move_backward_action, delta)

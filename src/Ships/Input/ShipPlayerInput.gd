@@ -38,6 +38,8 @@ func _process(delta : float) -> void:
 	
 	update_yaw_and_ptich()
 	update_throttle(move_forward_action, move_backward_action, delta)
+	
+	if Input.is_action_pressed(turb)
 
 
 func update_yaw_and_ptich() -> void:
