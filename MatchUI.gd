@@ -16,6 +16,7 @@ func _process(delta):
 	update_lifebars(false)
 	update_lifebars(true)
 
+
 func update_lifebars(blue : bool):
 	var ship = get_node(blue_ship) if blue else get_node(red_ship)
 	
@@ -28,9 +29,20 @@ func update_lifebars(blue : bool):
 	var ship_shield = float(ship.get_node("HealthSystem").shield)
 	var ship_max_shield = float(ship.get_node("HealthSystem").MAX_SHIELD)
 	
+	var time_left = ship.get_node("HealthSystem/ShieldTimer").time_left
+	var wait_time = ship.get_node("HealthSystem/ShieldTimer").wait_time
+	
+	
+	
 	if blue:
-		$Control/Control/LifeBarBlueShield/LifeBarBlue.value = ship_health / ship_max_health * 100
-		$Control/Control/LifeBarBlueShield.value = ship_shield / ship_max_shield * 100
+		$Control/LifeBarBlueShield/LifeBarBlue.value = ship_health / ship_max_health * 100
+		if ship_shield:
+			$Control/LifeBarBlueShield.value = ship_shield / ship_max_shield * 100
+		else:
+			$Control/LifeBarBlueShield.value = (1.0 - (time_left / wait_time)) * 100
 	else:
-		$Control/Control/LifeBarRedShield/LifeBarRed.value = ship_health / ship_max_health * 100
-		$Control/Control/LifeBarRedShield.value = ship_shield / ship_max_shield * 100
+		$Control/LifeBarRedShield/LifeBarRed.value = ship_health / ship_max_health * 100
+		if ship_shield:
+			$Control/LifeBarRedShield.value = ship_shield / ship_max_shield * 100
+		else:
+			$Control/LifeBarRedShield.value = (1.0 - (time_left / wait_time)) * 100

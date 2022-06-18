@@ -1,4 +1,4 @@
-extends StaticBody
+extends KinematicBody
 
 
 signal destroyed
@@ -22,3 +22,7 @@ func _on_HealthSystem_die():
 
 func _on_HealthSystem_shield_die():
 	$ShieldMesh.hide()
+
+
+func _on_HealthSystem_shield_recovered():
+	$ShieldMesh.show()

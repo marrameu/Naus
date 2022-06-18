@@ -73,6 +73,8 @@ script = ExtResource( 13 )
 [node name="HealthSystem" parent="." instance=ExtResource( 9 )]
 script = ExtResource( 10 )
 MAX_SHIELD = 300.0
+time_before_shield_repair = 5.0
+shield_repair_per_sec = 20.0
 MAX_HEALTH = 1200
 
 [node name="ShieldTimer" type="Timer" parent="HealthSystem"]
@@ -86,7 +88,5 @@ script = ExtResource( 11 )
 
 [connection signal="timeout" from="LeaveTimer" to="." method="_on_LeaveTimer_timeout"]
 [connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]
-[connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
-[connection signal="timeout" from="HealthSystem/ShieldTimer" to="HealthSystem" method="_on_ShieldTimer_timeout"]
 
 [editable path="ShipMesh"]

@@ -38,7 +38,7 @@ var ship_turboing := false
 
 # Input
 var input_device := 0
-var zoom_ship_action := "zoom_ship"
+var zoom_action := "zoom"
 var look_behind_action := "look_behind"
 
 var camera_right_action := "camera_right"
@@ -46,6 +46,7 @@ var camera_left_action := "camera_left"
 var camera_up_action := "camera_up"
 var camera_down_action := "camera_down"
 
+var wr
 
 func _ready():
 	init_cam()
@@ -53,6 +54,9 @@ func _ready():
 
 
 func _process(delta):
+	if not wr or not wr.get_ref():
+		return
+	
 	if Input.is_action_just_pressed("change_cam"):
 		Utilities.first_person = !Utilities.first_person
 		init_cam()
@@ -69,16 +73,13 @@ func _process(delta):
 
 
 func _physics_process(delta : float) -> void:
-	if not target:
-		fov = 40 # Si al final trec l'efecte, canviar el nombre a 70
+	if not wr or not wr.get_ref():
+		fov = 70
 		return
 	
-	"""
-	if Input.is_action_just_pressed(zoom_ship_action) and target.get_parent().state == target.get_parent().State.FLYING:
-		zooming = !zooming
-	"""
+	zooming = Input.is_action_pressed(zoom_action) and not ship_turboing
 	
-	if zooming and target.get_parent().state == target.get_parent().State.FLYING:
+	if zooming:
 		fov = lerp(fov, 40, .15)
 	else:
 		zooming = false
@@ -88,7 +89,10 @@ func _physics_process(delta : float) -> void:
 
 
 func init_cam():
-	if target: # si no, l'starter position es va canviant tota l'estona
+	if not tp_target_path and not fp_target_path:
+		return
+	
+	if wr and wr.get_ref(): # si no, l'starter position es va canviant tota l'estona
 		target.translation = starter_target_position
 	
 	# això es deu poder fer una mica millor
@@ -110,6 +114,11 @@ func init_cam():
 		forward_speed_divider = tp_forward_speed_divider
 		shake_amount = tp_shake_amount
 	
+	wr = weakref(target);
+	
+	if not wr.get_ref():
+		return
+	
 	global_transform.origin = target.global_transform.origin
 	global_transform.basis = target.global_transform.basis.get_euler()
 	starter_target_position = target.translation
@@ -121,8 +130,6 @@ func shake_cam():
 
 
 func move_camera(delta : float) -> void:
-	if not target:
-		return
 	global_transform.origin = target.global_transform.origin
 	
 	target.rotation_degrees = Vector3(0, 180, 0)
@@ -159,14 +166,12 @@ func update_target(delta : float):
 	var v_nor = target.owner.linear_velocity.normalized()
 	
 	var vel : Vector3
-	vel.x = b.x.dot(v_nor) * v_len
-	vel.y = b.y.dot(v_nor) * v_len
 	vel.z = b.z.dot(v_nor) * v_len
 	
 	
 	var speed_forward = vel.z / forward_speed_divider
 	
-	var desired_position = starter_target_position + Vector3(-horizontal, vertical, -speed_forward)
+	var desired_position = starter_target_position + Vector3(-horizontal, vertical, 0)#-speed_forward)
 	target.translation = target.translation.linear_interpolate(desired_position, delta)
 	
 	"""

@@ -1,15 +1,6 @@
-extends Node
+extends "res://ShipInput.gd"
 
-
-onready var physics : ShipPhysics = get_node("../../Physics") # ¿?
-onready var ship = get_node("../") # ¿?
-
-var pitch := 0.0
-var yaw := 0.0
-var roll := 0.0
-var strafe := 0.0
-var throttle := 0.0
-export(float, -1, 1) var min_throttle := 0.3
+signal activated_turboing
 
 # How quickly reacts to input
 # Move Towards 0.5
@@ -31,12 +22,29 @@ var camera_right_action := "camera_right"
 
 var turbo_action := "turbo"
 
-func _ready() -> void:
-	pass
 
 
 func _process(delta : float) -> void:
 	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
+	
+	# una mica chapuzas
+	var old_turboing = turboing
+	
+	if not turbo_time <= 0:
+		if Input.is_action_pressed(turbo_action):
+			turboing = true
+	else:
+		turboing = false
+		if $TurboTimer.is_stopped():
+			$TurboTimer.start()
+	
+	if turboing:
+		turbo_time = clamp(turbo_time - delta, 0, MAX_TURBO_TIME)
+	elif recover_turbo:
+		turbo_time = clamp(turbo_time + delta, 0, MAX_TURBO_TIME)
+	
+	if turboing != old_turboing:
+		emit_signal("activated_turboing", turboing)
 	
 	update_yaw_and_ptich()
 	update_throttle(move_forward_action, move_backward_action, delta)
@@ -52,10 +60,22 @@ func update_yaw_and_ptich() -> void:
 
 func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:
 	var target := throttle
-	# min throttle
-	target = clamp(Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action), min_throttle, 1)
+	var turbo_clamp := 2.0
+	if turboing:
+		target += delta
+	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
+		target -= delta
+	
+	target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
+	
+	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
 	# Change to move_towards
-	throttle = clamp(lerp(throttle, target, delta * THROTTLE_SPEED), -1, 1)
+	throttle = target #move_toward(throttle, target, delta)
+
+
+func _on_TurboTimer_timeout():
+	recover_turbo = true
+
 
 """
 # Called every frame. 'delta' is the elapsed time since the previous frame.
