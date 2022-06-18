@@ -44,7 +44,7 @@ func _process(delta : float) -> void:
 	$Center.visible = true # is_player
 	$LifeBar.show()
 	$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
-	$SpeedBars/TurboBar.value = float(get_node("../Physics").turbo_time) / float(get_node("../Physics").MAX_TURBO_TIME) * 100
+	$SpeedBars/TurboBar.value = float(get_node("../Input").turbo_time) / float(get_node("../Input").MAX_TURBO_TIME) * 100
 	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle / 2 * 100 
 	var b = owner.transform.basis
 	var v_len = owner.linear_velocity.length()

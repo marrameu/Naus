@@ -7,14 +7,16 @@
 
 [node name="PlayerShip" instance=ExtResource( 1 )]
 
-[node name="Input" type="Node" parent="." index="2"]
+[node name="Input" parent="." index="2"]
 script = ExtResource( 2 )
 MIN_THROTTLE = 0.0
 
 [node name="PlayerHUD" parent="." index="4" instance=ExtResource( 3 )]
 
-[node name="Shooting" parent="." index="9"]
+[node name="Listener" type="Listener" parent="." index="9"]
+current = true
+
+[node name="Shooting" parent="." index="10"]
 script = ExtResource( 4 )
 
-[node name="Listener" type="Listener" parent="." index="10"]
-current = true
+[connection signal="activated_turboing" from="Input" to="Shooting" method="_on_Input_activated_turboing"]

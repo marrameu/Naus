@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
 [ext_resource path="res://src/Ships/ShipShooting.gd" type="Script" id=3]
+[ext_resource path="res://ShipInput.gd" type="Script" id=4]
 [ext_resource path="res://assets/nau provisional.glb" type="PackedScene" id=5]
 [ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
@@ -23,6 +24,13 @@ shape = SubResource( 1 )
 
 [node name="HealthSystem" parent="." instance=ExtResource( 9 )]
 MAX_HEALTH = 1000
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="TurboTimer" type="Timer" parent="Input"]
+wait_time = 5.0
+one_shot = true
 
 [node name="Physics" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -59,6 +67,5 @@ max_distance = 1000.0
 bus = "Sounds"
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
-[connection signal="started_turboing" from="Physics" to="Shooting" method="_on_Physics_started_turboing"]
-[connection signal="stopped_turboing" from="Physics" to="Shooting" method="_on_Physics_stopped_turboing"]
+[connection signal="timeout" from="Input/TurboTimer" to="Input" method="_on_TurboTimer_timeout"]
 [connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]

@@ -20,7 +20,6 @@ func _process(delta):
 	if not physics:
 		physics = $Physics
 	
-	physics.wants_turbo = input.wants_turbo
 	
 	var final_linear_input := Vector3(input.strafe, 0.0, input.throttle)
 	var final_angular_input :=  Vector3(input.pitch, input.yaw, input.roll)

@@ -60,3 +60,7 @@ func shoot_target() -> Vector3:
 			shoot_target = result.position
 		
 	return shoot_target
+
+# fer-ho en la ship.tscn general
+func _on_Input_activated_turboing(enabled):
+	turboing = enabled

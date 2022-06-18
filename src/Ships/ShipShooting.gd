@@ -54,10 +54,3 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()
 
-
-func _on_Physics_started_turboing():
-	turboing = true
-
-
-func _on_Physics_stopped_turboing():
-	turboing = false
