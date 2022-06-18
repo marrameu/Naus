@@ -30,7 +30,7 @@ func _process(delta : float) -> void:
 
 
 
-sync func shoot(bullet_type : int, shoot_target) -> void:
+sync func shoot(bullet_type : int, shoot_target = Vector3.ZERO) -> void:
 	next_times_to_fire[bullet_type] = time_now + 1.0 / fire_rates[bullet_type]
 	
 	# Sound
@@ -47,6 +47,10 @@ sync func shoot(bullet_type : int, shoot_target) -> void:
 	get_node("/root/Level").add_child(bullet)
 	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
-	bullet.direction = (shoot_target - shoot_from).normalized()
-	bullet.look_at(shoot_target, Vector3.UP)
+	if shoot_target:
+		bullet.direction = (shoot_target - shoot_from).normalized()
+		bullet.look_at(shoot_target, Vector3.UP)
+	else:
+		bullet.direction = owner.global_transform.basis.z
+		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()

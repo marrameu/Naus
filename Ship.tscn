@@ -41,7 +41,7 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3
 [node name="ShipMesh" parent="." instance=ExtResource( 5 )]
 transform = Transform( 3.60686, 0, 0, 0, 1.19514, 0, 0, 0, 2.57414, 0, 0, 0 )
 
-[node name="Shooting" type="Node" parent="."]
+[node name="Shooting" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="Shooting"]

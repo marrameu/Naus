@@ -23,15 +23,15 @@ var going_to_cs = false
 
 
 
-func enter():
-	owner.leave()
-	owner.is_ai = true
+func _ready():
+	if owner.pilot_man.blue_team:
+		target = get_node("/root/Level/BigShipRed").translation
+	else:
+		target = get_node("/root/Level/BigShipBlue").translation
 
 
 func _physics_process(delta):
 	entered = true
-	
-	target = Vector3(1000, 50, -1000)
 	
 	distancia_per_comencar_a_frenat = 700
 	a_partir_daqui_min = 200

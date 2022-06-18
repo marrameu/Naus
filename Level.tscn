@@ -16,7 +16,7 @@
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=14]
 [ext_resource path="res://MatchUI.gd" type="Script" id=15]
 [ext_resource path="res://SpawnHUD.tscn" type="PackedScene" id=16]
-[ext_resource path="res://AIShip.tscn" type="PackedScene" id=17]
+[ext_resource path="res://PilotManager.gd" type="Script" id=18]
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.694118, 0.709804, 0.843137, 1 )
@@ -67,9 +67,6 @@ transform = Transform( 0.646273, 0.259072, 0.717784, -0.17335, 0.965858, -0.1925
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, -29.6491 )
 far = 4000.0
 script = ExtResource( 2 )
-
-[node name="AIShip" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -270.936, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 354.733 )
@@ -232,7 +229,15 @@ transform = Transform( 0.92432, -0.173311, 0.339995, 0, 0.890927, 0.454146, -0.3
 current = true
 far = 4000.0
 
-[node name="PlayerManager" type="Node" parent="."]
+[node name="Ships" type="Spatial" parent="."]
+
+[node name="PilotManagers" type="Node" parent="."]
+
+[node name="PlayerManager" type="Node" parent="PilotManagers"]
+script = ExtResource( 18 )
+
+[node name="AIManager0" type="Node" parent="PilotManagers"]
+script = ExtResource( 18 )
 
 [connection signal="destroyed" from="BigShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShipBlue" to="." method="_on_BigShip_destroyed"]

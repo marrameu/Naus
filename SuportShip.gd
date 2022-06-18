@@ -17,4 +17,4 @@ func _ready():
 
 func _physics_process(delta):
 	move_and_collide(transform.basis.x * delta * 100)
-	rotation_degrees += (Vector3(0, 10, 0) * delta)
+	rotation_degrees += (Vector3(0, 10, 10) * delta)
