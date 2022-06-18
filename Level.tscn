@@ -82,6 +82,9 @@ transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.3490
 [node name="Asteroide3" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 128.879, -250.502 )
 
+[node name="Asteroide4" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, 10.9353, -13.1148, 0 )
+
 [node name="PauseMenu" parent="." instance=ExtResource( 5 )]
 layer = 5
 

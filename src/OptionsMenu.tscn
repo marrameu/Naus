@@ -66,7 +66,7 @@ margin_bottom = -6.0
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = -30
+custom_constants/margin_right = 30
 custom_constants/margin_top = 30
 custom_constants/margin_left = 30
 custom_constants/margin_bottom = -30
@@ -74,32 +74,32 @@ custom_constants/margin_bottom = -30
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer"]
 margin_left = 30.0
 margin_top = 30.0
-margin_right = 1638.0
+margin_right = 1578.0
 margin_bottom = 738.0
 custom_constants/separation = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer"]
-margin_right = 990.0
+margin_right = 998.0
 margin_bottom = 708.0
+size_flags_horizontal = 3
 custom_constants/separation = 20
 
 [node name="Screen Settings" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 990.0
+margin_right = 998.0
 margin_bottom = 30.0
 text = "Screen Settings"
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 50.0
-margin_right = 990.0
+margin_right = 998.0
 margin_bottom = 108.0
 
 [node name="DisplayMode" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 986.0
+margin_right = 994.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 0, 50 )
-custom_constants/separation = 450
 
 [node name="DisplayMode" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode"]
 margin_top = 10.0
@@ -107,9 +107,16 @@ margin_right = 132.0
 margin_bottom = 40.0
 text = "DisplayMode"
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode"]
+margin_left = 136.0
+margin_right = 586.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="DisplayMode2" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode"]
-margin_left = 582.0
-margin_right = 982.0
+margin_left = 590.0
+margin_right = 990.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 0 )
 text = "Windowed"
@@ -117,18 +124,84 @@ flat = true
 items = [ "Windowed", null, false, 0, null, "Fullscreen", null, false, 1, null ]
 selected = 0
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 128.0
-margin_right = 990.0
+margin_right = 998.0
 margin_bottom = 186.0
+
+[node name="Resolution" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer4"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 994.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Resolution" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer4/Resolution"]
+margin_top = 10.0
+margin_right = 111.0
+margin_bottom = 40.0
+text = "Resolution"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer4/Resolution"]
+margin_left = 115.0
+margin_right = 586.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DisplayMode2" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer4/Resolution"]
+margin_left = 590.0
+margin_right = 990.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 400, 0 )
+text = "1920x1080"
+flat = true
+items = [ "1920x1080", null, false, 0, null, "1280x720", null, false, 1, null ]
+selected = 0
+
+[node name="PanelContainer5" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 206.0
+margin_right = 998.0
+margin_bottom = 264.0
+
+[node name="Resolution" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer5"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 994.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Brightness" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer5/Resolution"]
+margin_top = 10.0
+margin_right = 110.0
+margin_bottom = 40.0
+text = "Brightness"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer5/Resolution"]
+margin_left = 114.0
+margin_right = 586.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer5/Resolution"]
+margin_left = 590.0
+margin_right = 990.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 400, 0 )
+value = 50.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 284.0
+margin_right = 998.0
+margin_bottom = 342.0
 
 [node name="Vsync" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 986.0
+margin_right = 994.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 0, 50 )
-custom_constants/separation = 835
 
 [node name="Vsync" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Vsync"]
 margin_top = 10.0
@@ -136,25 +209,31 @@ margin_right = 61.0
 margin_bottom = 40.0
 text = "Vsync"
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Vsync"]
+margin_left = 65.0
+margin_right = 922.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="CheckVsync" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Vsync"]
-margin_left = 896.0
-margin_right = 960.0
+margin_left = 926.0
+margin_right = 990.0
 margin_bottom = 50.0
 pressed = true
 flat = true
 
 [node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 206.0
-margin_right = 990.0
-margin_bottom = 264.0
+margin_top = 362.0
+margin_right = 998.0
+margin_bottom = 420.0
 
 [node name="Display FPS" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 986.0
+margin_right = 994.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 0, 50 )
-custom_constants/separation = 796
 
 [node name="DisplayFps" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/Display FPS"]
 margin_top = 10.0
@@ -162,18 +241,327 @@ margin_right = 117.0
 margin_bottom = 40.0
 text = "Display FPS"
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/Display FPS"]
+margin_left = 121.0
+margin_right = 922.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="CheckDisplayFps" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/Display FPS"]
-margin_left = 913.0
-margin_right = 977.0
+margin_left = 926.0
+margin_right = 990.0
 margin_bottom = 50.0
 flat = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer"]
-margin_left = 1040.0
-margin_right = 1540.0
+[node name="PanelContainer6" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 440.0
+margin_right = 998.0
+margin_bottom = 498.0
+
+[node name="Graphics Quality" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer6"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 994.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="GraphicsQualityLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer6/Graphics Quality"]
+margin_top = 10.0
+margin_right = 159.0
+margin_bottom = 40.0
+text = "Texture Quality"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer6/Graphics Quality"]
+margin_left = 163.0
+margin_right = 586.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GraphicsQualityOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer6/Graphics Quality"]
+margin_left = 590.0
+margin_right = 990.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 400, 0 )
+text = "Low"
+flat = true
+items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null, "Custom", null, false, 4, null ]
+selected = 0
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 518.0
+margin_right = 998.0
+margin_bottom = 548.0
+toggle_mode = true
+text = "Advanced Options"
+align = 0
+
+[node name="Popup" type="Popup" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 568.0
+margin_right = 998.0
+margin_bottom = 568.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 994.0
+margin_bottom = 140.0
+custom_constants/separation = 20
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_right = 990.0
+margin_bottom = 58.0
+
+[node name="Texture Quality" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer3"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="DisplayFps" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer3/Texture Quality"]
+margin_top = 10.0
+margin_right = 159.0
+margin_bottom = 40.0
+text = "Texture Quality"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer3/Texture Quality"]
+margin_left = 163.0
+margin_right = 578.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureQuality" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer3/Texture Quality"]
+margin_left = 582.0
+margin_right = 982.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 400, 0 )
+text = "Low"
+flat = true
+items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null ]
+selected = 0
+
+[node name="PanelContainer4" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_top = 78.0
+margin_right = 990.0
+margin_bottom = 136.0
+
+[node name="Effects Quality" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer4"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="EffectsQualityLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer4/Effects Quality"]
+margin_top = 10.0
+margin_right = 151.0
+margin_bottom = 40.0
+text = "Effects Quality"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer4/Effects Quality"]
+margin_left = 155.0
+margin_right = 578.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EffectsQualityOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer4/Effects Quality"]
+margin_left = 582.0
+margin_right = 982.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 400, 0 )
+text = "Low"
+flat = true
+items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null ]
+selected = 0
+
+[node name="PanelContainer5" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_top = 156.0
+margin_right = 990.0
+margin_bottom = 214.0
+
+[node name="Mesh Quality" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer5"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="MeshQualityLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer5/Mesh Quality"]
+margin_top = 10.0
+margin_right = 151.0
+margin_bottom = 40.0
+text = "Effects Quality"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer5/Mesh Quality"]
+margin_left = 155.0
+margin_right = 578.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MeshQualityOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer5/Mesh Quality"]
+margin_left = 582.0
+margin_right = 982.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 400, 0 )
+text = "Low"
+flat = true
+items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null ]
+selected = 0
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_top = 234.0
+margin_right = 990.0
+margin_bottom = 292.0
+
+[node name="Bloom" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer2"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Bloom" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer2/Bloom"]
+margin_top = 10.0
+margin_right = 64.0
+margin_bottom = 40.0
+text = "Bloom"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer2/Bloom"]
+margin_left = 68.0
+margin_right = 914.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BloomCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer2/Bloom"]
+margin_left = 918.0
+margin_right = 982.0
+margin_bottom = 50.0
+pressed = true
+flat = true
+
+[node name="PanelContainer6" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_top = 312.0
+margin_right = 990.0
+margin_bottom = 370.0
+
+[node name="FXAA" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer6"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="FXAA" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer6/FXAA"]
+margin_top = 10.0
+margin_right = 53.0
+margin_bottom = 40.0
+text = "FXAA"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer6/FXAA"]
+margin_left = 57.0
+margin_right = 914.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FXAACheck" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer6/FXAA"]
+margin_left = 918.0
+margin_right = 982.0
+margin_bottom = 50.0
+pressed = true
+flat = true
+
+[node name="PanelContainer7" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_top = 390.0
+margin_right = 990.0
+margin_bottom = 448.0
+
+[node name="MSAA" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer7"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="MSAA" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer7/MSAA"]
+margin_top = 10.0
+margin_right = 60.0
+margin_bottom = 40.0
+text = "MSAA"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer7/MSAA"]
+margin_left = 64.0
+margin_right = 914.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MSAACheck" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer7/MSAA"]
+margin_left = 918.0
+margin_right = 982.0
+margin_bottom = 50.0
+pressed = true
+flat = true
+
+[node name="PanelContainer8" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer"]
+margin_top = 468.0
+margin_right = 990.0
+margin_bottom = 526.0
+
+[node name="ChromaticAberration" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer8"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 986.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="ChromaticAberration" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer8/ChromaticAberration"]
+margin_top = 10.0
+margin_right = 221.0
+margin_bottom = 40.0
+text = "Chromatic Aberration"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer8/ChromaticAberration"]
+margin_left = 225.0
+margin_right = 914.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ChromaticAberrationCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer8/ChromaticAberration"]
+margin_left = 918.0
+margin_right = 982.0
+margin_bottom = 50.0
+pressed = true
+flat = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer"]
+margin_left = 1048.0
+margin_right = 1548.0
 margin_bottom = 708.0
+custom_constants/separation = 30
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 500.0
+margin_bottom = 282.486
+rect_min_size = Vector2( 500, 282.486 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 312.0
+margin_right = 500.0
+margin_bottom = 622.0
 rect_min_size = Vector2( 500, 0 )
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras posuere libero at blandit placerat. Sed id finibus massa. Aenean efficitur tortor nulla, ut euismod nibh mollis eget. Mauris rhoncus justo nec mi tristique interdum. Nam egestas leo eget nunc euismod ornare. Fusce laoreet ex sit amet nibh dictum, nec imperdiet nisl rhoncus. Vivamus eu nulla ut sapien interdum lobortis. In condimentum risus enim, et pharetra nunc feugiat convallis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum ultricies purus nec vestibulum. Pellentesque ac ornare massa. Nam id libero augue. Curabitur ac turpis posuere, dictum metus dapibus, volutpat turpis. Pellentesque et nibh accumsan, ornare tellus eu, aliquam mauris. Nulla semper lorem at varius congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. "
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+fit_content_height = true
 
 [node name="AUDIO" type="Tabs" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
@@ -304,8 +692,14 @@ align = 1
 
 [connection signal="tab_changed" from="MarginContainer/VBoxContainer/TabContainer" to="." method="_on_TabContainer_tab_changed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2" to="." method="_on_DisplayMode2_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer4/Resolution/DisplayMode2" to="." method="_on_DisplayMode2_item_selected"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Vsync/CheckVsync" to="." method="_on_CheckVsync_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer3/Display FPS/CheckDisplayFps" to="." method="_on_CheckDisplayFps_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer6/Graphics Quality/GraphicsQualityOptions" to="." method="_on_DisplayMode2_item_selected"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_Button_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer3/Texture Quality/TextureQuality" to="." method="_on_DisplayMode2_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer4/Effects Quality/EffectsQualityOptions" to="." method="_on_DisplayMode2_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup/VBoxContainer/PanelContainer5/Mesh Quality/MeshQualityOptions" to="." method="_on_DisplayMode2_item_selected"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider" to="." method="_on_MasterVolumSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider" to="." method="_on_SensibilitySlider_value_changed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
