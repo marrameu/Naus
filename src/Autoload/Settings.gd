@@ -44,3 +44,9 @@ func set_sharpen_value(value):
 
 func set_brightness(value):
 	emit_signal("set_brightness", value)
+
+func toggle_MotionBlur(toggle):
+	if toggle == false:
+		get_parent().get_node("Level").get_node("Camera/motion_blur").hide()
+	else:
+		get_parent().get_node("Level").get_node("Camera/motion_blur").show()

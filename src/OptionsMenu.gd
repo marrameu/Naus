@@ -108,3 +108,7 @@ func _on_HSlider_value_changed(value):
 
 func _on_BrightnessSlider_value_changed(value):
 	Settings.set_brightness(value)
+
+
+func _on_MotionBlur2_toggled(button_pressed):
+	Settings.toggle_MotionBlur(button_pressed)
