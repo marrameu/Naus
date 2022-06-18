@@ -31,12 +31,12 @@ func _process(delta : float) -> void:
 	var old_turboing = turboing
 	
 	if not turbo_time <= 0:
-		if Input.is_action_pressed(turbo_action):
-			turboing = true
-	else:
+		turboing = Input.is_action_pressed(turbo_action)
+		recover_turbo = true
+	elif turboing:
+		recover_turbo = false
 		turboing = false
-		if $TurboTimer.is_stopped():
-			$TurboTimer.start()
+		$TurboTimer.start()
 	
 	if turboing:
 		turbo_time = clamp(turbo_time - delta, 0, MAX_TURBO_TIME)
@@ -65,8 +65,9 @@ func update_throttle(increase_action : String, decrease_action : String, delta :
 		target += delta
 	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
 		target -= delta
-	
-	target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
+	else:
+		turbo_clamp = 1.0
+		target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
 	
 	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
 	# Change to move_towards

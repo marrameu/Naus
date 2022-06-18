@@ -41,10 +41,6 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 
 func add_force(force : Vector3, delta : float):
 	desired_linear_force = desired_linear_force.linear_interpolate(force, delta / linear_drag * 10)
-	#desired_linear_force = desired_linear_force.move_toward(force, delta / linear_drag * 1000)
-	#desired_linear_force.x = clamp(desired_angular_force.x, 0, force.x)
-	#desired_linear_force.y = clamp(desired_angular_force.y, 0, force.y)
-	#desired_linear_force.z = clamp(desired_angular_force.z, 0, force.z)
 	ship.linear_velocity = ship.global_transform.basis.xform(desired_linear_force)
 
 

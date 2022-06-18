@@ -171,7 +171,7 @@ func update_target(delta : float):
 	
 	var speed_forward = vel.z / forward_speed_divider
 	
-	var desired_position = starter_target_position + Vector3(-horizontal, vertical, 0)#-speed_forward)
+	var desired_position = starter_target_position + Vector3(-horizontal, vertical, -speed_forward)
 	target.translation = target.translation.linear_interpolate(desired_position, delta)
 	
 	"""
@@ -185,9 +185,6 @@ func horizontal_lean(target : Spatial, x_input : float, lean_limit : float = 45 
 	target.rotation_degrees = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
 
 
-func _on_Physics_started_turboing():
-	ship_turboing = true
+func _on_Input_activated_turboing(enabled):
+	ship_turboing = enabled
 
-
-func _on_Physics_stopped_turboing():
-	ship_turboing = false

@@ -63,8 +63,7 @@ func _on_SpawnHUD_respawn():
 	# cam
 	$Camera.fp_target_path = ship.get_node("FPCameraPosition").get_path()
 	$Camera.tp_target_path = ship.get_node("CameraPosition").get_path()
-	ship.get_node("Physics").connect("started_turboing", $Camera, "_on_Physics_started_turboing")
-	ship.get_node("Physics").connect("stopped_turboing", $Camera, "_on_Physics_stopped_turboing")
+	ship.get_node("Input").connect("activated_turboing", $Camera, "_on_Input_activated_turboing")
 	$Camera.make_current()
 	$Camera.init_cam()
 
