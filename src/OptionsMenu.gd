@@ -82,6 +82,6 @@ func _on_TabContainer_tab_changed(tab):
 func _on_Button_toggled(button_pressed):
 	
 	if button_pressed == true:
-		$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup.popup()
+		$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer.show()
 	else:
-		!$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/Popup.popup()
+		$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer.hide()
