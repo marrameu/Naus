@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
-[ext_resource path="res://AIShipShooting.gd" type="Script" id=3]
+[ext_resource path="res://src/Ships/ShipShooting.gd" type="Script" id=3]
 [ext_resource path="res://assets/nau provisional.glb" type="PackedScene" id=5]
 [ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
@@ -59,4 +59,6 @@ max_distance = 1000.0
 bus = "Sounds"
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
+[connection signal="started_turboing" from="Physics" to="Shooting" method="_on_Physics_started_turboing"]
+[connection signal="stopped_turboing" from="Physics" to="Shooting" method="_on_Physics_stopped_turboing"]
 [connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]

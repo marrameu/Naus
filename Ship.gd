@@ -29,7 +29,7 @@ func _process(delta):
 	if get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():
 			#if not body.is_in_group("Bullets"):
-			Input.start_joy_vibration(0, 0, 1, 1)
+			#Input.start_joy_vibration(0, 0, 1, 1)
 			$HealthSystem.take_damage(INF, true)
 	
 	if Utilities.first_person:

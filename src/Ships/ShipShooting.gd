@@ -11,11 +11,11 @@ var fire_rates := { 0 : 4.0, 1 : 2.0 }
 var next_times_to_fire := { 0 : 0.0, 1 : 0.0}
 var time_now := 0.0
 
-var shoot_action := "shoot"
-var zoom_action := "zoom"
+var can_shoot := true
 
-var can_shoot_pri := true
-var can_shoot_sec := true
+var turboing := false
+
+var current_bullet := 0
 
 
 func _ready() -> void:
@@ -25,24 +25,23 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	time_now += delta
 	
-	can_shoot_pri = time_now >= next_times_to_fire[0]
-	can_shoot_sec = time_now >= next_times_to_fire[1]
+	can_shoot = time_now >= next_times_to_fire[current_bullet] and not turboing
 
 
 
-sync func shoot(bullet_type : int, shoot_target = Vector3.ZERO) -> void:
-	next_times_to_fire[bullet_type] = time_now + 1.0 / fire_rates[bullet_type]
+sync func shoot(shoot_target = Vector3.ZERO) -> void:
+	next_times_to_fire[current_bullet] = time_now + 1.0 / fire_rates[current_bullet]
 	
-	# Sound
-	if bullet_type == 0:
+	# Sound fer-ho pel nom com els pilotman
+	if current_bullet == 0:
 		$Audio.play()
-	elif bullet_type == 1:
+	elif current_bullet == 1:
 		$Audio2.play()
 	
 	var bullet : KinematicBody
-	if bullet_type == 0:
+	if current_bullet == 0:
 		bullet = bullet_scene.instance()
-	elif bullet_type == 1:
+	elif current_bullet == 1:
 		bullet = secondary_bullet_scene.instance()
 	get_node("/root/Level").add_child(bullet)
 	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
@@ -54,3 +53,11 @@ sync func shoot(bullet_type : int, shoot_target = Vector3.ZERO) -> void:
 		bullet.direction = owner.global_transform.basis.z
 		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()
+
+
+func _on_Physics_started_turboing():
+	turboing = true
+
+
+func _on_Physics_stopped_turboing():
+	turboing = false

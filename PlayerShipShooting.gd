@@ -1,18 +1,21 @@
 extends "res://src/Ships/ShipShooting.gd"
 
+var shoot_action := "shoot"
+var change_bullet_action := "change_bullet"
+
 
 func _process(delta):
-	if Input.is_action_pressed("shoot") and can_shoot_pri:
-		if get_tree().has_network_peer():
-			rpc("shoot", 0, shoot_target())
-		else:
-			shoot(0, shoot_target())
+	if Input.is_action_just_released(change_bullet_action):
+		if current_bullet == 0:
+			current_bullet = 1
+		elif current_bullet == 1:
+			current_bullet = 0
 	
-	if Input.is_action_pressed("zoom") and can_shoot_sec:
+	if Input.is_action_pressed(shoot_action) and can_shoot:
 		if get_tree().has_network_peer():
-			rpc("shoot", 1, shoot_target())
+			rpc("shoot", shoot_target())
 		else:
-			shoot(1, shoot_target())
+			shoot(shoot_target())
 
 
 func shoot_target() -> Vector3:

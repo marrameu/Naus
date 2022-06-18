@@ -38,7 +38,7 @@ var ship_turboing := false
 
 # Input
 var input_device := 0
-var zoom_ship_action := "zoom_ship"
+var zoom_action := "zoom"
 var look_behind_action := "look_behind"
 
 var camera_right_action := "camera_right"
@@ -78,12 +78,9 @@ func _physics_process(delta : float) -> void:
 		
 		# fov = 40 ??? # Si al final trec l'efecte, canviar el nombre a 70
 	
-	"""
-	if Input.is_action_just_pressed(zoom_ship_action) and target.get_parent().state == target.get_parent().State.FLYING:
-		zooming = !zooming
-	"""
+	zooming = Input.is_action_pressed(zoom_action) and not ship_turboing
 	
-	if zooming and target.get_parent().state == target.get_parent().State.FLYING:
+	if zooming:
 		fov = lerp(fov, 40, .15)
 	else:
 		zooming = false
