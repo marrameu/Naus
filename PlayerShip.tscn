@@ -15,3 +15,6 @@ min_throttle = 0.0
 
 [node name="Shooting" parent="." index="9"]
 script = ExtResource( 4 )
+
+[node name="Listener" type="Listener" parent="." index="10"]
+current = true

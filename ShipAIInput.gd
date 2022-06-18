@@ -24,10 +24,8 @@ var going_to_cs = false
 
 
 func _ready():
-	if owner.pilot_man.blue_team:
-		target = get_node("/root/Level/BigShipRed").translation
-	else:
-		target = get_node("/root/Level/BigShipBlue").translation
+	$Timer.wait_time = rand_range(5, 14)
+	choose_target()
 
 
 func _physics_process(delta):
@@ -43,6 +41,15 @@ func _physics_process(delta):
 		turn(delta)
 	
 	# roll = clamp(lerp(roll, 0, delta * ROLL_SPEED), -1, 1)
+
+
+func choose_target():
+	if owner.pilot_man.blue_team:
+		var count = randi() % (get_node("/root/Level/BigShipRed/ShipPoints").get_child_count() - 1)
+		target = get_node("/root/Level/BigShipRed/ShipPoints").get_child(count).global_transform.origin
+	else:
+		var count = randi() % (get_node("/root/Level/BigShipBlue/ShipPoints").get_child_count() - 1)
+		target = get_node("/root/Level/BigShipBlue/ShipPoints").get_child(count).global_transform.origin
 
 
 func move_forward(delta):

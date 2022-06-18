@@ -236,9 +236,6 @@ far = 4000.0
 [node name="PlayerManager" type="Node" parent="PilotManagers"]
 script = ExtResource( 18 )
 
-[node name="AIManager0" type="Node" parent="PilotManagers"]
-script = ExtResource( 18 )
-
 [connection signal="destroyed" from="BigShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]

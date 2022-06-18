@@ -1,6 +1,6 @@
 extends RigidBody
 
-signal player_died
+signal ship_died
 
 var input : Node # class per al input
 var physics : Node
@@ -45,7 +45,7 @@ func _on_HealthSystem_die():
 	
 	# animacions
 	
-	emit_signal("player_died")
+	emit_signal("ship_died")
 	
 	queue_free()
 	

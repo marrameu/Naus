@@ -8,8 +8,19 @@
 [node name="Input" type="Node" parent="." index="2"]
 script = ExtResource( 2 )
 
+[node name="Timer" type="Timer" parent="Input" index="0"]
+wait_time = 10.0
+autostart = true
+
 [node name="PlayerShipInterior" parent="." index="6"]
 visible = false
+
+[node name="Audio" parent="Shooting" index="0"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+emission_angle_degrees = 46.0
+
+[node name="Audio2" parent="Shooting" index="1"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="RayCast" type="RayCast" parent="Shooting" index="2"]
 enabled = true
@@ -41,3 +52,5 @@ cast_to = Vector3( 0, 75, 150 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -75, 150 )
+
+[connection signal="timeout" from="Input/Timer" to="Input" method="choose_target"]

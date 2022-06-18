@@ -25,6 +25,9 @@ points = PoolVector3Array( -100, -250, -50, -100, -250, 50, 0, 250, -50, 100, -2
 script = ExtResource( 1 )
 
 [node name="HealthSystem" parent="." instance=ExtResource( 2 )]
+MAX_SHIELD = 20000
+time_before_shield_repair = 90.0
+MAX_HEALTH = 50000
 
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( -1.07284e-07, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 1.07284e-07, 4.68955e-15, 0, 0, 0 )
@@ -62,6 +65,26 @@ transform = Transform( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336,
 
 [node name="Turret7" parent="Turrets" instance=ExtResource( 3 )]
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
+
+[node name="ShipPoints" type="Spatial" parent="."]
+
+[node name="AttackPos2" type="Position3D" parent="ShipPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.2106, -3.05176e-05, -564.878 )
+
+[node name="AttackPos3" type="Position3D" parent="ShipPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -427.03, -3.05176e-05, -390.446 )
+
+[node name="AttackPos4" type="Position3D" parent="ShipPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -555.769, -3.05176e-05, -5.8555 )
+
+[node name="AttackPos5" type="Position3D" parent="ShipPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -271.116, -3.05176e-05, 420.47 )
+
+[node name="AttackPos6" type="Position3D" parent="ShipPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 206.02, -3.05176e-05, 335.4 )
+
+[node name="AttackPos" type="Position3D" parent="ShipPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 610.084, 0, 0 )
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="shield_die" from="HealthSystem" to="." method="_on_HealthSystem_shield_die"]
