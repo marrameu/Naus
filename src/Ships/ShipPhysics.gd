@@ -7,8 +7,6 @@ signal stopped_turboing
 
 onready var ship = get_parent()
 
-var force_multiplier := 1.0 # cal?
-
 var linear_force := Vector3(0, 0, 200)
 var linear_force_turbo := Vector3(0, 0, 400)
 var angular_force := Vector3(90, 90, 175) / 100.0
@@ -20,7 +18,7 @@ var desired_linear_force := Vector3()
 var desired_angular_force := Vector3()
 
 var angular_drag := 3.5 # ¿?
-var linear_drag := 2.0 # ¿?
+var linear_drag := 5.0 # ¿?
 
 var stabilizing := false
 var stabilized := false
@@ -37,8 +35,11 @@ var turboing = false
 
 
 func _process(delta : float) -> void:
-	add_force(applied_linear_force * force_multiplier, delta)
-	add_torque(applied_angular_force * force_multiplier, delta)
+	if Input.is_action_just_pressed("test"):
+		add_force(-Vector3.FORWARD * 10000, delta)
+	
+	add_force(applied_linear_force, delta)
+	add_torque(applied_angular_force, delta) # * rotate_speed?
 	
 	if can_turbo and turbo_time <= 0:
 		can_turbo = false
@@ -51,17 +52,21 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	if wants_turbo and can_turbo:
 		turboing = true
 		emit_signal("started_turboing")
-		applied_linear_force = linear_force_turbo
 		turbo_time = clamp(turbo_time - delta, 0, MAX_TURBO_TIME)
 	else:
 		turboing = false
 		emit_signal("stopped_turboing")
-		applied_linear_force = linear_input * linear_force
 		turbo_time = clamp(turbo_time + delta, 0, MAX_TURBO_TIME)
+	applied_linear_force = linear_input * linear_force
+	
 
 
 func add_force(force : Vector3, delta : float):
 	desired_linear_force = desired_linear_force.linear_interpolate(force, delta / linear_drag * 10)
+	#desired_linear_force = desired_linear_force.move_toward(force, delta / linear_drag * 1000)
+	#desired_linear_force.x = clamp(desired_angular_force.x, 0, force.x)
+	#desired_linear_force.y = clamp(desired_angular_force.y, 0, force.y)
+	#desired_linear_force.z = clamp(desired_angular_force.z, 0, force.z)
 	ship.linear_velocity = ship.global_transform.basis.xform(desired_linear_force)
 
 

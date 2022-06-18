@@ -44,7 +44,14 @@ func _process(delta : float) -> void:
 	$Center.visible = true # is_player
 	$LifeBar.show()
 	$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
-	$TurboBar.value = float(get_node("../Physics").turbo_time) / float(get_node("../Physics").MAX_TURBO_TIME) * 100
+	$SpeedBars/TurboBar.value = float(get_node("../Physics").turbo_time) / float(get_node("../Physics").MAX_TURBO_TIME) * 100
+	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle / 2 * 100 
+	var b = owner.transform.basis
+	var v_len = owner.linear_velocity.length()
+	var v_nor = owner.linear_velocity.normalized()
+	var vel : Vector3
+	vel.z = b.z.dot(v_nor) * v_len
+	$SpeedBars/SpeedBar.value = vel.z / 5
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
 	if get_parent().is_player:

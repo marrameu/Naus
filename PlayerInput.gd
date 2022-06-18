@@ -31,6 +31,7 @@ func _process(delta : float) -> void:
 	wants_turbo = Input.is_action_pressed(turbo_action)
 	
 	update_yaw_and_ptich()
+	print(throttle)
 	update_throttle(move_forward_action, move_backward_action, delta)
 
 
@@ -44,10 +45,17 @@ func update_yaw_and_ptich() -> void:
 
 func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:
 	var target := throttle
-	# min throttle
-	target = clamp(Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action), min_throttle, 1)
+	var turbo_clamp := 2.0
+	if Input.is_action_pressed(turbo_action):
+		target += delta
+	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
+		target -= delta
+	
+	target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
+	
+	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
 	# Change to move_towards
-	throttle = clamp(lerp(throttle, target, delta * THROTTLE_SPEED), -1, 1)
+	throttle = target #move_toward(throttle, target, delta)
 
 """
 # Called every frame. 'delta' is the elapsed time since the previous frame.

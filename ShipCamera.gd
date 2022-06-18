@@ -74,9 +74,8 @@ func _process(delta):
 
 func _physics_process(delta : float) -> void:
 	if not wr or not wr.get_ref():
+		fov = 70
 		return
-		
-		# fov = 40 ??? # Si al final trec l'efecte, canviar el nombre a 70
 	
 	zooming = Input.is_action_pressed(zoom_action) and not ship_turboing
 	
@@ -167,14 +166,12 @@ func update_target(delta : float):
 	var v_nor = target.owner.linear_velocity.normalized()
 	
 	var vel : Vector3
-	vel.x = b.x.dot(v_nor) * v_len
-	vel.y = b.y.dot(v_nor) * v_len
 	vel.z = b.z.dot(v_nor) * v_len
 	
 	
 	var speed_forward = vel.z / forward_speed_divider
 	
-	var desired_position = starter_target_position + Vector3(-horizontal, vertical, -speed_forward)
+	var desired_position = starter_target_position + Vector3(-horizontal, vertical, 0)#-speed_forward)
 	target.translation = target.translation.linear_interpolate(desired_position, delta)
 	
 	"""

@@ -199,6 +199,6 @@ func turn(delta):
 
 func update_throttle(value : float, delta : float) -> void:
 	var targett := throttle
-	targett = clamp(value * boost_multi, min_throttle, 1)
+	targett = clamp(value * boost_multi, MIN_THROTTLE, 1)
 	# Change to move_towards
 	throttle = clamp(lerp(throttle, targett, delta * THROTTLE_SPEED), -1, 1)

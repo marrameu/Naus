@@ -9,7 +9,7 @@
 
 [node name="Input" type="Node" parent="." index="2"]
 script = ExtResource( 2 )
-min_throttle = 0.0
+MIN_THROTTLE = 0.0
 
 [node name="PlayerHUD" parent="." index="4" instance=ExtResource( 3 )]
 
