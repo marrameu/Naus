@@ -86,7 +86,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer"]
 margin_right = 986.0
-margin_bottom = 1328.0
+margin_bottom = 704.0
 size_flags_horizontal = 3
 custom_constants/separation = 20
 
@@ -160,6 +160,7 @@ margin_left = 578.0
 margin_right = 978.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 0 )
+disabled = true
 text = "1920x1080"
 flat = true
 items = [ "1920x1080", null, false, 0, null, "1280x720", null, false, 1, null ]
@@ -197,6 +198,7 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 400, 0 )
 step = 5.0
 value = 100.0
+editable = false
 
 [node name="PanelContainer7" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 284.0
@@ -356,6 +358,7 @@ margin_left = 578.0
 margin_right = 978.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 0 )
+disabled = true
 text = "Low"
 flat = true
 items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null, "Custom", null, false, 4, null ]
@@ -370,6 +373,7 @@ text = "Advanced Options"
 align = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+visible = false
 margin_top = 724.0
 margin_right = 986.0
 margin_bottom = 1328.0
@@ -407,6 +411,7 @@ margin_left = 578.0
 margin_right = 978.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 0 )
+disabled = true
 text = "Low"
 flat = true
 items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null ]
@@ -442,6 +447,7 @@ margin_left = 578.0
 margin_right = 978.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 0 )
+disabled = true
 text = "Low"
 flat = true
 items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null ]
@@ -477,6 +483,7 @@ margin_left = 578.0
 margin_right = 978.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 0 )
+disabled = true
 text = "Low"
 flat = true
 items = [ "Low", null, false, 0, null, "Medium", null, false, 1, null, "High", null, false, 2, null, "Ultra", null, false, 3, null ]
@@ -612,6 +619,7 @@ size_flags_vertical = 3
 margin_left = 914.0
 margin_right = 978.0
 margin_bottom = 50.0
+disabled = true
 pressed = true
 flat = true
 
