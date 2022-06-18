@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=12 format=2]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.427451, 0.427451, 0.427451, 1 )
@@ -20,6 +20,13 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=9]
+
+[sub_resource type="StyleBoxFlat" id=10]
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.219608, 0.211765, 0.227451, 1 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.364706 )
@@ -62,6 +69,9 @@ default_font = SubResource( 2 )
 Button/styles/hover = SubResource( 3 )
 Button/styles/normal = SubResource( 4 )
 Button/styles/pressed = SubResource( 5 )
+HSlider/styles/grabber_area = SubResource( 9 )
+HSlider/styles/grabber_area_highlight = SubResource( 10 )
+HSlider/styles/slider = SubResource( 11 )
 PanelContainer/styles/panel = SubResource( 8 )
 TabContainer/styles/panel = SubResource( 6 )
 TabContainer/styles/tab_bg = SubResource( 7 )
