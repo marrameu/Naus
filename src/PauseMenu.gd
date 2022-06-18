@@ -33,7 +33,7 @@ func _on_Reprendre_pressed():
 func _on_Opcions_pressed():
 	$Control/MenuPrincipal.hide()
 	$Control/OptionsMenu.show()
-	$Control/OptionsMenu/MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2.grab_focus()
+	$Control/OptionsMenu/MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2.grab_focus()
 
 
 func _on_Sortir_pressed():

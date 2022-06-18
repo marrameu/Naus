@@ -2,7 +2,7 @@ extends Control
 
 
 #Video Settings
-onready var display_options = $MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2
+onready var display_options = $MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2
 
 #Controls
 onready var SensiblitySlider = $MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider
@@ -72,7 +72,7 @@ func _on_DisplayMode2_item_selected(index):
 
 func _on_TabContainer_tab_changed(tab):
 	if tab == 0:
-		$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2.grab_focus()
+		$MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2.grab_focus()
 	elif tab == 1:
 		$MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider.grab_focus()
 	elif tab == 2:
