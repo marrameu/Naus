@@ -171,6 +171,7 @@ func update_target(delta : float):
 	
 	var speed_forward = vel.z / forward_speed_divider
 	
+	# en lloc de fer l'angular amb l'input, fer-ho amb les físiques reals?
 	var desired_position = starter_target_position + Vector3(-horizontal, vertical, -speed_forward)
 	target.translation = target.translation.linear_interpolate(desired_position, delta)
 	

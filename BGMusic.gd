@@ -9,7 +9,6 @@ export(AudioStream) var audio_sfx3
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var kk = randi() % 3
-	print(kk)
 	match kk:
 		0:
 			stream = audio_sfx1

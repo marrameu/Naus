@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/roboto/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=4]
 [ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=5]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/triangle.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -131,7 +132,7 @@ anchor_bottom = 1.0
 margin_left = 70.0
 margin_top = -73.0
 margin_right = 195.0
-margin_bottom = -20.0
+margin_bottom = 3.0
 rect_rotation = -90.0
 __meta__ = {
 "_edit_group_": true
@@ -140,15 +141,42 @@ __meta__ = {
 [node name="TurboBar" parent="SpeedBars" instance=ExtResource( 6 )]
 tint_progress = Color( 1, 0.815686, 0.384314, 0.588235 )
 
-[node name="ThrottleBar" parent="SpeedBars" instance=ExtResource( 6 )]
+[node name="HBoxContainer" type="HBoxContainer" parent="SpeedBars"]
 margin_top = 24.0
-margin_bottom = 29.0
+margin_right = 125.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="SpeedBars/HBoxContainer"]
+modulate = Color( 0.384314, 0.388235, 1, 0.588235 )
+margin_right = 62.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="SpeedBars/HBoxContainer"]
+modulate = Color( 0.384314, 0.388235, 1, 0 )
+margin_left = 62.0
+margin_right = 125.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+
+[node name="ThrottleBar" parent="SpeedBars" instance=ExtResource( 6 )]
+margin_top = 42.0
+margin_bottom = 52.0
 tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
 nine_patch_stretch = true
+stretch_margin_top = 5
+stretch_margin_bottom = 5
 
 [node name="SpeedBar" parent="SpeedBars" instance=ExtResource( 6 )]
-margin_top = 33.0
-margin_bottom = 53.0
+margin_top = 56.0
+margin_bottom = 76.0
 tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )

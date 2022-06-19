@@ -46,7 +46,6 @@ func _on_PlayerShip_tree_exited():
 
 
 func _on_AIShip_tree_exited(num):
-	print(num)
 	# wait 4 s
 	spawn_AI(num)
 

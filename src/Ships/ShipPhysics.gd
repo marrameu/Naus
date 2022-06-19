@@ -34,7 +34,23 @@ func _process(delta : float) -> void:
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
-	applied_angular_force = angular_input * angular_force
+	var b = ship.transform.basis
+	var v_len = ship.linear_velocity.length()
+	var v_nor = ship.linear_velocity.normalized()
+	var vel : Vector3
+	vel.z = b.z.dot(v_nor) * v_len
+	
+	var mutiplier := 1.0
+	
+	if vel.z <= 100:
+		mutiplier = (0.01 * vel.z) + 1
+	elif vel.z <= 200: # and vel.z < 400:
+		mutiplier = 3 - (0.01 * vel.z)
+	
+	if ship.name == "PlayerShip":
+		print(mutiplier)
+	
+	applied_angular_force = angular_input * angular_force * mutiplier
 	applied_linear_force = linear_input * linear_force
 	
 
