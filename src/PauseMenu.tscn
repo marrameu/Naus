@@ -46,6 +46,14 @@ margin_bottom = 547.0
 rect_min_size = Vector2( 0, 100 )
 text = "Sortir"
 
+[node name="Button" type="Button" parent="Control"]
+margin_left = 1595.0
+margin_top = 984.0
+margin_right = 1881.0
+margin_bottom = 1050.0
+text = "Suicidament"
+
 [connection signal="pressed" from="Control/MenuPrincipal/Reprendre" to="." method="_on_Reprendre_pressed"]
 [connection signal="pressed" from="Control/MenuPrincipal/Opcions" to="." method="_on_Opcions_pressed"]
 [connection signal="pressed" from="Control/MenuPrincipal/Sortir" to="." method="_on_Sortir_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]
