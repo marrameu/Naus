@@ -25,7 +25,7 @@ var fp_vertical_turn_up_move := 0.1
 var fp_vertical_turn_down_move := 0.1
 
 var forward_speed_divider := 100
-var tp_forward_speed_divider := 50
+var tp_forward_speed_divider := 35
 var fp_forward_speed_divider := 3750
 
 var zooming := false

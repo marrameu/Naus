@@ -51,7 +51,7 @@ func _process(delta : float) -> void:
 	var v_nor = owner.linear_velocity.normalized()
 	var vel : Vector3
 	vel.z = b.z.dot(v_nor) * v_len
-	$SpeedBars/SpeedBar.value = vel.z / 5
+	$SpeedBars/SpeedBar.value = vel.z / 4
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
 	if get_parent().is_player:

@@ -14,7 +14,7 @@ func _ready():
 
 
 func _process(delta):
-	if ray.is_colliding() and ray.get_collider() == target and can_shoot_pri:
+	if ray.is_colliding() and ray.get_collider() == target and can_shoot:
 		if get_tree().has_network_peer():
 			rpc("shoot")
 		else:
