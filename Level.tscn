@@ -28,12 +28,12 @@ roughness = 0.75
 [sub_resource type="PrismMesh" id=1]
 size = Vector3( 50, 50, 50 )
 
-[sub_resource type="PanoramaSky" id=2]
+[sub_resource type="PanoramaSky" id=65]
 panorama = ExtResource( 6 )
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=66]
 background_mode = 2
-background_sky = SubResource( 2 )
+background_sky = SubResource( 65 )
 background_energy = 5.23
 ambient_light_energy = 0.0
 ambient_light_sky_contribution = 0.0
@@ -44,7 +44,6 @@ glow_strength = 0.89
 glow_bloom = 0.79
 glow_blend_mode = 1
 glow_bicubic_upscale = true
-adjustment_enabled = true
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -109,7 +108,7 @@ audio_sfx2 = ExtResource( 7 )
 audio_sfx3 = ExtResource( 9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+environment = SubResource( 66 )
 script = ExtResource( 17 )
 
 [node name="Results" type="CanvasLayer" parent="."]

@@ -16,7 +16,7 @@ MIN_THROTTLE = 0.0
 [node name="Listener" type="Listener" parent="." index="9"]
 current = true
 
-[node name="Shooting" parent="." index="10"]
+[node name="Shooting" parent="." index="11"]
 script = ExtResource( 4 )
 
 [connection signal="activated_turboing" from="Input" to="Shooting" method="_on_Input_activated_turboing"]

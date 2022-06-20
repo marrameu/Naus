@@ -38,6 +38,26 @@ _global_script_classes=[ {
 "class": "ShipPhysics",
 "language": "GDScript",
 "path": "res://src/Ships/ShipPhysics.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderFBMWarpTexture",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/fBm_warp_texture.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderMapSteppedLinear",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/map_stepped_linear.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderVoronoiTexture",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/voronoi_texture.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderWaveTexture",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/wave_texture.gd"
 } ]
 _global_script_class_icons={
 "HealthSystem": "",
@@ -45,7 +65,11 @@ _global_script_class_icons={
 "PilotManager": "",
 "Ship": "",
 "ShipBullet": "",
-"ShipPhysics": ""
+"ShipPhysics": "",
+"VisualShaderFBMWarpTexture": "",
+"VisualShaderMapSteppedLinear": "",
+"VisualShaderVoronoiTexture": "",
+"VisualShaderWaveTexture": ""
 }
 
 [application]
