@@ -13,10 +13,13 @@ MIN_THROTTLE = 0.0
 
 [node name="PlayerHUD" parent="." index="4" instance=ExtResource( 3 )]
 
+[node name="ShipMesh" parent="." index="8"]
+visible = true
+
 [node name="Listener" type="Listener" parent="." index="9"]
 current = true
 
-[node name="Shooting" parent="." index="11"]
+[node name="Shooting" parent="." index="10"]
 script = ExtResource( 4 )
 
 [connection signal="activated_turboing" from="Input" to="Shooting" method="_on_Input_activated_turboing"]

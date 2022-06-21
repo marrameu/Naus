@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://SuportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://WorldEnvironment.gd" type="Script" id=17]
 [ext_resource path="res://PilotManager.gd" type="Script" id=18]
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/Planets/Earth/Earth.glb" type="PackedScene" id=20]
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.694118, 0.709804, 0.843137, 1 )
@@ -67,7 +68,7 @@ transform = Transform( 0.646273, 0.259072, 0.717784, -0.17335, 0.965858, -0.1925
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, -29.6491 )
-far = 4000.0
+far = 100000.0
 script = ExtResource( 2 )
 
 [node name="motion_blur" parent="Camera" instance=ExtResource( 19 )]
@@ -241,9 +242,16 @@ far = 4000.0
 [node name="PlayerManager" type="Node" parent="PilotManagers"]
 script = ExtResource( 18 )
 
+[node name="Earth" parent="." instance=ExtResource( 20 )]
+transform = Transform( 200000, 0, 0, 0, 200000, 0, 0, 0, 200000, 0, 0, -100000 )
+
+[node name="Earth_Diffuse_1K001" parent="Earth" index="1"]
+visible = false
+
 [connection signal="destroyed" from="BigShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 [connection signal="respawn" from="SpawnHUD" to="." method="_on_SpawnHUD_respawn"]
 
 [editable path="BigShipBlue"]
+[editable path="Earth"]
