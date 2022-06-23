@@ -44,6 +44,7 @@ func _physics_process(delta):
 
 
 func choose_target():
+	return
 	if owner.pilot_man.blue_team:
 		var count = randi() % (get_node("/root/Level/BigShipRed/ShipPoints").get_child_count() - 1)
 		target = get_node("/root/Level/BigShipRed/ShipPoints").get_child(count).global_transform.origin
