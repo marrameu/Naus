@@ -16,5 +16,6 @@ func _on_bloom_toggled(value):
 	environment.glow_enabled = value
 	print ("bloom desactivado")
 
+
 func _on_set_brightness(value):
 	environment.adjustment_brightness = value
