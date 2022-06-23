@@ -53,7 +53,6 @@ func _process(delta : float) -> void:
 			a -= 1
 		else:
 			rect.color = Color("48b6b6b6")
-	#$SpeedBars/TurboBar.value = float(get_node("../Input").turbo_time) / float(get_node("../Input").MAX_TURBO_TIME) * 100
 	
 	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle / 2 * 100 
 	var b = owner.transform.basis

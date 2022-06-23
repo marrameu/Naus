@@ -129,62 +129,58 @@ margin_bottom = 21.0
 [node name="SpeedBars" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 70.0
-margin_top = -73.0
-margin_right = 195.0
-margin_bottom = 23.0
+margin_left = 49.0
+margin_top = -71.0
+margin_right = 174.0
+margin_bottom = 3.0
 rect_rotation = -90.0
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="TurboBar" parent="SpeedBars" instance=ExtResource( 6 )]
-tint_progress = Color( 1, 0.815686, 0.384314, 0.588235 )
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="SpeedBars"]
-margin_top = 24.0
 margin_right = 125.0
-margin_bottom = 39.0
+margin_bottom = 16.0
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="SpeedBars/HBoxContainer2"]
 margin_right = 21.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 color = Color( 0.713726, 0.713726, 0.713726, 0.282353 )
 
 [node name="ColorRect2" type="ColorRect" parent="SpeedBars/HBoxContainer2"]
 margin_left = 25.0
 margin_right = 47.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 color = Color( 0.713726, 0.713726, 0.713726, 0.282353 )
 
 [node name="ColorRect3" type="ColorRect" parent="SpeedBars/HBoxContainer2"]
 margin_left = 51.0
 margin_right = 73.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 color = Color( 0.713726, 0.713726, 0.713726, 0.282353 )
 
 [node name="ColorRect4" type="ColorRect" parent="SpeedBars/HBoxContainer2"]
 margin_left = 77.0
 margin_right = 99.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 color = Color( 0.713726, 0.713726, 0.713726, 0.282353 )
 
 [node name="ColorRect5" type="ColorRect" parent="SpeedBars/HBoxContainer2"]
 margin_left = 103.0
 margin_right = 125.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 color = Color( 0.713726, 0.713726, 0.713726, 0.282353 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SpeedBars"]
-margin_top = 43.0
+margin_top = 20.0
 margin_right = 125.0
-margin_bottom = 58.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -192,7 +188,7 @@ custom_constants/separation = 0
 [node name="TextureRect" type="TextureRect" parent="SpeedBars/HBoxContainer"]
 modulate = Color( 0.384314, 0.388235, 1, 0.588235 )
 margin_right = 62.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
@@ -202,21 +198,21 @@ expand = true
 modulate = Color( 0.384314, 0.388235, 1, 0 )
 margin_left = 62.0
 margin_right = 125.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
 expand = true
 
 [node name="ThrottleBar" parent="SpeedBars" instance=ExtResource( 6 )]
-margin_top = 62.0
-margin_bottom = 72.0
+margin_top = 40.0
+margin_bottom = 50.0
 tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
 nine_patch_stretch = true
 stretch_margin_top = 5
 stretch_margin_bottom = 5
 
 [node name="SpeedBar" parent="SpeedBars" instance=ExtResource( 6 )]
-margin_top = 76.0
-margin_bottom = 96.0
+margin_top = 54.0
+margin_bottom = 74.0
 tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )

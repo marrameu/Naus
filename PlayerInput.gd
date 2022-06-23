@@ -2,8 +2,6 @@ extends "res://ShipInput.gd"
 
 signal activated_turboing
 
-# How quickly reacts to input
-# Move Towards 0.5
 const THROTTLE_SPEED := 2.5
 const ROLL_SPEED := 2.5
 
@@ -23,43 +21,20 @@ var camera_right_action := "camera_right"
 var turbo_action := "turbo"
 
 
-
-#temp
-
-
-
 func _process(delta : float) -> void:
-	
-	
-	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
-	
-	# una mica chapuzas
-	var old_turboing = turboing
-	
+	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - 
+		Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
 	
 	wants_turbo = Input.is_action_pressed(turbo_action) and avaliable_turbos
 	if turboing and wants_turbo:
 		if $DrainTurboTimer.is_stopped():
 			$DrainTurboTimer.start()
-	elif turboing and not wants_turbo:
+	elif turboing and not wants_turbo: # player has stopped pressing or run out of turbos
 		if not $DrainTurboTimer.is_stopped():
 			$DrainTurboTimer.stop()
 			avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
 	else:
 		_recover_turbo()
-	
-	"""elif turboing:
-		recover_turbo = false
-		turboing = false
-		#$TurboTimer.start()
-	
-	if turboing:
-		turbo_time = clamp(turbo_time - delta, 0, MAX_TURBO_TIME)
-	elif recover_turbo:
-		turbo_time = clamp(turbo_time + delta, 0, MAX_TURBO_TIME)
-	"""
-	
-
 	
 	update_yaw_and_ptich()
 	update_throttle(move_forward_action, move_backward_action, delta)
@@ -84,22 +59,15 @@ func update_throttle(increase_action : String, decrease_action : String, delta :
 		turbo_clamp = 1.0
 		target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
 	
-	""" kk
-	if target > 1:
-		avaliable_turbos -= 1
-		$DrainTurboTimer.start()
-	"""
-	
 	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
 	
 	turboing = target > 1
-	
 	if target > 1 and throttle <= 1: # s'acaba d'activar el turbo
 		emit_signal("activated_turboing", true)
 	elif throttle > 1 and target <= 1:
 		emit_signal("activated_turboing", false)
 	
-	throttle = target #move_toward(throttle, target, delta)
+	throttle = target
 
 
 func _on_DrainTurboTimer_timeout():

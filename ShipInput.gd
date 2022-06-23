@@ -7,19 +7,14 @@ var strafe := 0.0
 var throttle := 0.0
 export(float, -1, 1) var MIN_THROTTLE := 0.3
 
-var can_turbo = false
-var recover_turbo := false
+# TURBO
+var TURBO_RECHARGE_TIME := 3.0
+var MAX_AVALIABLE_TURBOS : int = 5
+var avaliable_turbos : int = 0
 
 var turboing := false
-
-var MAX_TURBO_TIME := 5.0
-# var turbo_time := MAX_TURBO_TIME
-
-var avaliable_turbos : int = 0
-var MAX_AVALIABLE_TURBOS : int = 5
-
-
 var wants_turbo = false
+
 
 func _process(delta):
 	_recover_turbo()
@@ -35,7 +30,7 @@ func _recover_turbo():
 	else:
 		if $ReloadTurboTimer.is_stopped():
 			$ReloadTurboTimer.start()
-		$ReloadTurboTimer.wait_time = 3.0 #MAX_TURBO_TIME / MAX_AVALIABLE_TURBOS
+		$ReloadTurboTimer.wait_time = TURBO_RECHARGE_TIME
 
 
 func _on_DrainTurboTimer_timeout():
