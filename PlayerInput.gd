@@ -24,27 +24,42 @@ var turbo_action := "turbo"
 
 
 
+#temp
+
+
+
 func _process(delta : float) -> void:
+	
+	
 	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
 	
 	# una mica chapuzas
 	var old_turboing = turboing
 	
-	if not turbo_time <= 0:
-		turboing = Input.is_action_pressed(turbo_action)
-		recover_turbo = true
-	elif turboing:
+	
+	wants_turbo = Input.is_action_pressed(turbo_action) and avaliable_turbos
+	if turboing and wants_turbo:
+		if $DrainTurboTimer.is_stopped():
+			$DrainTurboTimer.start()
+	elif turboing and not wants_turbo:
+		if not $DrainTurboTimer.is_stopped():
+			$DrainTurboTimer.stop()
+			avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
+	else:
+		_recover_turbo()
+	
+	"""elif turboing:
 		recover_turbo = false
 		turboing = false
-		$TurboTimer.start()
+		#$TurboTimer.start()
 	
 	if turboing:
 		turbo_time = clamp(turbo_time - delta, 0, MAX_TURBO_TIME)
 	elif recover_turbo:
 		turbo_time = clamp(turbo_time + delta, 0, MAX_TURBO_TIME)
+	"""
 	
-	if turboing != old_turboing:
-		emit_signal("activated_turboing", turboing)
+
 	
 	update_yaw_and_ptich()
 	update_throttle(move_forward_action, move_backward_action, delta)
@@ -61,7 +76,7 @@ func update_yaw_and_ptich() -> void:
 func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:
 	var target := throttle
 	var turbo_clamp := 2.0
-	if turboing:
+	if wants_turbo:
 		target += delta
 	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
 		target -= delta
@@ -69,13 +84,27 @@ func update_throttle(increase_action : String, decrease_action : String, delta :
 		turbo_clamp = 1.0
 		target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
 	
+	""" kk
+	if target > 1:
+		avaliable_turbos -= 1
+		$DrainTurboTimer.start()
+	"""
+	
 	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
-	# Change to move_towards
+	
+	turboing = target > 1
+	
+	if target > 1 and throttle <= 1: # s'acaba d'activar el turbo
+		emit_signal("activated_turboing", true)
+	elif throttle > 1 and target <= 1:
+		emit_signal("activated_turboing", false)
+	
 	throttle = target #move_toward(throttle, target, delta)
 
 
-func _on_TurboTimer_timeout():
-	recover_turbo = true
+func _on_DrainTurboTimer_timeout():
+	avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
+	$TurboSwitchAudio.play()
 
 
 """

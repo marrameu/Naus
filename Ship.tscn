@@ -28,8 +28,11 @@ MAX_HEALTH = 1000
 [node name="Input" type="Node" parent="."]
 script = ExtResource( 4 )
 
-[node name="TurboTimer" type="Timer" parent="Input"]
-wait_time = 5.0
+[node name="ReloadTurboTimer" type="Timer" parent="Input"]
+wait_time = 3.0
+
+[node name="DrainTurboTimer" type="Timer" parent="Input"]
+wait_time = 3.0
 one_shot = true
 
 [node name="Physics" type="Node" parent="."]
@@ -67,5 +70,6 @@ max_distance = 1000.0
 bus = "Sounds"
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
-[connection signal="timeout" from="Input/TurboTimer" to="Input" method="_on_TurboTimer_timeout"]
+[connection signal="timeout" from="Input/ReloadTurboTimer" to="Input" method="_on_ReloadTurboTimer_timeout"]
+[connection signal="timeout" from="Input/DrainTurboTimer" to="Input" method="_on_DrainTurboTimer_timeout"]
 [connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]
