@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
 [ext_resource path="res://src/Ships/ShipShooting.gd" type="Script" id=3]
 [ext_resource path="res://ShipInput.gd" type="Script" id=4]
-[ext_resource path="res://assets/nau provisional.glb" type="PackedScene" id=5]
+[ext_resource path="res://assets/CombatShip1/CombatShip1.glb" type="PackedScene" id=5]
 [ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
@@ -50,8 +50,6 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
 
 [node name="ShipMesh" parent="." instance=ExtResource( 5 )]
-transform = Transform( 3.60686, 0, 0, 0, 1.19514, 0, 0, 0, 2.57414, 0, 0, 0 )
-visible = false
 
 [node name="Shooting" type="Spatial" parent="."]
 script = ExtResource( 3 )
