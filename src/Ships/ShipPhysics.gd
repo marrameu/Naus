@@ -47,11 +47,9 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	elif vel.z <= 200: # vel.z < 400 si vols que amb el turbo li costi enacra més (0.5 em pens)
 		mutiplier = 3 - (0.01 * vel.z)
 	
-	"""
-	if ship.name == "PlayerShip":
-		print(mutiplier)
-	"""
-	
+	#if ship.name != "PlayerShip":
+	#	print(mutiplier)
+		
 	applied_angular_force = angular_input * angular_force * mutiplier
 	applied_linear_force = linear_input * linear_force
 	

@@ -21,6 +21,7 @@ var raycast_multiplier = 1
 
 var going_to_cs = false
 
+var des_throttle := 1.0
 
 
 func _ready():
@@ -55,7 +56,7 @@ func choose_target():
 
 func move_forward(delta):
 	var dist = owner.global_transform.origin.distance_to(target)
-	update_throttle(dist - a_partir_daqui_min/distancia_per_comencar_a_frenat - a_partir_daqui_min, delta)
+	update_throttle(des_throttle, delta) #dist - a_partir_daqui_min/distancia_per_comencar_a_frenat - a_partir_daqui_min, delta)
 
 
 # Va una mica ebri!, però fa el fet. S'hauria de fer amb matemàtiques, passant la desired_oirent a local, com ho feia al del 2017 (amb l'Slerp però amb pitch, yaw i roll)

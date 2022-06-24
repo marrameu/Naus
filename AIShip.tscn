@@ -12,6 +12,7 @@
 
 [node name="Input" parent="." index="2"]
 script = ExtResource( 2 )
+MIN_THROTTLE = 0.2
 
 [node name="Timer" type="Timer" parent="Input" index="0"]
 wait_time = 10.0
@@ -27,14 +28,16 @@ script = ExtResource( 5 )
 [node name="AttackEnemies" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 6 )
 
-[node name="AttackCP" type="Node" parent="StateMachine" index="2"]
+[node name="OutOfRangeTimer" type="Timer" parent="StateMachine/AttackEnemies" index="0"]
 
-[node name="DefendCP" type="Node" parent="StateMachine" index="3"]
+[node name="AttackCP" type="Node" parent="." index="5"]
 
-[node name="PlayerShipInterior" parent="." index="7"]
+[node name="DefendCP" type="Node" parent="." index="6"]
+
+[node name="PlayerShipInterior" parent="." index="9"]
 visible = false
 
-[node name="Shooting" parent="." index="9"]
+[node name="Shooting" parent="." index="11"]
 script = ExtResource( 3 )
 
 [node name="Audio" parent="Shooting" index="0"]
@@ -50,41 +53,53 @@ cast_to = Vector3( 0, 0, 1000 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
-[node name="ColDetectLeft" type="RayCast" parent="." index="10"]
+[node name="ShootingArea" type="Area" parent="Shooting" index="3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Shooting/ShootingArea" index="0"]
+transform = Transform( 150, 0, 0, 0, -2.18557e-05, 150, 0, -500, -6.55671e-06, 0, 0, 495.819 )
+shape = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": "Fer-la més petita"
+}
+
+[node name="ColDetectLeft" type="RayCast" parent="." index="12"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( 75, 0, 150 )
 
-[node name="ColDetectRight" type="RayCast" parent="." index="11"]
+[node name="ColDetectRight" type="RayCast" parent="." index="13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( -75, 0, 150 )
 
-[node name="ColDetectForward" type="RayCast" parent="." index="12"]
+[node name="ColDetectForward" type="RayCast" parent="." index="14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
 enabled = true
 cast_to = Vector3( 0, 0, 150 )
 
-[node name="ColDetectUp" type="RayCast" parent="." index="13"]
+[node name="ColDetectUp" type="RayCast" parent="." index="15"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, 75, 150 )
 
-[node name="ColDetectDown" type="RayCast" parent="." index="14"]
+[node name="ColDetectDown" type="RayCast" parent="." index="16"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -75, 150 )
 
-[node name="InitTimer" type="Timer" parent="." index="15"]
+[node name="InitTimer" type="Timer" parent="." index="17"]
 one_shot = true
 autostart = true
 
-[node name="EnemyDetectArea" type="Area" parent="." index="16"]
+[node name="EnemyDetectArea" type="Area" parent="." index="18"]
 
 [node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea" index="0"]
-transform = Transform( 100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 27.8584 )
+transform = Transform( 200, 0, 0, 0, -2.18557e-05, 200, 0, -500, -8.74228e-06, 0, 0, 314.225 )
 shape = ExtResource( 7 )
 
 [connection signal="timeout" from="Input/Timer" to="Input" method="choose_target"]
+[connection signal="timeout" from="StateMachine/AttackEnemies/OutOfRangeTimer" to="StateMachine/AttackEnemies" method="_on_OutOfRangeTimer_timeout"]
+[connection signal="body_entered" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_entered"]
+[connection signal="body_exited" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_exited"]
 [connection signal="timeout" from="InitTimer" to="StateMachine/ChooseObjective" method="_on_InitTimer_timeout"]
 [connection signal="body_entered" from="EnemyDetectArea" to="StateMachine/AttackEnemies" method="_on_EnemyDetectArea_body_entered"]

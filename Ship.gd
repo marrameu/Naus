@@ -2,6 +2,9 @@ extends RigidBody
 
 signal ship_died
 
+export var red_mat : Material
+export var blue_mat : Material
+
 var input : Node # class per al input
 var physics : Node
 
@@ -9,7 +12,13 @@ var  pilot_man : PilotManager
 
 #export var team_blue := false
 
-
+func _ready():
+	if pilot_man.blue_team:
+		$ShipMesh/Cube.material_override = blue_mat
+		$ShipMesh/Cube001.material_override = blue_mat
+	else:
+		$ShipMesh/Cube.material_override = red_mat
+		$ShipMesh/Cube001.material_override = red_mat
 
 
 func _process(delta):
@@ -37,6 +46,15 @@ func _process(delta):
 	else:
 		$ShipMesh.visible = true
 		$PlayerShipInterior.visible = false
+		var b = transform.basis
+		var v_len = linear_velocity.length()
+		var v_nor = linear_velocity.normalized()
+		var vel : Vector3
+		vel.z = b.z.dot(v_nor) * v_len
+		$ShipMesh/ThrusterFlame.Speed = max(0.1, vel.z / 200)
+		$ShipMesh/ThrusterFlame.Intensity = max(0.1, vel.z / 400)
+		$ShipMesh/ThrusterFlame.Energy = max(0.1, vel.z / 200)
+
 
 
 func _on_HealthSystem_die():

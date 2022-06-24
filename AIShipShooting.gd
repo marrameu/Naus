@@ -5,17 +5,31 @@ onready var ray : RayCast = $RayCast
 
 var target : Spatial
 
+var enemy_in_range := false
 
 func _ready():
+	pass
+	"""
 	if owner.pilot_man.blue_team:
 		target = get_node("/root/Level/BigShipRed")
 	else:
 		target = get_node("/root/Level/BigShipBlue")
+		"""
 
 
 func _process(delta):
-	if ray.is_colliding() and ray.get_collider() == target and can_shoot:
+	if enemy_in_range and can_shoot:
 		if get_tree().has_network_peer():
-			rpc("shoot")
+			rpc("shoot", target.translation)
 		else:
-			shoot()
+			shoot(target.translation)
+
+
+func _on_ShootingArea_body_entered(body):
+	if body == target:
+		enemy_in_range = true
+
+
+func _on_ShootingArea_body_exited(body):
+	if body == target:
+		enemy_in_range = false
