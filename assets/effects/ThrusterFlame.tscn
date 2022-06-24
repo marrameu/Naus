@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/effects/ThrusterPropulsion.tres" type="Shader" id=1]
+[ext_resource path="res://assets/effects/ThrusterParticles.tres" type="Shader" id=2]
+[ext_resource path="res://assets/effects/ThrusterFlameShaderController.gd" type="Script" id=3]
+[ext_resource path="res://assets/effects/SpaceEngineEffect.obj" type="ArrayMesh" id=4]
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = ExtResource( 1 )
+shader_param/Intensity = 0.5
+shader_param/Degrees = 90.0
+shader_param/Speed = 1.0
+shader_param/Energy = 1.0
+
+[sub_resource type="ShaderMaterial" id=64]
+shader = ExtResource( 2 )
+shader_param/Intensity = 0.5
+shader_param/Speed = 1.0
+shader_param/Degrees = 90.0
+shader_param/Energy = 1.0
+
+[node name="ThrusterFlame" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 4 )
+material/0 = SubResource( 31 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = SubResource( 64 )
