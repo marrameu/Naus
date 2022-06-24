@@ -20,3 +20,7 @@ func _on_EnemyDetectArea_body_entered(body):
 			enemy = body
 			enemy_wr = weakref(enemy)
 			owner.get_node("Shooting").target = enemy
+
+
+func finished():
+	pass
