@@ -59,21 +59,27 @@ albedo_color = Color( 0, 0.0745098, 1, 1 )
 script = ExtResource( 11 )
 
 [node name="BigShipRed" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2441.38, 0, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4000, 0, 0 )
 
 [node name="BigShipBlue" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 1657.22, 0, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4000, 0, 0 )
 team_blue = true
 
 [node name="Mesh" parent="BigShipBlue" index="1"]
 material/0 = SubResource( 5 )
 
+[node name="CollisionShape" parent="BigShipBlue" index="3"]
+transform = Transform( -1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, 0 )
+
 [node name="SuportShip" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.646273, 0.259072, 0.717784, -0.17335, 0.965858, -0.192531, -0.743156, 0, 0.669118, -1634.1, 330.563, 1054.42 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2253.83, 0, -963.107 )
+
+[node name="SuportShip2" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2253.83, 0, 715.452 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, -29.6491 )
-far = 4000.0
+far = 7000.0
 script = ExtResource( 2 )
 
 [node name="motion_blur" parent="Camera" instance=ExtResource( 19 )]
@@ -283,9 +289,9 @@ text = "BLUE:"
 layer = 3
 
 [node name="WaittingCam" type="Camera" parent="."]
-transform = Transform( 0.92432, -0.173311, 0.339995, 0, 0.890927, 0.454146, -0.381619, -0.419776, 0.823502, 858.031, 1230.9, 1998.18 )
+transform = Transform( 0.9773, -0.173311, 0.121853, 0.10284, 0.890927, 0.442349, -0.185226, -0.419776, 0.888526, 1153.7, 1851.18, 3192.59 )
 current = true
-far = 4000.0
+far = 7000.0
 
 [node name="Ships" type="Spatial" parent="."]
 
@@ -294,14 +300,14 @@ far = 4000.0
 [node name="PlayerManager" type="Node" parent="PilotManagers"]
 script = ExtResource( 18 )
 
-[node name="Pito" type="Position3D" parent="."]
+[node name="MiddlePoint" type="Position3D" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Pito"]
+[node name="MeshInstance" type="MeshInstance" parent="MiddlePoint"]
 transform = Transform( 7.13262, 0, 0, 0, 0.3, 0, 0, 0, 3000, -21.9825, 0.0344696, 0.0334425 )
 mesh = SubResource( 6 )
 material/0 = SubResource( 7 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="Pito"]
+[node name="MeshInstance2" type="MeshInstance" parent="MiddlePoint"]
 transform = Transform( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 2.29866, 0, 0 )
 mesh = SubResource( 6 )
 material/0 = SubResource( 8 )
@@ -310,5 +316,6 @@ material/0 = SubResource( 8 )
 [connection signal="destroyed" from="BigShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 [connection signal="respawn" from="SpawnHUD" to="." method="_on_SpawnHUD_respawn"]
+[connection signal="respawn" from="SpawnHUD" to="." method="respawn_player"]
 
 [editable path="BigShipBlue"]

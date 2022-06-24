@@ -30,20 +30,21 @@ time_before_shield_repair = 90.0
 MAX_HEALTH = 50000
 
 [node name="Mesh" type="MeshInstance" parent="."]
-transform = Transform( -1.07284e-07, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 1.07284e-07, 4.68955e-15, 0, 0, 0 )
+transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 3 )
 
 [node name="ShieldMesh" type="MeshInstance" parent="."]
-transform = Transform( -4.80825e-08, 1.1, 4.80825e-08, 0, -4.80825e-08, 1.1, 1.1, 4.80825e-08, 2.10175e-15, 0, 0, 0 )
+transform = Transform( -1.1, 9.61651e-08, 4.20351e-15, 0, -4.80825e-08, 1.1, 9.61651e-08, 1.1, 4.80825e-08, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( -1.07284e-07, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 1.07284e-07, 4.68955e-15, 0, 0, 0 )
+transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="Turrets" type="Spatial" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
 
 [node name="Turret" parent="Turrets" instance=ExtResource( 3 )]
 transform = Transform( 0.977802, 0, -0.209533, 0, 1, 0, 0.209533, 0, 0.977802, 130.967, 0, -23.566 )
@@ -67,6 +68,7 @@ transform = Transform( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336,
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
 
 [node name="ShipPoints" type="Spatial" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
 
 [node name="AttackPos2" type="Position3D" parent="ShipPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.2106, -3.05176e-05, -564.878 )

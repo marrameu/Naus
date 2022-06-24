@@ -94,7 +94,7 @@ autostart = true
 [node name="EnemyDetectArea" type="Area" parent="." index="18"]
 
 [node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea" index="0"]
-transform = Transform( 200, 0, 0, 0, -2.18557e-05, 200, 0, -500, -8.74228e-06, 0, 0, 314.225 )
+transform = Transform( 600, 0, 0, 0, -6.55671e-05, 600, 0, -1500, -2.62268e-05, 0, 0, 1279.57 )
 shape = ExtResource( 7 )
 
 [connection signal="timeout" from="Input/Timer" to="Input" method="choose_target"]

@@ -51,9 +51,9 @@ func _process(delta):
 		var v_nor = linear_velocity.normalized()
 		var vel : Vector3
 		vel.z = b.z.dot(v_nor) * v_len
-		$ShipMesh/ThrusterFlame.Speed = max(0.1, vel.z / 200)
-		$ShipMesh/ThrusterFlame.Intensity = max(0.1, vel.z / 400)
-		$ShipMesh/ThrusterFlame.Energy = max(0.1, vel.z / 200)
+		$ShipMesh/ThrusterFlame.Speed = max(0.1, vel.z / 100)
+		$ShipMesh/ThrusterFlame.Intensity = max(0.1, vel.z / 200)
+		$ShipMesh/ThrusterFlame.Energy = max(0.1, vel.z / 100)
 
 
 

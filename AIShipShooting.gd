@@ -18,11 +18,12 @@ func _ready():
 
 
 func _process(delta):
-	if enemy_in_range and can_shoot:
-		if get_tree().has_network_peer():
-			rpc("shoot", target.translation)
-		else:
-			shoot(target.translation)
+	if weakref(target).get_ref():
+		if enemy_in_range and can_shoot:
+			if get_tree().has_network_peer():
+				rpc("shoot", target.translation)
+			else:
+				shoot(target.translation)
 
 
 func _on_ShootingArea_body_entered(body):

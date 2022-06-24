@@ -29,9 +29,9 @@ func enter():
 	enemy_middle_point /= num_of_enemies
 	# potser amb dir-li 1000/-1000 n'hi ha prou 
 	
-	target.y = rand_range(-150, 150)
-	target.z = rand_range(-150, 150)
-	x = rand_range(-150, 150)
+	target.y = rand_range(-300, 300)
+	target.z = rand_range(-500, 500)
+	x = rand_range(-500, 500)
 	
 	target.x = enemy_middle_point + x
 	

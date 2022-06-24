@@ -3,7 +3,7 @@ extends "res://ShipInput.gd"
 
 const THROTTLE_SPEED := 2.5
 
-var target: Vector3 = Vector3(100, 2000, 100)
+var target: Vector3 = Vector3(0, 0, 0)
 
 var raycast_offset = 6
 var detection_dist = 50
