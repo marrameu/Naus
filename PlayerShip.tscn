@@ -18,6 +18,9 @@ bus = "Sounds"
 
 [node name="PlayerHUD" parent="." index="4" instance=ExtResource( 3 )]
 
+[node name="ShipMesh" parent="." index="8"]
+visible = true
+
 [node name="Listener" type="Listener" parent="." index="9"]
 current = true
 
