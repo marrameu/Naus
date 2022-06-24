@@ -44,14 +44,14 @@ func _on_EnemyDetectArea_body_entered(body):
 			enemy = body
 			enemy_wr = weakref(enemy)
 			owner.get_node("Shooting").target = enemy
-			
+			"""
 			# encara és massa lluny, no pot agafar la posició d'atac pq seria massa lluny
 			# això ho haruia de treure, fer l'area de detecció més petita i fer directament q si no troba
 			# cap enemic q vagi directament al q sigui més a  prop, coneixent ja la posicició de tots els enemics
 			if owner.translation.distance_to(enemy.translation) > 1200:
 				timer.wait_time = rand_range(4, 6)
 				timer.start()
-			
+			"""
 			total_attack_pos = enemy.translation + attack_rel_pos
 
 

@@ -18,6 +18,7 @@ func _ready():
 
 
 func _process(delta):
+	# cal la weakref? si pot ser evitat millor
 	if weakref(target).get_ref():
 		if enemy_in_range and can_shoot:
 			if get_tree().has_network_peer():

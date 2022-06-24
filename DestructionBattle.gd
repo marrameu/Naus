@@ -119,11 +119,12 @@ func spawn_AI(number, blue_team : bool = false):
 	ship.connect("ship_died", self, "_on_AIShip_tree_exited", [number])
 
 
+# això?! endaya
 func choose_spawn_position(blue_team : bool) -> Vector3:
 	# POTSER cal fer algun clamp
 	if blue_team:
 		var blue_spawn = (BLUE_LIMIT + middle_point) / 2
-		return(Vector3(rand_range(blue_spawn - 50, blue_spawn + 50), rand_range(-50, 50), rand_range(-1500, 1500)))
+		return(Vector3(rand_range(blue_spawn - 50, blue_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
 	else:
 		var red_spawn = (RED_LIMIT + middle_point) / 2
-		return(Vector3(rand_range(red_spawn - 50, red_spawn + 50), rand_range(-50, 50), rand_range(-1500, 1500)))
+		return(Vector3(rand_range(red_spawn - 50, red_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
