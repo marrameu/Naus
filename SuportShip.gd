@@ -16,4 +16,6 @@ func _ready():
 #	pass
 
 func _physics_process(delta):
-	move_and_collide(Vector3(-10 * delta, 0, 0))
+	# en funció de l'estat de la partida o(1 o 2 [o sigui]) la línia
+	#move_and_collide(Vector3(10 * delta, 0, 0))
+	pass

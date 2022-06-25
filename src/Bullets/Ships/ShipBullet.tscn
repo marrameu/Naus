@@ -38,6 +38,7 @@ material = ExtResource( 2 )
 size = Vector2( 2, 2 )
 
 [sub_resource type="BoxShape" id=6]
+extents = Vector3( 5, 5, 20 )
 
 [sub_resource type="Animation" id=7]
 length = 1.5

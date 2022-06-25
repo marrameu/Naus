@@ -19,6 +19,9 @@ var camera_left_action := "camera_left"
 var camera_right_action := "camera_right"
 
 var turbo_action := "turbo"
+var zoom_action := "zoom"
+
+var zooming := false
 
 
 func _process(delta : float) -> void:
@@ -36,6 +39,8 @@ func _process(delta : float) -> void:
 	else:
 		_recover_turbo()
 	
+	zooming = Input.is_action_pressed(zoom_action) # and not turboing
+	
 	update_yaw_and_ptich()
 	update_throttle(move_forward_action, move_backward_action, delta)
 
@@ -46,6 +51,10 @@ func update_yaw_and_ptich() -> void:
 	
 	pitch = mouse_input.y if not Settings.controller_input else Input.get_action_strength(camera_down_action) - Input.get_action_strength(camera_up_action)
 	yaw = -mouse_input.x if not Settings.controller_input else Input.get_action_strength(camera_left_action) - Input.get_action_strength(camera_right_action)
+	
+	if zooming: # fer que quan faci zoom la velocitat de girar és sempre la minima encara q sigui al mig?
+		pitch /= 2
+		yaw /= 2
 
 
 func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:

@@ -54,13 +54,13 @@ func _process(delta : float) -> void:
 		else:
 			rect.color = Color("48b6b6b6")
 	
-	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle / 2 * 100 
+	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle * 100 
 	var b = owner.transform.basis
 	var v_len = owner.linear_velocity.length()
 	var v_nor = owner.linear_velocity.normalized()
 	var vel : Vector3
 	vel.z = b.z.dot(v_nor) * v_len
-	$SpeedBars/SpeedBar.value = vel.z / 4
+	$SpeedBars/SpeedBar.value = vel.z / 2
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
 	if get_parent().is_player:
