@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/Player_Ship_Interior/Optimized/PlayerShipInteriorOptimized.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/audio/engines.ogg" type="AudioStream" id=11]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -43,10 +44,10 @@ MAX_HEALTH = 1000
 script = ExtResource( 4 )
 
 [node name="ReloadTurboTimer" type="Timer" parent="Input"]
-wait_time = 3.0
+wait_time = 5.0
 
 [node name="DrainTurboTimer" type="Timer" parent="Input"]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="DriftTimer" type="Timer" parent="Input"]
@@ -102,6 +103,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104 )
 local_coords = false
 mesh = SubResource( 5 )
 gravity = Vector3( 0, 0, 0 )
+
+[node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 11 )
+unit_size = 10.0
+autoplay = true
+max_distance = 600.0
+doppler_tracking = 2
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="Input/ReloadTurboTimer" to="Input" method="_on_ReloadTurboTimer_timeout"]
