@@ -25,7 +25,7 @@ func _process(delta : float) -> void:
 	
 	move_and_collide(delta * direction * bullet_velocity)
 	
-	return
+	#return # cal optimitzar
 	
 	var exclude : Array = []
 	var wr = weakref(ship)

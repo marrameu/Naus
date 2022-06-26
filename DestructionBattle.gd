@@ -88,9 +88,8 @@ func respawn_player():
 	$SpawnHUD/Control.hide()
 	
 	# cam
-	$Camera.fp_target_path = ship.get_node("FPCameraPosition").get_path()
-	$Camera.tp_target_path = ship.get_node("CameraPosition").get_path()
-	ship.get_node("Input").connect("activated_turboing", $Camera, "_on_Input_activated_turboing")
+	#ship.get_node("Input").connect("activated_turboing", $Camera, "_on_Input_activated_turboing")
+	$Camera.ship = ship
 	$Camera.make_current()
 	$Camera.init_cam()
 

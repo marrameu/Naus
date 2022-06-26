@@ -34,10 +34,7 @@ script = ExtResource( 6 )
 
 [node name="DefendCP" type="Node" parent="." index="6"]
 
-[node name="PlayerShipInterior" parent="." index="9"]
-visible = false
-
-[node name="Shooting" parent="." index="11"]
+[node name="Shooting" parent="." index="10"]
 script = ExtResource( 3 )
 
 [node name="Audio" parent="Shooting" index="0"]

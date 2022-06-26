@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "RigidBody",
 "class": "Ship",
 "language": "GDScript",
-"path": "res://src/Ships/Ship.gd"
+"path": "res://Ship.gd"
 }, {
 "base": "KinematicBody",
 "class": "ShipBullet",

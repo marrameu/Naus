@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PlayerInput.gd" type="Script" id=2]
@@ -7,8 +7,11 @@
 [ext_resource path="res://assets/audio/switch_turbo.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/drift.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/audio/turbo.wav" type="AudioStream" id=7]
+[ext_resource path="res://PlayerShip.gd" type="Script" id=8]
+[ext_resource path="res://assets/Player_Ship_Interior/PlayerShipInterior.tscn" type="PackedScene" id=9]
 
 [node name="PlayerShip" instance=ExtResource( 1 )]
+script = ExtResource( 8 )
 
 [node name="Input" parent="." index="2"]
 script = ExtResource( 2 )
@@ -29,10 +32,11 @@ pitch_scale = 0.7
 
 [node name="PlayerHUD" parent="." index="4" instance=ExtResource( 3 )]
 
-[node name="Listener" type="Listener" parent="." index="9"]
-current = true
+[node name="PlayerShipInterior" parent="." index="8" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
 
-[node name="Shooting" parent="." index="10"]
+[node name="Shooting" parent="." index="9"]
 script = ExtResource( 4 )
 
-[connection signal="activated_turboing" from="Input" to="Shooting" method="_on_Input_activated_turboing"]
+[node name="Listener" type="Listener" parent="." index="10"]
+current = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Player_Ship_Interior/Optimized/PlayerShipInteriorOptimized.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/audio/engines.ogg" type="AudioStream" id=11]
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -64,9 +63,6 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 6, -
 
 [node name="FPCameraPosition" type="Position3D" parent="."]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01986, 3.31544 )
-
-[node name="PlayerShipInterior" parent="." instance=ExtResource( 10 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
 
 [node name="ShipMesh" parent="." instance=ExtResource( 5 )]
 

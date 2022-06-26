@@ -13,8 +13,6 @@ var time_now := 0.0
 
 var can_shoot := true
 
-var turboing := false
-
 var current_bullet := 0
 
 
@@ -25,7 +23,7 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	time_now += delta
 	
-	can_shoot = time_now >= next_times_to_fire[current_bullet] and not turboing
+	can_shoot = time_now >= next_times_to_fire[current_bullet] and not owner.input.turboing
 
 
 
