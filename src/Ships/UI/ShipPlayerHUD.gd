@@ -54,7 +54,17 @@ func _process(delta : float) -> void:
 		else:
 			rect.color = Color("48b6b6b6")
 	
+	var old_throttle_bar_value = $SpeedBars/ThrottleBar.value
 	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle * 100 
+	
+	if not owner.input.turboing and not owner.input.drifting:
+		if old_throttle_bar_value > 70 and $SpeedBars/ThrottleBar.value <= 70 or old_throttle_bar_value < 30 and $SpeedBars/ThrottleBar.value >= 30:
+			# hi entra
+			$ThrottleInAudio.play()
+		if old_throttle_bar_value < 70 and $SpeedBars/ThrottleBar.value >= 70 or old_throttle_bar_value > 30 and $SpeedBars/ThrottleBar.value <= 30:
+			# en surt
+			$ThrottleOutAudio.play()
+	
 	var b = owner.transform.basis
 	var v_len = owner.linear_velocity.length()
 	var v_nor = owner.linear_velocity.normalized()
