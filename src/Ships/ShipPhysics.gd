@@ -17,7 +17,7 @@ var desired_angular_force := Vector3()
 var angular_drag := 3.5
 var linear_drag := 5.0 # temps en frenar/accelerar (inèrcia)
 var NORMAL_LINEAR_DRAG := 5.0
-var DRIFTING_LINEAR_DRAG := 10.0
+var DRIFTING_LINEAR_DRAG := 15.0
 #si accelera de pressa (turbo) es redreça més de pressa (lerp)
 
 var drifting := false

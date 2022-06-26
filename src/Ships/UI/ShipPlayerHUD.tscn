@@ -170,10 +170,10 @@ margin_bottom = 134.0
 
 [node name="ThrottleInAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = 5.0
+volume_db = 10.0
 bus = "Sounds"
 
 [node name="ThrottleOutAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = 5.0
+volume_db = 10.0
 bus = "Sounds"

@@ -57,11 +57,12 @@ func _process(delta : float) -> void:
 	var old_throttle_bar_value = $SpeedBars/ThrottleBar.value
 	$SpeedBars/ThrottleBar.value = get_node("../Input").throttle * 100 
 	
-	if not owner.input.turboing and not owner.input.drifting:
-		if old_throttle_bar_value > 70 and $SpeedBars/ThrottleBar.value <= 70 or old_throttle_bar_value < 30 and $SpeedBars/ThrottleBar.value >= 30:
+	if not owner.input.turboing: # and not owner.input.drifting:
+		# q no faci salts (frenar)
+		if (old_throttle_bar_value > 70 and $SpeedBars/ThrottleBar.value <= 70 and $SpeedBars/ThrottleBar.value > 30) or (old_throttle_bar_value < 30 and $SpeedBars/ThrottleBar.value >= 30 and $SpeedBars/ThrottleBar.value < 70):
 			# hi entra
 			$ThrottleInAudio.play()
-		if old_throttle_bar_value < 70 and $SpeedBars/ThrottleBar.value >= 70 or old_throttle_bar_value > 30 and $SpeedBars/ThrottleBar.value <= 30:
+		if (old_throttle_bar_value < 70 and $SpeedBars/ThrottleBar.value >= 70 and $SpeedBars/ThrottleBar.value > 30) or (old_throttle_bar_value > 30 and $SpeedBars/ThrottleBar.value <= 30 and old_throttle_bar_value <= 70):
 			# en surt
 			$ThrottleOutAudio.play()
 	

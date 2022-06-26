@@ -61,10 +61,12 @@ func _process(delta : float) -> void:
 	if not turboing:
 		if Input.is_action_just_pressed(turbo_action) and avaliable_turbos:
 			wants_turbo = true
+			$TurboAudio.play()
 	else:
 		if Input.is_action_just_pressed(drift_action):
 			drifting = true
 			wants_turbo = false
+			$DriftAudio.play()
 		# drifting = Input.is_action_pressed(drift_action) # just?
 	
 	zooming = Input.is_action_pressed(zoom_action) and not turboing and not drifting # ferho a la cam tmb
@@ -98,7 +100,7 @@ func update_throttle(increase_action : String, decrease_action : String, delta :
 			emit_signal("activated_turboing", false)
 	else:
 		turbo_clamp = 1.0
-		target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta
+		target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta / 2
 	
 	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
 	
