@@ -40,19 +40,18 @@ func update(_delta):
 
 func _on_EnemyDetectArea_body_entered(body):
 	if body.is_in_group("Ships"): #and not enemy: # fer q passat un mig minut passi de l'enemic
-		if body.pilot_man.blue_team != owner.pilot_man.blue_team:
-			enemy = body
-			enemy_wr = weakref(enemy)
-			owner.get_node("Shooting").target = enemy
-			"""
-			# encara és massa lluny, no pot agafar la posició d'atac pq seria massa lluny
-			# això ho haruia de treure, fer l'area de detecció més petita i fer directament q si no troba
-			# cap enemic q vagi directament al q sigui més a  prop, coneixent ja la posicició de tots els enemics
-			if owner.translation.distance_to(enemy.translation) > 1200:
-				timer.wait_time = rand_range(4, 6)
-				timer.start()
-			"""
-			total_attack_pos = enemy.translation + attack_rel_pos
+		if body.pilot_man.blue_team == owner.pilot_man.blue_team:
+			return
+	elif body.is_in_group("BigShips"):
+		if body.team_blue == owner.pilot_man.blue_team:
+			return
+	else: 
+		return
+	
+	enemy = body
+	enemy_wr = weakref(enemy)
+	owner.get_node("Shooting").target = enemy
+	total_attack_pos = enemy.translation + attack_rel_pos
 
 
 func _on_OutOfRangeTimer_timeout():

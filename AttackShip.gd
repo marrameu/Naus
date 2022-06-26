@@ -10,8 +10,11 @@ func _ready():
 
 
 func _physics_process(delta):
-	move_and_collide(global_transform.basis.z * 100 * delta)
+	move_and_collide(global_transform.basis.z * 150 * delta)
 	turn(delta)
+	if target.distance_to(translation) < 200 and $ChangePosTimer.is_stopped():
+		$ChangePosTimer.wait_time = rand_range(4, 10)
+		$ChangePosTimer.start()
 
 
 func turn(delta):
@@ -31,11 +34,12 @@ func turn(delta):
 	#yaw = def_rot.y
 	#roll = def_rot.z
 	
-	DebugDraw.draw_line_3d(global_transform.origin, target, Color(1, 1, 0))
+	#DebugDraw.draw_line_3d(global_transform.origin, target, Color(1, 1, 0))
 	
 	# COM AL JOC ANTERIOR
 	# AQUEST PRINT POT SER LA SOLUCIÓ A TOTS ELS MEUS PROBLEMES!!!
-	$DesiredRot.global_transform.basis = global_transform.basis.slerp(desired_oirent.basis, 0.7 * delta)
+	# nse pq aqui cal ortonormalitzar i en les naus normals no :/
+	$DesiredRot.global_transform.basis = global_transform.basis.orthonormalized().slerp(desired_oirent.basis, 0.7 * delta)
 	#print(owner.get_node("MeshInstance").rotation)
 	var uwu = $DesiredRot.rotation * 80 # no normalitzis la rotació del fill pq imagina't que li queda molt poc en tots els axis, faràs que es mogui molt i, vagi ebri
 	#print(uwu)
@@ -146,9 +150,12 @@ func turn(delta):
 	
 	$DesiredRot.rotation = Vector3.ZERO
 	
-	rotation += (Vector3(pitch, yaw, 0) * delta)
+	rotation += (Vector3(pitch, yaw, roll) * delta / 3)
 	
 	# COM AL JOC ANTERIOR
 	#owner.global_transform.basis = owner.global_transform.basis.slerp(desired_oirent.basis, 0.7 * delta)
 	#owner.translation += owner.global_transform.basis.z * 100 * delta
 
+
+func _on_ChangePosTimer_timeout():
+	target = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))

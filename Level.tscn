@@ -1,6 +1,6 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://SuportShip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SupportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BigShip.tscn" type="PackedScene" id=4]
@@ -20,11 +20,6 @@
 [ext_resource path="res://PilotManager.gd" type="Script" id=18]
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=19]
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=20]
-
-[sub_resource type="SpatialMaterial" id=5]
-albedo_color = Color( 0.694118, 0.709804, 0.843137, 1 )
-metallic = 0.6
-roughness = 0.75
 
 [sub_resource type="PanoramaSky" id=2]
 panorama = ExtResource( 6 )
@@ -68,12 +63,6 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4000, 
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4000, 0, 0 )
 team_blue = true
 
-[node name="Mesh" parent="BigShips/CapitalShipBlue" index="1"]
-material/0 = SubResource( 5 )
-
-[node name="CollisionShape" parent="BigShips/CapitalShipBlue" index="3"]
-transform = Transform( -1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, 0 )
-
 [node name="SuportShip" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3243.69, 0, 715.452 )
 
@@ -85,6 +74,22 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3696.0
 
 [node name="AttackShip2" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3696.04, 431.208, -726.323 )
+
+[node name="SuportShip3" parent="BigShips" instance=ExtResource( 1 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3299.96, 0, -643.399 )
+team_blue = true
+
+[node name="SuportShip4" parent="BigShips" instance=ExtResource( 1 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3299.96, 0, 1035.16 )
+team_blue = true
+
+[node name="AttackShip3" parent="BigShips" instance=ExtResource( 20 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3752.31, -300.505, -963.107 )
+team_blue = true
+
+[node name="AttackShip4" parent="BigShips" instance=ExtResource( 20 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3752.31, 431.208, 798.376 )
+team_blue = true
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, -29.6491 )
@@ -324,7 +329,5 @@ material/0 = SubResource( 8 )
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
-[connection signal="respawn" from="SpawnHUD" to="." method="_on_SpawnHUD_respawn"]
 [connection signal="respawn" from="SpawnHUD" to="." method="respawn_player"]
-
-[editable path="BigShips/CapitalShipBlue"]
+[connection signal="respawn" from="SpawnHUD" to="." method="_on_SpawnHUD_respawn"]

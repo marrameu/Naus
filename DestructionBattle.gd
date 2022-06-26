@@ -1,9 +1,5 @@
 extends Spatial
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 const player_ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
 

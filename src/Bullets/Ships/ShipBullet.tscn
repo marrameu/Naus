@@ -87,3 +87,9 @@ autoplay = true
 max_distance = 500.0
 bus = "Sounds"
 doppler_tracking = 2
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+aabb = AABB( -1, -1, -4.14208, 2, 2, 8.28415 )
+
+[connection signal="screen_entered" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]

@@ -8,7 +8,7 @@ var direction : Vector3
 var ship # : Ship
 
 var _hit := false
-var _time_alive := 7.0
+var _time_alive := 3.5 #7.0
 var _old_translation : Vector3
 
 
@@ -24,6 +24,8 @@ func _process(delta : float) -> void:
 		queue_free()
 	
 	move_and_collide(delta * direction * bullet_velocity)
+	
+	return
 	
 	var exclude : Array = []
 	var wr = weakref(ship)
@@ -57,3 +59,11 @@ func _process(delta : float) -> void:
 		_hit = true
 	
 	_old_translation = translation
+
+
+func _on_VisibilityNotifier_screen_entered():
+	visible = true
+
+
+func _on_VisibilityNotifier_screen_exited():
+	visible = false

@@ -1,13 +1,18 @@
 extends KinematicBody
 
-
 signal destroyed
+
+export var red_mat : Material
+export var blue_mat : Material
 
 export var team_blue : bool = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if team_blue:
+		$Mesh.material_override = blue_mat
+	else:
+		$Mesh.material_override = red_mat
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

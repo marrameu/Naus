@@ -14,8 +14,10 @@ var applied_angular_force := Vector3()
 var desired_linear_force := Vector3()
 var desired_angular_force := Vector3()
 
-var angular_drag := 3.5 # ¿?
-var linear_drag := 5.0 # ¿?
+var angular_drag := 3.5
+var linear_drag := 5.0 # temps en frenar/accelerar
+var orientation_drag := 2.0 # inèrcia
+#si accelera de pressa (turbo) es redreça més de pressa (lerp)
 
 var stabilizing := false
 var stabilized := false
@@ -26,11 +28,18 @@ var DESIRED_DESCENSE_VEL := 5.0
 
 
 func _process(delta : float) -> void:
-	if Input.is_action_just_pressed("test"):
-		add_force(-Vector3.FORWARD * 10000, delta)
-	
-	add_force(applied_linear_force, delta)
-	add_torque(applied_angular_force, delta) # * rotate_speed?
+	if not Input.is_action_pressed("drift"):
+		#orientation_drag = 2.0 # 3.0
+		linear_drag = 5.0
+		add_force(applied_linear_force, delta)
+		add_torque(applied_angular_force, delta) # * rotate_speed?
+	else:
+		#orientation_drag = 2.0 # 1.0
+		# es canvia car aquí els motors "s'apaguen", en l'altre cas se suposa q quan els motors estan a zero
+		# fan força per a frenar (aquí en egeuixen fent (si no, no pararia), però més a poc a poc)
+		linear_drag = 10.0
+		add_force(Vector3.ZERO, delta) # apaga els motors del tot, sols roman la inèrcia
+		add_torque(applied_angular_force * 4, delta)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
@@ -49,15 +58,31 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	
 	#if ship.name != "PlayerShip":
 	#	print(mutiplier)
-		
-	applied_angular_force = angular_input * angular_force * mutiplier
-	applied_linear_force = linear_input * linear_force
 	
+	applied_angular_force = angular_input * angular_force * mutiplier
+	# lerp per a derrapar
+	#var a = linear_input * linear_force
+	#applied_linear_force = applied_linear_force.linear_interpolate(ship.global_transform.basis.xform(a), delta)
+	
+	var a = linear_input * linear_force
+	applied_linear_force = a #applied_linear_force.linear_interpolate(ship.global_transform.basis.xform(a), delta)
 
 
 func add_force(force : Vector3, delta : float):
-	desired_linear_force = desired_linear_force.linear_interpolate(force, delta / linear_drag * 10)
-	ship.linear_velocity = ship.global_transform.basis.xform(desired_linear_force)
+	# lerp per a derrapar
+	desired_linear_force = desired_linear_force.linear_interpolate(ship.global_transform.basis.xform(force), delta / linear_drag * 10)
+	# lerp per a accelerar/frenar
+	# desired_linear_force = desired_linear_force.linear_interpolate(desired_linear_force, delta / linear_drag * 10)
+	ship.linear_velocity = desired_linear_force
+	
+	var b = owner.transform.basis
+	var v_len = owner.linear_velocity.length()
+	var v_nor = owner.linear_velocity.normalized()
+	var vel : Vector3
+	vel.z = b.z.dot(v_nor) * v_len
+	vel.x = b.x.dot(v_nor) * v_len
+	vel.y = b.y.dot(v_nor) * v_len
+	get_node("../Pito").translation = vel
 
 
 func add_torque(torque : Vector3, delta : float):
