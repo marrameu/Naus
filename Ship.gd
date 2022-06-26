@@ -32,6 +32,7 @@ func set_team_color():
 
 
 func update_thruster_flame():
+	$ShipMesh/ThrusterFlame.visible = !input.drifting
 	var b = transform.basis
 	var v_len = linear_velocity.length()
 	var v_nor = linear_velocity.normalized()
@@ -53,7 +54,7 @@ func check_collisions(delta):
 		for body in get_colliding_bodies():
 			#if not body.is_in_group("Bullets"):
 			#Input.start_joy_vibration(0, 0, 1, 1)
-			$HealthSystem.take_damage(delta * 1000, true)
+			$HealthSystem.take_damage(delta * 4 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
 
 
 func _on_HealthSystem_die():
