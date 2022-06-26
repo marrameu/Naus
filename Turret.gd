@@ -51,8 +51,6 @@ func _on_Area_body_entered(body):
 
 
 sync func shoot() -> void:
-	return
-	
 	# Sound
 	$Audio.play()
 	

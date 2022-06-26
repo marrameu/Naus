@@ -28,8 +28,6 @@ func _process(delta : float) -> void:
 
 
 sync func shoot(shoot_target = Vector3.ZERO) -> void:
-	return
-	
 	next_times_to_fire[current_bullet] = time_now + 1.0 / fire_rates[current_bullet]
 	
 	# Sound fer-ho pel nom com els pilotman
