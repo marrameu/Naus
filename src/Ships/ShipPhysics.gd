@@ -20,8 +20,6 @@ var NORMAL_LINEAR_DRAG := 5.0
 var DRIFTING_LINEAR_DRAG := 10.0
 #si accelera de pressa (turbo) es redreça més de pressa (lerp)
 
-var DRIFTING_TORQUE_MULTIPLIER := 4.0
-
 var drifting := false
 
 var stabilizing := false
@@ -56,13 +54,19 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	
 	var mutiplier := 1.0
 	
+	if owner.input.throttle <= 0.5:
+		mutiplier = 2 * owner.input.throttle + 1
+	elif owner.input.throttle > 0.5 and owner.input.throttle <= 1.0:
+		mutiplier = 3 - (2 * owner.input.throttle)
+	elif owner.input.throttle > 1.0: # turbo
+		mutiplier = 1.5 - (0.5 * owner.input.throttle)
+	
+	"""
 	if vel.z <= 100:
 		mutiplier = (0.01 * vel.z) + 1
 	elif vel.z <= 200: # vel.z < 400 si vols que amb el turbo li costi enacra més (0.5 em pens)
 		mutiplier = 3 - (0.01 * vel.z)
-	
-	#if ship.name != "PlayerShip":
-	#	print(mutiplier)
+	"""
 	
 	applied_angular_force = angular_input * angular_force * mutiplier
 	# lerp per a derrapar
@@ -91,8 +95,8 @@ func add_force(force : Vector3, delta : float):
 
 
 func add_torque(torque : Vector3, delta : float):
-	if drifting:
-		torque *= DRIFTING_TORQUE_MULTIPLIER
+	#if drifting:
+	#	torque *= DRIFTING_TORQUE_MULTIPLIER
 	
 	desired_angular_force = desired_angular_force.linear_interpolate(torque, delta / angular_drag * 10)
 	ship.angular_velocity = ship.global_transform.basis.xform(desired_angular_force)
