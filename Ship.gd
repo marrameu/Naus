@@ -18,7 +18,7 @@ func _ready():
 
 func _process(delta):
 	input_to_physics(delta)
-	check_collisions()
+	check_collisions(delta)
 	update_thruster_flame()
 
 
@@ -48,12 +48,12 @@ func input_to_physics(delta):
 	physics.set_physics_input(final_linear_input, final_angular_input, delta)
 
 
-func check_collisions():
+func check_collisions(delta):
 	if get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():
 			#if not body.is_in_group("Bullets"):
 			#Input.start_joy_vibration(0, 0, 1, 1)
-			$HealthSystem.take_damage(INF, true)
+			$HealthSystem.take_damage(delta * 1000, true)
 
 
 func _on_HealthSystem_die():

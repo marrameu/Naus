@@ -4,7 +4,7 @@ extends Ship
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	input_to_physics(delta)
-	check_collisions()
+	check_collisions(delta)
 	update_thruster_flame()
 	
 	if Utilities.first_person:

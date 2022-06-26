@@ -36,7 +36,7 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 	elif current_bullet == 1:
 		$Audio2.play()
 	
-	var bullet : KinematicBody
+	var bullet : Spatial
 	if current_bullet == 0:
 		bullet = bullet_scene.instance()
 	elif current_bullet == 1:

@@ -54,7 +54,7 @@ sync func shoot() -> void:
 	# Sound
 	$Audio.play()
 	
-	var bullet : KinematicBody
+	var bullet : Spatial
 	bullet = bullet_scene.instance()
 	
 	get_node("/root/Level").add_child(bullet)

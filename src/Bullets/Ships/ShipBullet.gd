@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Spatial
 class_name ShipBullet
 
 export var damage := 100
@@ -13,8 +13,21 @@ var _old_translation : Vector3
 
 
 func _process(delta : float) -> void:
-	if not _old_translation:
-		_old_translation = translation
+	var long = translation.distance_to(_old_translation)
+	for ray in $RayCasts.get_children():
+		if ray.is_colliding():
+			var body = ray.get_collider()
+			if body != ship:
+				if body.is_in_group("Damagable"):
+					if get_tree().has_network_peer():
+						if get_tree().is_network_server():
+							body.get_node("HealthSystem").rpc("take_damage", damage)
+					else:
+						body.get_node("HealthSystem").take_damage(damage)
+				
+				queue_free() # $AnimationPlayer.play("explode")
+				_hit = true
+		ray.cast_to = Vector3(0, 0, long)
 	
 	if _hit: # Per l'animació d'explosió
 		return
@@ -23,47 +36,17 @@ func _process(delta : float) -> void:
 	if _time_alive < 0:
 		queue_free()
 	
-	move_and_collide(delta * direction * bullet_velocity)
-	
-	#return # cal optimitzar
-	
-	var exclude : Array = []
-	var wr = weakref(ship)
-	if wr.get_ref():
-		exclude.push_back(ship)
-	
-	var space_state = get_world().direct_space_state
-	var result = space_state.intersect_ray(_old_translation, translation, exclude)
-	
-	if result:
-		# Explosió, overlap_shpere()
-		if result.collider.is_in_group("Damagable"):
-			var ship = result.collider # : Ship
-			if get_tree().has_network_peer():
-				if get_tree().is_network_server():
-					ship.get_node("HealthSystem").rpc("take_damage", damage)
-			else:
-				ship.get_node("HealthSystem").take_damage(damage)
-			
-		"""
-		elif result.collider.is_in_group("CapitalShipsColliders"):
-			var frigate : CapitalShip = result.collider.get_node("../../../")
-			if get_tree().has_network_peer():
-				if get_tree().is_network_server():
-					frigate.get_node("HealthSystem").rpc("take_damage", damage)
-			else:
-				frigate.get_node("HealthSystem").take_damage(damage)
-		"""
-		
-		queue_free() # $AnimationPlayer.play("explode")
-		_hit = true
+	translation += delta * direction * bullet_velocity
+	# fer que depenent de la velocitat q ha recorregut la area canvia de llargada? :/
 	
 	_old_translation = translation
 
 
 func _on_VisibilityNotifier_screen_entered():
-	visible = true
+	pass
+	#visible = true
 
 
 func _on_VisibilityNotifier_screen_exited():
-	visible = false
+	pass
+	#visible = false
