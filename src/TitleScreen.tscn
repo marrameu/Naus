@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/TitleScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 2 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="MainMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Play" type="Button" parent="MainMenu"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 774.5
+margin_top = 747.0
+margin_right = 1105.5
+margin_bottom = 895.0
+theme = ExtResource( 1 )
+text = "JUGA"
+
+[node name="Label" type="Label" parent="MainMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 714.0
+margin_top = 83.0
+margin_right = 1165.0
+margin_bottom = 241.0
+custom_fonts/font = SubResource( 1 )
+text = "NAUS"
+align = 1
+valign = 1
+
+[node name="LoadingScreen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ProgressBar" type="ProgressBar" parent="LoadingScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -151.0
+margin_top = 49.0
+margin_right = 151.0
+margin_bottom = 79.0
+
+[node name="Label" type="Label" parent="LoadingScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -154.0
+margin_top = -15.0
+margin_right = 154.0
+margin_bottom = 15.0
+text = "CARREGANT..."
+align = 1
+valign = 1
+
+[connection signal="pressed" from="MainMenu/Play" to="." method="_on_Play_pressed"]

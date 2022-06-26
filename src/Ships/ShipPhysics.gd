@@ -6,7 +6,7 @@ onready var ship = get_parent()
 
 var linear_force := Vector3(0, 0, 200)
 var linear_force_turbo := Vector3(0, 0, 400)
-var angular_force := Vector3(90, 90, 175) / 100.0
+var angular_force := Vector3(120, 120, 175) / 100.0
 
 var applied_linear_force := Vector3()
 var applied_angular_force := Vector3()
@@ -17,7 +17,7 @@ var desired_angular_force := Vector3()
 var angular_drag := 3.5
 var linear_drag := 5.0 # temps en frenar/accelerar (inèrcia)
 var NORMAL_LINEAR_DRAG := 5.0
-var DRIFTING_LINEAR_DRAG := 15.0
+var DRIFTING_LINEAR_DRAG := 20.0
 #si accelera de pressa (turbo) es redreça més de pressa (lerp)
 
 var drifting := false
@@ -55,11 +55,12 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	var mutiplier := 1.0
 	
 	if owner.input.throttle <= 0.5:
-		mutiplier = 2 * owner.input.throttle + 1
+		mutiplier = owner.input.throttle + 1
 	elif owner.input.throttle > 0.5 and owner.input.throttle <= 1.0:
-		mutiplier = 3 - (2 * owner.input.throttle)
-	elif owner.input.throttle > 1.0: # turbo
-		mutiplier = 1.5 - (0.5 * owner.input.throttle)
+		mutiplier = 2 - owner.input.throttle
+	# soc jo o costa massa de girar?
+	#elif owner.input.throttle > 1.0: # turbo
+	#	mutiplier = 1.5 - (0.5 * owner.input.throttle)
 	
 	"""
 	if vel.z <= 100:
