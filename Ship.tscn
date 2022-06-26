@@ -49,6 +49,10 @@ wait_time = 3.0
 wait_time = 3.0
 one_shot = true
 
+[node name="DriftTimer" type="Timer" parent="Input"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Physics" type="Node" parent="."]
 script = ExtResource( 2 )
 
@@ -102,4 +106,5 @@ gravity = Vector3( 0, 0, 0 )
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="Input/ReloadTurboTimer" to="Input" method="_on_ReloadTurboTimer_timeout"]
 [connection signal="timeout" from="Input/DrainTurboTimer" to="Input" method="_on_DrainTurboTimer_timeout"]
+[connection signal="timeout" from="Input/DriftTimer" to="Input" method="_on_DriftTimer_timeout"]
 [connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]

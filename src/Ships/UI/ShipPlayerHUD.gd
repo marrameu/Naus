@@ -61,6 +61,14 @@ func _process(delta : float) -> void:
 	var vel : Vector3
 	vel.z = b.z.dot(v_nor) * v_len
 	$SpeedBars/SpeedBar.value = vel.z / 2
+	$SpeedBars/SpeedBar.tint_progress = Color("966263ff") if not owner.input.turboing else Color("b79b5b")
+	
+	$Label.text = ""
+	if owner.input.turboing:
+		$Label.text += "turboing"
+	if owner.input.drifting:
+		$Label.text += "drifting"
+	
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
 	if get_parent().is_player:

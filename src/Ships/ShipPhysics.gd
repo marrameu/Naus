@@ -15,9 +15,14 @@ var desired_linear_force := Vector3()
 var desired_angular_force := Vector3()
 
 var angular_drag := 3.5
-var linear_drag := 5.0 # temps en frenar/accelerar
-var orientation_drag := 2.0 # inèrcia
+var linear_drag := 5.0 # temps en frenar/accelerar (inèrcia)
+var NORMAL_LINEAR_DRAG := 5.0
+var DRIFTING_LINEAR_DRAG := 10.0
 #si accelera de pressa (turbo) es redreça més de pressa (lerp)
+
+var DRIFTING_TORQUE_MULTIPLIER := 4.0
+
+var drifting := false
 
 var stabilizing := false
 var stabilized := false
@@ -28,18 +33,18 @@ var DESIRED_DESCENSE_VEL := 5.0
 
 
 func _process(delta : float) -> void:
-	if not Input.is_action_pressed("drift"):
-		#orientation_drag = 2.0 # 3.0
-		linear_drag = 5.0
+	drifting = ship.input.drifting
+	
+	linear_drag = NORMAL_LINEAR_DRAG if !drifting else DRIFTING_LINEAR_DRAG
+	# es canvia car aquí els motors "s'apaguen", en l'altre cas se suposa q quan els motors estan a zero
+	# fan força per a frenar (aquí en egeuixen fent (si no, no pararia), però més a poc a poc)
+	
+	if not drifting:
 		add_force(applied_linear_force, delta)
-		add_torque(applied_angular_force, delta) # * rotate_speed?
 	else:
-		#orientation_drag = 2.0 # 1.0
-		# es canvia car aquí els motors "s'apaguen", en l'altre cas se suposa q quan els motors estan a zero
-		# fan força per a frenar (aquí en egeuixen fent (si no, no pararia), però més a poc a poc)
-		linear_drag = 10.0
 		add_force(Vector3.ZERO, delta) # apaga els motors del tot, sols roman la inèrcia
-		add_torque(applied_angular_force * 4, delta)
+	
+	add_torque(applied_angular_force, delta)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
@@ -86,6 +91,9 @@ func add_force(force : Vector3, delta : float):
 
 
 func add_torque(torque : Vector3, delta : float):
+	if drifting:
+		torque *= DRIFTING_TORQUE_MULTIPLIER
+	
 	desired_angular_force = desired_angular_force.linear_interpolate(torque, delta / angular_drag * 10)
 	ship.angular_velocity = ship.global_transform.basis.xform(desired_angular_force)
 

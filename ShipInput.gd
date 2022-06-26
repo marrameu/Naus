@@ -15,6 +15,9 @@ var avaliable_turbos : int = 0
 var turboing := false
 var wants_turbo = false
 
+var drifting := false
+var wants_drift := false # temp
+
 
 func _process(delta):
 	_recover_turbo()
@@ -35,3 +38,7 @@ func _recover_turbo():
 
 func _on_DrainTurboTimer_timeout():
 	avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
+
+
+func _on_DriftTimer_timeout():
+	drifting = false

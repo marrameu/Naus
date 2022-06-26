@@ -78,7 +78,7 @@ func _physics_process(delta : float) -> void:
 		return
 	
 	# canviar-ho i fer-ho com ship_turboing
-	zooming = Input.is_action_pressed(zoom_action) # and not ship_turboing
+	zooming = Input.is_action_pressed(zoom_action) and not ship_turboing
 	
 	if zooming:
 		fov = lerp(fov, 40, .15)
