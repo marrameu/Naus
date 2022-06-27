@@ -8,6 +8,7 @@ export var blue_mat : Material
 
 onready var input : Node = $Input # class per a linput i el physics
 onready var physics : Node = $Physics
+onready var shooting : Node = $Shooting
 
 var  pilot_man : PilotManager
 

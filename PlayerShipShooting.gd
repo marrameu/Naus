@@ -11,7 +11,8 @@ func _process(delta):
 		elif current_bullet == 1:
 			current_bullet = 0
 	
-	if Input.is_action_pressed(shoot_action) and can_shoot:
+	wants_shoot = Input.is_action_pressed(shoot_action)
+	if wants_shoot and can_shoot:
 		if get_tree().has_network_peer():
 			rpc("shoot", shoot_target())
 		else:

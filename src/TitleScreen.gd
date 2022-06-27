@@ -8,7 +8,7 @@ signal finished_loading
 
 
 func _ready() -> void:
-	$MainMenu/Play.grab_focus()
+	$MainMenu/VBoxContainer/Play.grab_focus()
 
 
 func _on_Play_pressed() -> void:
@@ -65,3 +65,4 @@ func load_scene(path : String, instant_load : bool) -> void:
 func update_progress() -> void:
 	var progress : float = float(loader.get_stage()) / loader.get_stage_count()
 	$LoadingScreen/ProgressBar.value = progress * 100
+

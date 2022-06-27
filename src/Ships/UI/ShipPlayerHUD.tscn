@@ -165,8 +165,20 @@ margin_bottom = 74.0
 tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_right = 250.0
 margin_bottom = 134.0
+
+[node name="AmmoBar" parent="." instance=ExtResource( 6 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -101.0
+margin_top = -56.0
+margin_right = 24.0
+margin_bottom = -36.0
+rect_rotation = -90.0
 
 [node name="ThrottleInAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

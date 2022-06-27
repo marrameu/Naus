@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/audio/engines.ogg" type="AudioStream" id=11]
+
+[sub_resource type="PhysicsMaterial" id=6]
+bounce = 0.5
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -26,6 +29,7 @@ extents = Vector3( 5, 4, 9 )
 
 [node name="Ship" type="RigidBody" groups=["Damagable", "Ships"]]
 mass = 5000.0
+physics_material_override = SubResource( 6 )
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )

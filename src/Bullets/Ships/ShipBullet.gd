@@ -12,7 +12,8 @@ var _time_alive := 3.5 #7.0
 var _old_translation : Vector3
 
 
-func _process(delta : float) -> void:
+func _process(delta : float) -> void: # rumiar si fer-ho al physics_process
+	translation += delta * direction * bullet_velocity
 	var long = translation.distance_to(_old_translation)
 	for ray in $RayCasts.get_children():
 		if ray.is_colliding():
@@ -35,8 +36,6 @@ func _process(delta : float) -> void:
 	_time_alive -= delta
 	if _time_alive < 0:
 		queue_free()
-	
-	translation += delta * direction * bullet_velocity
 	# fer que depenent de la velocitat q ha recorregut la area canvia de llargada? :/
 	
 	_old_translation = translation

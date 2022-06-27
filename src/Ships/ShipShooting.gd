@@ -11,10 +11,17 @@ var fire_rates := { 0 : 4.0, 1 : 2.0 }
 var next_times_to_fire := { 0 : 0.0, 1 : 0.0}
 var time_now := 0.0
 
+var wants_shoot := false
+
+var MAX_AMMO :=  50.0
+var ammo := 00.0
+var not_eased_ammo := ammo
+
 var can_shoot := true
 
 var current_bullet := 0
 
+var old_wants_shoot := false
 
 func _ready() -> void:
 	pass
@@ -23,11 +30,31 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	time_now += delta
 	
-	can_shoot = time_now >= next_times_to_fire[current_bullet] and not owner.input.turboing
+	can_shoot = time_now >= next_times_to_fire[current_bullet] and not owner.input.turboing and ammo >= 1
+	
+	if not wants_shoot:
+		not_eased_ammo += delta * 5
+		ammo = clamp(pow(not_eased_ammo/MAX_AMMO, 3.0) * MAX_AMMO, 0, MAX_AMMO)
+	else: #not old_wants_shoot:
+		var a = pow(ammo/MAX_AMMO, 1.0/3.0) #* MAX_AMMO
+		not_eased_ammo = clamp(a*MAX_AMMO, 0, MAX_AMMO)
+		#var y = (ammo - 0.0) / (50 - 0.0)
+		#not_eased_ammo = 1 + 1/10 * logWithBase(y, 3)
+		#ammo = ease(not_eased_ammo/MAX_AMMO, 0.2) * MAX_AMMO
+	
+	""" Millorar codi si és possible
+	if shooting:
+		if get_tree().has_network_peer():
+			rpc("shoot", shoot_target())
+		else:
+			shoot(shoot_target())
+	"""
+	old_wants_shoot = wants_shoot
 
 
 
 sync func shoot(shoot_target = Vector3.ZERO) -> void:
+	ammo -= 1
 	next_times_to_fire[current_bullet] = time_now + 1.0 / fire_rates[current_bullet]
 	
 	# Sound fer-ho pel nom com els pilotman
@@ -52,3 +79,5 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()
 
+
+func logWithBase(value, base): return log(value) / log(base)

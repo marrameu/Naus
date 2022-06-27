@@ -80,6 +80,8 @@ func _process(delta : float) -> void:
 	if owner.input.drifting:
 		$Label.text += "drifting"
 	
+	$AmmoBar.value = owner.shooting.ammo / owner.shooting.MAX_AMMO * 100
+	
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
 	if get_parent().is_player:
