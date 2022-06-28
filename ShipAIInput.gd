@@ -63,6 +63,8 @@ func move_forward(delta):
 # Ja no va ebri!, però li costa de centrar-se del tot al voltant de l'eix Y, segurament és deu a fer-ho d'aquesta manera, amb físiques i amb un Slerp aproxiament
 # no obstant això, aquest és el millor mètode que he trobat i val a dir que n'estic prou orgullós
 func turn(delta):
+	#return
+	
 	var desired_oirent : Transform = owner.global_transform.looking_at(target, Vector3.UP)
 	desired_oirent = desired_oirent.basis.rotated(desired_oirent.basis.y, deg2rad(180))
 	
@@ -99,6 +101,7 @@ func turn(delta):
 	pitch = uwu.x
 	yaw = uwu.y
 	
+	"""
 	var fotut = false
 	
 	boost_multi = 1
@@ -114,7 +117,7 @@ func turn(delta):
 	owner.get_node("ColDetectRight").cast_to = Vector3(-75 * raycast_multiplier, 0, 150 * raycast_multiplier)
 	owner.get_node("ColDetectLeft").cast_to = Vector3(75 * raycast_multiplier, 0, 150 * raycast_multiplier)
 	
-	"""
+	""
 	# fer-ho amb la velocitat?
 	var dist = owner.global_transform.origin.distance_to(target)
 	var multi = clamp(((dist - a_partir_daqui_min)/(distancia_per_comencar_a_frenat - a_partir_daqui_min)), min_raycast_longitude, 1)
@@ -126,7 +129,7 @@ func turn(delta):
 	owner.get_node("ColDetectLeft").cast_to = Vector3(150 * multi, 0, 300 * multi)
 	
 	#owner.get_node("ColDetectForward").force_raycast_update()
-	"""
+	""
 	
 	if (owner.get_node("ColDetectUp") as RayCast).is_colliding():
 		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetectUp").cast_to)), Color.blue)
@@ -191,6 +194,7 @@ func turn(delta):
 				yaw = uwu.y
 			if fotut: # Toca amunt dreta, esquerra i, a més, amunt, avall i endevant
 				boost_multi = 0.25
+	"""
 	
 	owner.get_node("ShipMesh").rotation = Vector3.ZERO
 	
