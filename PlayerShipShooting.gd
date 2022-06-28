@@ -12,11 +12,14 @@ func _process(delta):
 			current_bullet = 0
 	
 	wants_shoot = Input.is_action_pressed(shoot_action)
-	if wants_shoot and can_shoot:
-		if get_tree().has_network_peer():
-			rpc("shoot", shoot_target())
-		else:
-			shoot(shoot_target())
+	if wants_shoot:
+		if can_shoot:
+			if get_tree().has_network_peer():
+				rpc("shoot", shoot_target())
+			else:
+				shoot(shoot_target())
+		elif ammo < 1 and not $NoAmmoAudio.playing:
+			$NoAmmoAudio.play()
 
 
 func shoot_target() -> Vector3:
