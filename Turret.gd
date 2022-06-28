@@ -62,7 +62,7 @@ sync func shoot() -> void:
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = -$Spatial.global_transform.basis.z
 	bullet.look_at($Spatial.global_transform.origin + -$Spatial.global_transform.basis.z, Vector3.UP)
-	bullet.ship = get_parent()
+	bullet.ship = owner
 
 
 func _on_Area_body_exited(body):

@@ -86,6 +86,9 @@ aabb = AABB( -1, -1, -4.14208, 2, 2, 8.28415 )
 [node name="RayCast" type="RayCast" parent="RayCasts"]
 enabled = true
 cast_to = Vector3( 0, 0, 100 )
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
 debug_shape_thickness = 5
 
 [connection signal="screen_entered" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_entered"]

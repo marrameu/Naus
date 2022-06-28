@@ -17,7 +17,7 @@ func _process(delta : float) -> void: # rumiar si fer-ho al physics_process
 	var long = translation.distance_to(_old_translation)
 	for ray in $RayCasts.get_children():
 		if ray.is_colliding():
-			var body = ray.get_collider()
+			var body = ray.get_collider().owner
 			if body != ship:
 				if body.is_in_group("Damagable"):
 					if get_tree().has_network_peer():

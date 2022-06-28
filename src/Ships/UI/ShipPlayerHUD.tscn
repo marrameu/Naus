@@ -210,4 +210,6 @@ stream = ExtResource( 8 )
 volume_db = 10.0
 bus = "Sounds"
 
+[node name="NoAmmoAudio" type="AudioStreamPlayer" parent="."]
+
 [editable path="ShieldLifeBar"]

@@ -23,7 +23,7 @@ surfaces/0 = {
 }
 
 [sub_resource type="CapsuleShape" id=6]
-radius = 9.66962
+radius = 12.8902
 height = 17.249
 
 [node name="Asteroid" type="StaticBody" groups=["Damagable"]]
@@ -44,5 +44,14 @@ shape = SubResource( 6 )
 script = ExtResource( 4 )
 shard_template = ExtResource( 6 )
 shard_scene = ExtResource( 5 )
+
+[node name="DamageArea" type="Area" parent="."]
+collision_layer = 8
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2" type="CollisionShape" parent="DamageArea"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 6 )
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
