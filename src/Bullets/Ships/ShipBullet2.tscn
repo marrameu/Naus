@@ -25,6 +25,3 @@ draw_pass_1 = SubResource( 3 )
 
 [node name="OmniLight" parent="." index="2"]
 light_color = Color( 0.301961, 0.541176, 1, 1 )
-
-[node name="CollisionShape" parent="." index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
