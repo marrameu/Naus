@@ -11,8 +11,6 @@ var shield : float = 0
 export var time_before_shield_repair : float= 5
 export var shield_repair_per_sec : float = 20
 
-var recover_shield  := false
-
 export var MAX_HEALTH : int = 150 
 # 150 Tropes d'assalt, 1200 Caces estelars, 800 Interceptors, 2100 Bombarders, 3600 Naus de transport, 600000 Creuers 
 var health : int = 0
@@ -28,8 +26,7 @@ func _ready() -> void:
 
 
 func _process(delta):
-	if recover_shield:
-		heal_shield(shield_repair_per_sec * delta)
+	pass
 
 
 sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
@@ -39,8 +36,6 @@ sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
 			shield = max(0, shield)
 			if shield <= 0:
 				emit_signal("shield_die")
-				recover_shield = true
-				$ShieldTimer.start()
 		else:
 			health -= amount
 			health = max(0, health)
@@ -59,6 +54,4 @@ sync func heal_shield(amount : int) -> void:
 
 
 func _on_ShieldTimer_timeout():
-	recover_shield = true
-	emit_signal("shield_recovered")
-
+	pass

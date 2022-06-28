@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/triangle.png" type="Texture" id=7]
 [ext_resource path="res://assets/audio/throttle_out.wav" type="AudioStream" id=8]
+[ext_resource path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" type="PackedScene" id=9]
 
 [node name="PlayerHUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -65,6 +66,7 @@ texture = ExtResource( 5 )
 expand = true
 
 [node name="LifeBar" parent="." instance=ExtResource( 6 )]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -89,6 +91,24 @@ margin_left = -99.75
 margin_top = -21.0
 margin_right = 99.75
 margin_bottom = 21.0
+
+[node name="ShieldLifeBar" parent="." instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -98.0
+margin_top = -110.0
+margin_right = 98.0
+margin_bottom = -71.0
+nine_patch_stretch = true
+
+[node name="LifeBar" parent="ShieldLifeBar" index="0"]
+margin_left = -90.0
+margin_top = -14.5
+margin_right = 90.0
+margin_bottom = 14.5
+tint_progress = Color( 1, 1, 1, 1 )
 
 [node name="SpeedBars" type="VBoxContainer" parent="."]
 anchor_top = 1.0
@@ -189,3 +209,5 @@ bus = "Sounds"
 stream = ExtResource( 8 )
 volume_db = 10.0
 bus = "Sounds"
+
+[editable path="ShieldLifeBar"]

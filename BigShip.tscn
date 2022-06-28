@@ -86,7 +86,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 206.02, -3.05176e-05, 335.4 )
 
 [node name="AttackPos" type="Position3D" parent="ShipPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 610.084, 0, 0 )
-
-[connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
-[connection signal="shield_die" from="HealthSystem" to="." method="_on_HealthSystem_shield_die"]
-[connection signal="shield_recovered" from="HealthSystem" to="." method="_on_HealthSystem_shield_recovered"]

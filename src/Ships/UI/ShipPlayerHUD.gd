@@ -42,8 +42,11 @@ func _process(delta : float) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	$Center.visible = true # is_player
-	$LifeBar.show()
-	$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
+	#$LifeBar.show()
+	#$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
+	$ShieldLifeBar.show()
+	$ShieldLifeBar.value = float(get_node("../HealthSystem").shield) / float(get_node("../HealthSystem").MAX_SHIELD) * 100
+	$ShieldLifeBar/LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
 	
 	var a = get_node("../Input").avaliable_turbos
 	var rects = $SpeedBars/HBoxContainer2.get_children()

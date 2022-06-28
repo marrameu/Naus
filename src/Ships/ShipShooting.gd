@@ -14,7 +14,7 @@ var time_now := 0.0
 var wants_shoot := false
 
 var MAX_AMMO :=  50.0
-var ammo := 00.0
+var ammo := MAX_AMMO
 var not_eased_ammo := ammo
 
 var can_shoot := true

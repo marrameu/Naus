@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/HealthSystem/AutorepairHealthSystem.gd" type="Script" id=10]
 [ext_resource path="res://assets/audio/engines.ogg" type="AudioStream" id=11]
 
 [sub_resource type="PhysicsMaterial" id=6]
@@ -41,7 +42,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 1 )
 
 [node name="HealthSystem" parent="." instance=ExtResource( 9 )]
-MAX_HEALTH = 1000
+script = ExtResource( 10 )
+MAX_SHIELD = 1000
+shield_repair_per_sec = 100.0
+MAX_HEALTH = 500
 
 [node name="Input" type="Node" parent="."]
 script = ExtResource( 4 )
