@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+onready var lock_target_info := $LockTargetInfo
+onready var lock_target_nickname := $LockTargetInfo/Nickname
+onready var lock_target_life_bar := $LockTargetInfo/LifeBar
+
 # Tots els nodes de la nau agafen l'input des d'aquí, millor que l'agafin des del node PlayerInput
 var cursor_input := Vector2()
 
@@ -41,7 +45,28 @@ func _process(delta : float) -> void:
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
+	
+	
+	
+	
 	$Center.visible = true # is_player
+	
+	var target : Spatial = owner.shooting.lock_target
+	if target and weakref(target).get_ref():
+		if not owner.cam.is_position_behind(target.translation):
+			lock_target_info.show()
+			lock_target_nickname.text = target.name
+			lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
+			lock_target_life_bar.get_node("LifeBar").value = (float(target.get_node("HealthSystem").health) / float(target.get_node("HealthSystem").MAX_HEALTH)) * 100
+			lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size.x / 2, lock_target_info.rect_size.y / 2) + Vector2.UP * 80
+		else:
+			lock_target_info.hide()
+	else:
+			lock_target_info.hide()
+			
+	
+	
+	
 	#$LifeBar.show()
 	#$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
 	$ShieldLifeBar.show()

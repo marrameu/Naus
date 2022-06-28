@@ -329,4 +329,4 @@ material/0 = SubResource( 8 )
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
-[connection signal="respawn" from="SpawnHUD" to="." method="respawn_player"]
+[connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
