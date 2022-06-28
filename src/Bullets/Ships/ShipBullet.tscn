@@ -73,7 +73,6 @@ stream = ExtResource( 3 )
 unit_db = 3.0
 unit_size = 50.0
 max_db = 1.0
-autoplay = true
 max_distance = 500.0
 bus = "Sounds"
 doppler_tracking = 2

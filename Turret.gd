@@ -52,7 +52,7 @@ func _on_Area_body_entered(body):
 
 sync func shoot() -> void:
 	# Sound
-	$Audio.play()
+	#$Audio.play()
 	
 	var bullet : Spatial
 	bullet = bullet_scene.instance()

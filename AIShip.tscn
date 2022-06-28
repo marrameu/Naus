@@ -103,6 +103,7 @@ autostart = true
 [connection signal="timeout" from="Input/Timer" to="Input" method="choose_target"]
 [connection signal="timeout" from="StateMachine/AttackEnemies/OutOfRangeTimer" to="StateMachine/AttackEnemies" method="_on_OutOfRangeTimer_timeout"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_entered"]
+[connection signal="body_entered" from="Shooting/ShootingArea" to="StateMachine/AttackEnemies" method="_on_ShootingArea_body_entered"]
 [connection signal="body_exited" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_exited"]
 [connection signal="timeout" from="InitTimer" to="StateMachine/ChooseObjective" method="_on_InitTimer_timeout"]
 

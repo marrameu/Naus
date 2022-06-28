@@ -59,7 +59,8 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 	
 	# Sound fer-ho pel nom com els pilotman
 	if current_bullet == 0:
-		$Audio.play()
+		# $Audio.play()
+		pass
 	elif current_bullet == 1:
 		$Audio2.play()
 	

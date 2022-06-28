@@ -22,6 +22,7 @@ func _process(delta):
 	"""
 	enemy_in_range = false
 	# cal la weakref? si pot ser evitat millor
+	# si ho faig amb body_entered/exited el problema esq si canvia d'enemic i l'anterior no ha sortit de l'àrea...
 	if weakref(target).get_ref():
 		for body in $ShootingArea.get_overlapping_bodies():
 			if body == target:
