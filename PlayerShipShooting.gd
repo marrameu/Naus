@@ -2,9 +2,19 @@ extends "res://src/Ships/ShipShooting.gd"
 
 var shoot_action := "shoot"
 var change_bullet_action := "change_bullet"
+var lock_action := "lock"
 
+var clear_target_press_time := 0.0
 
 func _process(delta):
+	if Input.is_action_just_pressed(lock_action):
+		lock_target = closest_enenmy()
+		clear_target_press_time = 0.0
+	if Input.is_action_pressed(lock_action):
+		clear_target_press_time += delta
+		if clear_target_press_time > 1:
+			lock_target = null
+	
 	if Input.is_action_just_released(change_bullet_action):
 		if current_bullet == 0:
 			current_bullet = 1

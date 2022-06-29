@@ -63,7 +63,6 @@ func _process(delta : float) -> void:
 			lock_target_info.hide()
 	else:
 			lock_target_info.hide()
-			
 	
 	
 	

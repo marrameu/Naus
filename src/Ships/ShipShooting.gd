@@ -30,9 +30,6 @@ func _ready() -> void:
 
 
 func _process(delta : float) -> void:
-	if Input.is_action_just_pressed("lock"):
-		lock_target = closest_enenmy()
-	
 	time_now += delta
 	
 	can_shoot = time_now >= next_times_to_fire[current_bullet] and not owner.input.turboing and ammo >= 1
