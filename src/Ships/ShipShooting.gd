@@ -17,6 +17,9 @@ var MAX_AMMO :=  50.0
 var ammo := MAX_AMMO
 var not_eased_ammo := ammo
 
+var MAX_MISSILES_AMMO :=  4
+var missiles_ammmo := MAX_AMMO
+
 var can_shoot := true
 
 var current_bullet := 0
@@ -56,14 +59,25 @@ func _process(delta : float) -> void:
 
 
 sync func shoot(shoot_target = Vector3.ZERO) -> void:
+	if current_bullet == 0:
+		# $Audio.play()
+		pass
+	elif current_bullet == 1:
+		$Audio2.play()
+	
 	ammo -= 1
 	next_times_to_fire[current_bullet] = time_now + 1.0 / fire_rates[current_bullet]
 	
-	var bullet : Spatial
+	var bullet : ShipBullet
 	if current_bullet == 0:
 		bullet = bullet_scene.instance()
 	elif current_bullet == 1:
 		bullet = secondary_bullet_scene.instance()
+	
+	if bullet is MissileBullet:
+		if lock_target:
+			bullet.target = lock_target
+	
 	get_node("/root/Level").add_child(bullet)
 	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
@@ -74,15 +88,6 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 		bullet.direction = owner.global_transform.basis.z
 		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()
-	
-		# Sound fer-ho pel nom com els pilotman
-	if current_bullet == 0:
-		# $Audio.play()
-		pass
-	elif current_bullet == 1:
-		if lock_target:
-			bullet.target = lock_target
-		$Audio2.play()
 
 
 func closest_enenmy() -> Spatial: # poder rutllar es +o- fàcil (comparar si concorda amb l'histoiral)

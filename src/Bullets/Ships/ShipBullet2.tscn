@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Bullets/Ships/ShipBullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Bullets/Ships/MissileBullet.gd" type="Script" id=2]
@@ -15,13 +15,9 @@ material = SubResource( 2 )
 radius = 2.5
 height = 5.0
 
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.192157, 0.105882, 0.917647, 1 )
-
-[sub_resource type="CapsuleMesh" id=5]
-material = SubResource( 4 )
-radial_segments = 4
-rings = 1
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 2 )
+size = Vector3( 0.984, 0.36, 4 )
 
 [sub_resource type="CubeMesh" id=6]
 size = Vector3( 2, 2, 100 )
@@ -44,11 +40,13 @@ transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
 light_color = Color( 0.301961, 0.541176, 1, 1 )
 
 [node name="CPUParticles" type="CPUParticles" parent="." index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0236011 )
-amount = 20
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.33913 )
+amount = 25
+lifetime = 0.05
 local_coords = false
-mesh = SubResource( 5 )
+mesh = SubResource( 7 )
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="8"]
+visible = false
 mesh = SubResource( 6 )
 material/0 = null

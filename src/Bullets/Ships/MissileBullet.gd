@@ -1,4 +1,5 @@
 extends ShipBullet
+class_name MissileBullet
 
 export var rotate_speed := 50
 var target : Spatial
