@@ -339,7 +339,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -1244.91, 122.352 )
+graph_offset = Vector2( 16.9528, 103.938 )
 modes/cull = 2
 modes/depth_draw = 3
 nodes/vertex/2/node = SubResource( 94 )
