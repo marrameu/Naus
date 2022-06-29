@@ -3,6 +3,7 @@ extends CanvasLayer
 onready var lock_target_info := $LockTargetInfo
 onready var lock_target_nickname := $LockTargetInfo/Nickname
 onready var lock_target_life_bar := $LockTargetInfo/LifeBar
+onready var locking_target_tween := $LockingTarget/Tween
 
 onready var cursor := $Center/Cursor
 onready var crosshair := $Center/Crosshair
@@ -72,12 +73,21 @@ func _process(delta : float) -> void:
 			lock_target_nickname.text = target.name
 			lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
 			lock_target_life_bar.get_node("LifeBar").value = (float(target.get_node("HealthSystem").health) / float(target.get_node("HealthSystem").MAX_HEALTH)) * 100
-			lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size.x / 2, lock_target_info.rect_size.y / 2) + Vector2.UP * 80
+			lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
 		else:
 			lock_target_info.hide()
+		
+		if owner.shooting.locking_target:
+			$LockingTarget.show()
+			$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
+			if not locking_target_tween.is_active():
+				locking_target_tween.interpolate_property($LockingTarget, "rect_size:x", 140, 74, owner.shooting.locking_time, Tween.TRANS_QUAD, Tween.EASE_OUT)
+				locking_target_tween.start()
+		else:
+			$LockingTarget.hide()
 	else:
 			lock_target_info.hide()
-	
+			$LockingTarget.hide()
 	
 	
 	#$LifeBar.show()

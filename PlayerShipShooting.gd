@@ -7,6 +7,8 @@ var lock_action := "lock"
 var clear_target_press_time := 0.0
 
 func _process(delta):
+	current_bullet = 0 # temproal, endreçar
+	
 	if Input.is_action_just_pressed(lock_action):
 		lock_target = closest_enenmy()
 		clear_target_press_time = 0.0
@@ -15,11 +17,14 @@ func _process(delta):
 		if clear_target_press_time > 1:
 			lock_target = null
 	
-	if Input.is_action_just_released(change_bullet_action):
-		if current_bullet == 0:
-			current_bullet = 1
-		elif current_bullet == 1:
-			current_bullet = 0
+	if Input.is_action_just_pressed("secondary_shoot"):
+		prepare_to_shoot_missile()
+	
+	if locking_target:
+		if not $LockingAudio.playing:
+			$LockingAudio.play()
+	else:
+		$LockingAudio.stop()
 	
 	wants_shoot = Input.is_action_pressed(shoot_action)
 	if wants_shoot:

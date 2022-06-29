@@ -1,5 +1,7 @@
 extends Node
 
+onready var lock_missile_timer : Timer = $LockMissileTimer
+
 var shoot_range := 1500
 
 # Bullets
@@ -26,6 +28,9 @@ var current_bullet := 0
 
 var old_wants_shoot := false
 
+var locking_target := false
+var locking_time := 2.0
+
 var lock_target : Spatial
 
 func _ready() -> void:
@@ -46,6 +51,13 @@ func _process(delta : float) -> void:
 		#var y = (ammo - 0.0) / (50 - 0.0)
 		#not_eased_ammo = 1 + 1/10 * logWithBase(y, 3)
 		#ammo = ease(not_eased_ammo/MAX_AMMO, 0.2) * MAX_AMMO
+	
+	if locking_target:
+		var direction := Vector3(lock_target.translation - owner.translation).normalized()
+		var a = direction.dot(owner.global_transform.basis.z)
+		if a < 0.5:
+			$LockMissileTimer.stop()
+			locking_target = false
 	
 	""" Millorar codi si és possible
 	if shooting:
@@ -125,3 +137,17 @@ func closest_enenmy() -> Spatial: # poder rutllar es +o- fàcil (comparar si con
 
 
 func logWithBase(value, base): return log(value) / log(base)
+
+
+func prepare_to_shoot_missile():
+	if lock_target:
+		locking_target = true
+		if lock_missile_timer.is_stopped():
+			lock_missile_timer.wait_time = locking_time
+			lock_missile_timer.start()
+
+
+func _on_LockMissileTimer_timeout():
+	current_bullet = 1
+	locking_target = false
+	shoot()
