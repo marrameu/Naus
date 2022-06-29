@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/interface/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=4]
-[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=5]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/triangle.png" type="Texture" id=7]
 [ext_resource path="res://assets/audio/throttle_out.wav" type="AudioStream" id=8]
@@ -37,55 +36,52 @@ margin_bottom = 54.0
 size_flags_vertical = 3
 
 [node name="Center" type="Control" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -500.0
+margin_right = 500.0
+margin_bottom = 500.0
 
 [node name="Crosshair" type="TextureRect" parent="Center"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 912.5
-margin_top = 492.5
-margin_right = 967.5
-margin_bottom = 547.5
+margin_left = -60.0
+margin_top = -60.0
+margin_right = 60.0
+margin_bottom = 60.0
 rect_pivot_offset = Vector2( 27, 27 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="CursorPivot" type="Control" parent="Center"]
+[node name="Cursor" type="TextureRect" parent="Center"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 909.5
-margin_top = 489.5
-margin_right = 909.5
-margin_bottom = 489.5
-
-[node name="Cursor" type="TextureRect" parent="Center/CursorPivot"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 60.0
-margin_bottom = 60.0
+margin_left = -36.0
+margin_top = -36.0
+margin_right = 36.0
+margin_bottom = 36.0
 rect_pivot_offset = Vector2( 30, 30 )
 texture = ExtResource( 4 )
 expand = true
 
-[node name="Point" type="TextureRect" parent="Center/CursorPivot/Cursor"]
+[node name="Rodona" type="TextureRect" parent="Center"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1.5
-margin_top = -1.5
-margin_right = 1.5
-margin_bottom = 1.5
-rect_pivot_offset = Vector2( 1.5, 1.5 )
-texture = ExtResource( 5 )
+margin_left = -511.0
+margin_top = -511.0
+margin_right = 511.0
+margin_bottom = 511.0
+rect_pivot_offset = Vector2( 30, 30 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="LifeBar" parent="." instance=ExtResource( 6 )]

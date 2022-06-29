@@ -25,3 +25,6 @@ draw_pass_1 = SubResource( 3 )
 
 [node name="OmniLight" parent="." index="2"]
 light_color = Color( 0.301961, 0.541176, 1, 1 )
+
+[node name="Tail" type="Particles" parent="." index="7"]
+visible = false

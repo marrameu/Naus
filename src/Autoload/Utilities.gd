@@ -2,7 +2,6 @@ extends Node
 
 # Mouse
 var mouse_position := Vector2()
-var mouse_movement := Vector2()
 var mouse_acceleration := Vector2() # Not ready
 
 # Time
@@ -21,10 +20,8 @@ func play_button_audio() -> void:
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		mouse_movement = event.relative
 		mouse_position = event.position
 
 
 func _process(delta : float) -> void:
-	mouse_movement = Vector2()
 	time = OS.get_ticks_msec() / 1000.0 # Pausa?

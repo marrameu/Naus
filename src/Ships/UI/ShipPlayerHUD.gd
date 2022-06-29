@@ -4,12 +4,21 @@ onready var lock_target_info := $LockTargetInfo
 onready var lock_target_nickname := $LockTargetInfo/Nickname
 onready var lock_target_life_bar := $LockTargetInfo/LifeBar
 
+onready var cursor := $Center/Cursor
+onready var crosshair := $Center/Crosshair
+onready var cursor_center_pos : Vector2 = $Center.rect_size / 2 - cursor.rect_size / 2
+onready var crosshair_center_pos : Vector2 = $Center.rect_size / 2 - crosshair.rect_size / 2
+
+
 # Tots els nodes de la nau agafen l'input des d'aquí, millor que l'agafin des del node PlayerInput
 var cursor_input := Vector2()
 
 var _cursor_visible := false
 var _cursor_limit := 450
+var _crosshair_limit := 300
 var _min_position := 20
+
+var mouse_movement : Vector2
 
 
 func _ready() -> void:
@@ -35,6 +44,9 @@ func _process(delta : float) -> void:
 	#Utilities.canvas_scaler(get_parent().number_of_player, self)
 	
 	# Debug
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	"""
+	
 	if Input.is_key_pressed(KEY_F1):
 		_cursor_visible = true
 	elif Input.is_key_pressed(KEY_F2):
@@ -44,12 +56,14 @@ func _process(delta : float) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
+	"""
 	
 	
 	
 	
 	$Center.visible = true # is_player
+	update_center(delta)
+	
 	
 	var target : Spatial = owner.shooting.lock_target
 	if target and weakref(target).get_ref():
@@ -123,17 +137,32 @@ func _process(delta : float) -> void:
 			$LifeBar.hide()
 	"""
 
-func _physics_process(delta : float) -> void:
+
+func _physics_process(delta):
+	update_center(delta)
+	mouse_movement = Vector2.ZERO
+
+
+func _input(event : InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		mouse_movement = event.relative
+
+
+func update_center(delta):
 	if $Center.visible:
 		if not Settings.controller_input:
-			$Center/CursorPivot/Cursor.rect_position += Utilities.mouse_movement * delta * Settings.mouse_sensitivity
-			$Center/CursorPivot/Cursor.rect_position = $Center/CursorPivot/Cursor.rect_position.clamped(_cursor_limit)
+			cursor.rect_position += mouse_movement * delta * Settings.mouse_sensitivity
+			crosshair.rect_position = cursor.rect_position - cursor_center_pos + crosshair_center_pos
+			cursor.rect_position = (cursor.rect_position -  cursor_center_pos).clamped(_cursor_limit) + cursor_center_pos
+			crosshair.rect_position = (crosshair.rect_position - crosshair_center_pos).clamped(_crosshair_limit) + crosshair_center_pos
+			# tots aquests calculs pq al mig no és 0,0 sinó la meitat del pare :/
 			
-			if $Center/CursorPivot/Cursor.rect_position.length() > _min_position:
-				cursor_input.x = $Center/CursorPivot/Cursor.rect_position.x / _cursor_limit
-				cursor_input.y = -$Center/CursorPivot/Cursor.rect_position.y / _cursor_limit
+			if (cursor.rect_position - cursor_center_pos).length() > _min_position:
+				cursor_input.x = (cursor.rect_position.x - cursor_center_pos.x) / _cursor_limit
+				cursor_input.y = -(cursor.rect_position.y - cursor_center_pos.y) / _cursor_limit
 			else:
 				cursor_input = Vector2()
 		else:
-			$Center/CursorPivot/Cursor.rect_position = Vector2()
+			cursor.rect_position = cursor_center_pos
+			crosshair.rect_position = crosshair_center_pos
 			cursor_input = Vector2()
