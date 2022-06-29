@@ -8,12 +8,31 @@ var direction : Vector3
 var ship # : Ship
 
 var _hit := false
-var _time_alive := 3.5 #7.0
+export var _time_alive := 3.5 #7.0
 var _old_translation : Vector3
 
 
 func _process(delta : float) -> void: # rumiar si fer-ho al physics_process
+	if _hit: # Per l'animació d'explosió
+		return
+	
+	move(delta)
+	check_collisions()
+	
+	_time_alive -= delta
+	if _time_alive < 0:
+		queue_free()
+	# fer que depenent de la velocitat q ha recorregut la area canvia de llargada? :/
+	
+	_old_translation = translation
+
+
+func move(delta):
+	print(name)
 	translation += delta * direction * bullet_velocity
+
+
+func check_collisions():
 	var long = translation.distance_to(_old_translation)
 	for ray in $RayCasts.get_children():
 		if ray.is_colliding():
@@ -29,16 +48,6 @@ func _process(delta : float) -> void: # rumiar si fer-ho al physics_process
 				queue_free() # $AnimationPlayer.play("explode")
 				_hit = true
 		ray.cast_to = Vector3(0, 0, long)
-	
-	if _hit: # Per l'animació d'explosió
-		return
-	
-	_time_alive -= delta
-	if _time_alive < 0:
-		queue_free()
-	# fer que depenent de la velocitat q ha recorregut la area canvia de llargada? :/
-	
-	_old_translation = translation
 
 
 func _on_VisibilityNotifier_screen_entered():

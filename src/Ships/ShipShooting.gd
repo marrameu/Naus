@@ -59,13 +59,6 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 	ammo -= 1
 	next_times_to_fire[current_bullet] = time_now + 1.0 / fire_rates[current_bullet]
 	
-	# Sound fer-ho pel nom com els pilotman
-	if current_bullet == 0:
-		# $Audio.play()
-		pass
-	elif current_bullet == 1:
-		$Audio2.play()
-	
 	var bullet : Spatial
 	if current_bullet == 0:
 		bullet = bullet_scene.instance()
@@ -81,6 +74,15 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 		bullet.direction = owner.global_transform.basis.z
 		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 	bullet.ship = get_parent()
+	
+		# Sound fer-ho pel nom com els pilotman
+	if current_bullet == 0:
+		# $Audio.play()
+		pass
+	elif current_bullet == 1:
+		if lock_target:
+			bullet.target = lock_target
+		$Audio2.play()
 
 
 func closest_enenmy() -> Spatial: # poder rutllar es +o- fàcil (comparar si concorda amb l'histoiral)
