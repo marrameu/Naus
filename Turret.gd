@@ -47,7 +47,7 @@ func _on_Area_body_entered(body):
 	if body.is_in_group("Ships"):
 		if body.pilot_man.blue_team != owner.team_blue:
 			enemies.push_back(body)
-			print(name + " a matar " + body.name)
+			# print(name + " a matar " + body.name)
 
 
 sync func shoot() -> void:

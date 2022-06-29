@@ -28,7 +28,6 @@ func _process(delta : float) -> void: # rumiar si fer-ho al physics_process
 
 
 func move(delta):
-	print(name)
 	translation += delta * direction * bullet_velocity
 
 
