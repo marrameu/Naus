@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/interface/crosshair1.png" type="Texture" id=3]
 [ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=4]
+[ext_resource path="res://assets/interface/circle.png" type="Texture" id=5]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/triangle.png" type="Texture" id=7]
 [ext_resource path="res://assets/audio/throttle_out.wav" type="AudioStream" id=8]
@@ -59,7 +60,6 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="Cursor" type="TextureRect" parent="Center"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -77,12 +77,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -511.0
-margin_top = -511.0
-margin_right = 511.0
-margin_bottom = 511.0
+margin_left = -518.5
+margin_top = -518.5
+margin_right = 518.5
+margin_bottom = 518.5
 rect_pivot_offset = Vector2( 30, 30 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 expand = true
 
 [node name="LifeBar" parent="." instance=ExtResource( 6 )]
