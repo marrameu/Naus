@@ -46,6 +46,7 @@ func update(_delta):
 
 func change_enemy_to_nearest():
 	var nearest_dist := INF
+	# com el closest_enenmy() del shooting (cridar-lo)
 	for body in get_tree().get_nodes_in_group("Ships"):
 		if body.pilot_man.blue_team != owner.pilot_man.blue_team:
 			var new_dist = owner.translation.distance_to(body.translation)

@@ -5,6 +5,7 @@
 [node name="ShieldLifeBar" instance=ExtResource( 1 )]
 value = 50.0
 tint_progress = Color( 0.682353, 0.866667, 1, 0.588235 )
+nine_patch_stretch = true
 
 [node name="LifeBar" parent="." index="0" instance=ExtResource( 1 )]
 anchor_left = 0.5

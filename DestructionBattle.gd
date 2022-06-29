@@ -76,7 +76,7 @@ func _on_AIShip_tree_exited(num):
 	spawn_AI(num)
 
 
-func respawn_player():
+func spawn_player():
 	var ship = player_ship_scene.instance()
 	ship.pilot_man = $PilotManagers/PlayerManager
 	ship.translation = choose_spawn_position(ship.pilot_man.blue_team)
@@ -90,6 +90,7 @@ func respawn_player():
 	# cam
 	#ship.get_node("Input").connect("activated_turboing", $Camera, "_on_Input_activated_turboing")
 	$Camera.ship = ship
+	ship.cam = $Camera
 	$Camera.make_current()
 	$Camera.init_cam()
 
