@@ -56,4 +56,5 @@ bus = "Sounds"
 
 [node name="LockingAudio" type="AudioStreamPlayer" parent="Shooting" index="4"]
 stream = ExtResource( 11 )
+volume_db = 15.0
 bus = "Sounds"

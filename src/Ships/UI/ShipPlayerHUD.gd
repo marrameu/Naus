@@ -79,15 +79,17 @@ func _process(delta : float) -> void:
 		
 		if owner.shooting.locking_target:
 			$LockingTarget.show()
-			$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
 			if not locking_target_tween.is_active():
 				locking_target_tween.interpolate_property($LockingTarget, "rect_size:x", 140, 74, owner.shooting.locking_time, Tween.TRANS_QUAD, Tween.EASE_OUT)
 				locking_target_tween.start()
+			$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
 		else:
 			$LockingTarget.hide()
+			locking_target_tween.stop_all()
 	else:
 			lock_target_info.hide()
 			$LockingTarget.hide()
+			locking_target_tween.stop_all()
 	
 	
 	#$LifeBar.show()

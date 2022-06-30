@@ -12,15 +12,21 @@ func _process(delta):
 	if Input.is_action_just_pressed(lock_action):
 		lock_target = closest_enenmy()
 		clear_target_press_time = 0.0
+		cancel_locking_target()
 	if Input.is_action_pressed(lock_action):
 		clear_target_press_time += delta
 		if clear_target_press_time > 1:
 			lock_target = null
 	
 	if Input.is_action_just_pressed("secondary_shoot"):
-		prepare_to_shoot_missile()
+		if lock_target:
+			prepare_to_shoot_missile()
+		else:
+			current_bullet = 1
+			shoot()
+			current_bullet = 0
 	
-	if locking_target:
+	if locking_target and weakref(lock_target).get_ref():
 		if not $LockingAudio.playing:
 			$LockingAudio.play()
 	else:

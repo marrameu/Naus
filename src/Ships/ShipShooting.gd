@@ -53,11 +53,13 @@ func _process(delta : float) -> void:
 		#ammo = ease(not_eased_ammo/MAX_AMMO, 0.2) * MAX_AMMO
 	
 	if locking_target:
-		var direction := Vector3(lock_target.translation - owner.translation).normalized()
-		var a = direction.dot(owner.global_transform.basis.z)
-		if a < 0.5:
-			$LockMissileTimer.stop()
-			locking_target = false
+		if weakref(lock_target).get_ref():
+			var direction := Vector3(lock_target.translation - owner.translation).normalized()
+			var a = direction.dot(owner.global_transform.basis.z)
+			if a < 0 or not can_shoot:
+				cancel_locking_target()
+		else:
+			cancel_locking_target()
 	
 	""" Millorar codi si és possible
 	if shooting:
@@ -145,6 +147,11 @@ func prepare_to_shoot_missile():
 		if lock_missile_timer.is_stopped():
 			lock_missile_timer.wait_time = locking_time
 			lock_missile_timer.start()
+
+
+func cancel_locking_target():
+	$LockMissileTimer.stop()
+	locking_target = false
 
 
 func _on_LockMissileTimer_timeout():
