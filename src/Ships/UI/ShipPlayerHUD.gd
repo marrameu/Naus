@@ -44,10 +44,6 @@ func _process(delta : float) -> void:
 	
 	#Utilities.canvas_scaler(get_parent().number_of_player, self)
 	
-	# Debug
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	"""
-	
 	if Input.is_key_pressed(KEY_F1):
 		_cursor_visible = true
 	elif Input.is_key_pressed(KEY_F2):
@@ -57,12 +53,9 @@ func _process(delta : float) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	"""
 	
 	
 	
-	
-	$Center.visible = true # is_player
 	update_center(delta)
 	
 	
@@ -119,12 +112,14 @@ func _process(delta : float) -> void:
 			# en surt
 			$ThrottleOutAudio.play()
 	
+	"""
 	var b = owner.transform.basis
 	var v_len = owner.linear_velocity.length()
 	var v_nor = owner.linear_velocity.normalized()
 	var vel : Vector3
 	vel.z = b.z.dot(v_nor) * v_len
-	$SpeedBars/SpeedBar.value = vel.z / 2
+	"""
+	$SpeedBars/SpeedBar.value = owner.linear_velocity.length() / 2
 	$SpeedBars/SpeedBar.tint_progress = Color("966263ff") if not owner.input.turboing else Color("b79b5b")
 	
 	$Label.text = ""

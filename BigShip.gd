@@ -5,11 +5,11 @@ signal destroyed
 export var red_mat : Material
 export var blue_mat : Material
 
-export var team_blue : bool = 0
+export var blue_team : bool = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if team_blue:
+	if blue_team:
 		$Mesh.material_override = blue_mat
 	else:
 		$Mesh.material_override = red_mat
@@ -21,7 +21,7 @@ func _ready():
 
 
 func _on_HealthSystem_die():
-	emit_signal("destroyed", team_blue)
+	emit_signal("destroyed", blue_team)
 	queue_free()
 
 

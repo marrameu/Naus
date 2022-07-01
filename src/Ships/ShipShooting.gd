@@ -33,6 +33,7 @@ var locking_time := 2.0
 
 var lock_target : Spatial
 
+
 func _ready() -> void:
 	pass
 
@@ -104,38 +105,28 @@ sync func shoot(shoot_target = Vector3.ZERO) -> void:
 	bullet.ship = get_parent()
 
 
-func closest_enenmy() -> Spatial: # poder rutllar es +o- fàcil (comparar si concorda amb l'histoiral)
+func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- fàcil (comparar si concorda amb l'histoiral)
 	var closest_dist := -INF
-	var closest_enemy : Spatial = null
-	for body in get_tree().get_nodes_in_group("Ships"):
-		if body.pilot_man.blue_team != owner.pilot_man.blue_team:
-			var direction := Vector3(body.translation - owner.translation).normalized()
-			var a = direction.dot(owner.global_transform.basis.z)
-			
-			if a > closest_dist:
-				closest_dist = a
-				closest_enemy = body
-			
-			"""
-			return null
-			var zvec = owner.global_transform.basis.z
-			var zdist = zvec.dot(body.translation-owner.translation)
-			if zdist < 0:
-				return null
-			var xvec = owner.global_transform.basis.x
-			var xdist = abs(xvec.dot(body.translation-owner.translation))
-			var yvec = owner.global_transform.basis.y
-			var ydist = abs(yvec.dot(body.translation-owner.translation))
-			var dist = xdist+(zdist/4)+ydist # /4 pq és la q menys importa
-			print(dist)
-			"""
-			
-			"""
-			if dist < closest_dist:
-				closest_dist = dist
-				closest_enemy = body
-			"""
-	return closest_enemy
+	var most_frontal_enenmy : Spatial = null
+	
+	var enemies := []
+	for ship in get_tree().get_nodes_in_group("Ships"):
+		if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
+			enemies.append(ship)
+	if big_ships:
+		for big_ship in get_tree().get_nodes_in_group("BigShips"):
+			if big_ship.blue_team != owner.pilot_man.blue_team:
+				enemies.append(big_ship)
+	
+	for body in enemies:
+		var direction := Vector3(body.translation - owner.translation).normalized()
+		var a = direction.dot(owner.global_transform.basis.z)
+		
+		if a > closest_dist:
+			closest_dist = a
+			most_frontal_enenmy = body
+	
+	return most_frontal_enenmy
 
 
 func logWithBase(value, base): return log(value) / log(base)

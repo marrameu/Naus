@@ -10,7 +10,7 @@ func _process(delta):
 	current_bullet = 0 # temproal, endreçar
 	
 	if Input.is_action_just_pressed(lock_action):
-		lock_target = closest_enenmy()
+		lock_target = most_frontal_enenmy(true)
 		clear_target_press_time = 0.0
 		cancel_locking_target()
 	if Input.is_action_pressed(lock_action):

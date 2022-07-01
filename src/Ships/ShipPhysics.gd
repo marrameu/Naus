@@ -17,7 +17,7 @@ var desired_angular_force := Vector3()
 var angular_drag := 3.5
 var linear_drag := 5.0 # temps en frenar/accelerar (inèrcia)
 var NORMAL_LINEAR_DRAG := 5.0
-var DRIFTING_LINEAR_DRAG := 20.0
+var DRIFTING_LINEAR_DRAG := 15.0
 #si accelera de pressa (turbo) es redreça més de pressa (lerp)
 
 var drifting := false
@@ -46,30 +46,32 @@ func _process(delta : float) -> void:
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
-	var b = ship.transform.basis
-	var v_len = ship.linear_velocity.length()
-	var v_nor = ship.linear_velocity.normalized()
-	var vel : Vector3
-	vel.z = b.z.dot(v_nor) * v_len
+	var vel_length = ship.linear_velocity.length()
 	
-	var mutiplier := 1.0
+	var multiplier := 1.0
 	
+	"""
 	if owner.input.throttle <= 0.5:
-		mutiplier = owner.input.throttle + 1
+		multiplier = owner.input.throttle + 1
 	elif owner.input.throttle > 0.5 and owner.input.throttle <= 1.0:
-		mutiplier = 2 - owner.input.throttle
+		multiplier = 2 - owner.input.throttle
 	# soc jo o costa massa de girar?
 	#elif owner.input.throttle > 1.0: # turbo
-	#	mutiplier = 1.5 - (0.5 * owner.input.throttle)
-	
-	"""
-	if vel.z <= 100:
-		mutiplier = (0.01 * vel.z) + 1
-	elif vel.z <= 200: # vel.z < 400 si vols que amb el turbo li costi enacra més (0.5 em pens)
-		mutiplier = 3 - (0.01 * vel.z)
+	#	multiplier = 1.5 - (0.5 * owner.input.throttle)
 	"""
 	
-	applied_angular_force = angular_input * angular_force * mutiplier
+	
+	if vel_length <= 100:
+		multiplier = (0.005 * vel_length) + 1
+	else: # vel_length <= 400: #vel.z <= 200 si vols que amb el turbo li costi el mateix
+		multiplier = max(2 - (0.005 * vel_length), 0.5)
+		# clamp pq a partir de 300 sigui 0,5 (si no, quan passés de 300 continuaria baixant fins q a 400 seria 0)
+	
+	#if owner.name == "PlayerShip":
+	#	print(multiplier, "    ", vel_length)
+	
+	
+	applied_angular_force = angular_input * angular_force * multiplier
 	# lerp per a derrapar
 	#var a = linear_input * linear_force
 	#applied_linear_force = applied_linear_force.linear_interpolate(ship.global_transform.basis.xform(a), delta)

@@ -44,7 +44,7 @@ func _process(delta):
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("Ships"):
-		if body.pilot_man.blue_team != owner.team_blue:
+		if body.pilot_man.blue_team != owner.blue_team:
 			enemies.push_back(body)
 			# print(name + " a matar " + body.name)
 

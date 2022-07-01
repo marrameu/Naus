@@ -20,6 +20,10 @@ var wants_drift := false # temp
 
 
 func _process(delta):
+	if drifting:
+		if owner.linear_velocity.length() < 20:
+			drifting = false
+	
 	_recover_turbo()
 
 
@@ -41,4 +45,6 @@ func _on_DrainTurboTimer_timeout():
 
 
 func _on_DriftTimer_timeout():
+	return
+	# fer-ho així? -> if drifting: if veloctiy < 5 (gairebe aturat): drifting = false
 	drifting = false

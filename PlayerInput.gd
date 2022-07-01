@@ -53,7 +53,7 @@ func _process(delta : float) -> void:
 		#if not drifting: # ha deixat de premer
 		#	$DriftTimer.stop() # per evitar possibles problemes
 		if Input.is_action_just_pressed(turbo_action) and avaliable_turbos:
-			_on_DriftTimer_timeout()
+			drifting = false
 			$DriftTimer.stop() # per evitar possibles problemes
 			wants_turbo = true
 	

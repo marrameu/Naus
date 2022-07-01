@@ -20,8 +20,7 @@ func _ready():
 
 func enter():
 	# temporal -> dos estats q estenen i q nomes canvien això
-	# recorda't q closest enemy és el més proper quant a direcció, no quant a distància
-	var clos_enemy = owner.shooting.closest_enenmy()
+	var clos_enemy = owner.shooting.most_frontal_enenmy()
 	if clos_enemy:
 		if clos_enemy.translation.distance_to(owner.translation) < 500:
 			set_enemy(clos_enemy)

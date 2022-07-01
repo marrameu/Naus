@@ -64,7 +64,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4000, 
 
 [node name="CapitalShipBlue" parent="BigShips" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4000, 0, 0 )
-team_blue = true
+blue_team = true
 
 [node name="SuportShip" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3243.69, 0, 715.452 )
@@ -80,19 +80,19 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3696.0
 
 [node name="SuportShip3" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3299.96, 0, -643.399 )
-team_blue = true
+blue_team = true
 
 [node name="SuportShip4" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3299.96, 0, 1035.16 )
-team_blue = true
+blue_team = true
 
 [node name="AttackShip3" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3752.31, -300.505, -963.107 )
-team_blue = true
+blue_team = true
 
 [node name="AttackShip4" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3752.31, 431.208, 798.376 )
-team_blue = true
+blue_team = true
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
