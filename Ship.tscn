@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -22,7 +22,10 @@ albedo_color = Color( 1, 0, 0, 1 )
 albedo_color = Color( 0.0313726, 0, 1, 1 )
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 5, 2.62945, 7.97898 )
+extents = Vector3( 3.70997, 1.34271, 7.36319 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 7.10742, 4.44127, 10.355 )
 
 [sub_resource type="CubeMesh" id=4]
 
@@ -48,7 +51,7 @@ monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="DamageArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="HealthSystem" parent="." instance=ExtResource( 9 )]
 script = ExtResource( 10 )
