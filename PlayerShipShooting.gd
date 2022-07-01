@@ -7,40 +7,38 @@ var lock_action := "lock"
 var clear_target_press_time := 0.0
 
 func _process(delta):
-	current_bullet = 0 # temproal, endreçar
-	
-	if Input.is_action_just_pressed(lock_action):
+	if Input.is_action_just_pressed(lock_action): # fixar enemic
 		lock_target = most_frontal_enenmy(true)
 		clear_target_press_time = 0.0
 		cancel_locking_target()
-	if Input.is_action_pressed(lock_action):
+	if Input.is_action_pressed(lock_action): # desfixar enemic
 		clear_target_press_time += delta
 		if clear_target_press_time > 1:
 			lock_target = null
 	
-	if Input.is_action_just_pressed("secondary_shoot") and can_shoot:
-		if lock_target:
-			prepare_to_shoot_missile()
-		else:
-			current_bullet = 1
-			shoot()
-			current_bullet = 0
+	wants_shoots[0] = Input.is_action_pressed(shoot_action)
+	wants_shoots[1] = Input.is_action_pressed("secondary_shoot")
 	
-	if locking_target and weakref(lock_target).get_ref():
+	if wants_shoots[1] and can_shoots[1]:
+		if not target_locked:
+			if lock_target:
+				lock_target_to_missile()
+			else:
+				shoot_bullet(1, shoot_target())
+				target_locked = false
+		else:
+			shoot_bullet(1)
+	
+	if wants_shoots[0] and can_shoots[0]:
+		shoot_bullet(0, shoot_target())
+	elif wants_shoots[0] and ammos[0] < 1 and not $NoAmmoAudio.playing:
+		$NoAmmoAudio.play()
+	
+	if locking_target_to_missile:
 		if not $LockingAudio.playing:
 			$LockingAudio.play()
 	else:
 		$LockingAudio.stop()
-	
-	wants_shoot = Input.is_action_pressed(shoot_action)
-	if wants_shoot:
-		if can_shoot:
-			if get_tree().has_network_peer():
-				rpc("shoot", shoot_target())
-			else:
-				shoot(shoot_target())
-		elif ammo < 1 and not $NoAmmoAudio.playing:
-			$NoAmmoAudio.play()
 
 
 func shoot_target() -> Vector3:

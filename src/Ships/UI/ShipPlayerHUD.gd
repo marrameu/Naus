@@ -70,16 +70,19 @@ func _process(delta : float) -> void:
 		else:
 			lock_target_info.hide()
 		
-		if owner.shooting.locking_target:
+		# ES POT FER MILLOR EL TWEEN
+		if owner.shooting.locking_target_to_missile or owner.shooting.target_locked:
 			$LockingTarget.show()
-			if not locking_target_tween.is_active():
+			if not locking_target_tween.is_active() and $LockingTarget.rect_size.x != 74:
 				locking_target_tween.interpolate_property($LockingTarget, "rect_size:x", 140, 74, owner.shooting.locking_time, Tween.TRANS_QUAD, Tween.EASE_OUT)
 				locking_target_tween.start()
 			$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
 		else:
+			$LockingTarget.rect_size.x != 140
 			$LockingTarget.hide()
 			locking_target_tween.stop_all()
 	else:
+			$LockingTarget.rect_size.x != 140
 			lock_target_info.hide()
 			$LockingTarget.hide()
 			locking_target_tween.stop_all()
@@ -128,7 +131,7 @@ func _process(delta : float) -> void:
 	if owner.input.drifting:
 		$Label.text += "drifting"
 	
-	$AmmoBar.value = owner.shooting.ammo / owner.shooting.MAX_AMMO * 100
+	$AmmoBar.value = owner.shooting.ammos[0] / owner.shooting.MAX_AMMOS[0] * 100
 	
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor
