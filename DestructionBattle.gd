@@ -137,14 +137,16 @@ func spawn_AI(number, blue_team : bool = false):
 # això?! endaya
 func choose_spawn_position(blue_team : bool) -> Vector3:
 	if blue_team:
-		return(Vector3(rand_range(BLUE_LIMIT - 50, BLUE_LIMIT + 50), rand_range(-50, 50), rand_range(-500, 500)))
+		return(Vector3(rand_range(BLUE_LIMIT - 50, BLUE_LIMIT + 50), rand_range(-250, -350), rand_range(-500, 500)))
 	else:
-		return(Vector3(rand_range(RED_LIMIT - 50, RED_LIMIT + 50), rand_range(-50, 50), rand_range(-500, 500)))
+		return(Vector3(rand_range(RED_LIMIT - 50, RED_LIMIT + 50), rand_range(-250, -350), rand_range(-500, 500)))
 	
-	# POTSER cal fer algun clamp
+	"""
+		# POTSER cal fer algun clamp
 	if blue_team:
 		var blue_spawn = (BLUE_LIMIT + middle_point) / 2
 		return(Vector3(rand_range(blue_spawn - 50, blue_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
 	else:
 		var red_spawn = (RED_LIMIT + middle_point) / 2
 		return(Vector3(rand_range(red_spawn - 50, red_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
+	"""
