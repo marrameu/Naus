@@ -21,7 +21,7 @@ func enter():
 	self.add_child(t)
 	t.start()
 	t.connect("timeout", self, "update_point")
-	connect("finished", t, "queue_free")
+	t.connect("timeout", t, "queue_free")
 
 
 func update_point():

@@ -2,6 +2,7 @@ extends "AIShipState.gd"
 
 
 func enter():
+	# turbo
 	owner.input.des_throttle = 1
 	owner.input.target = owner.translation + Vector3(rand_range(-500, 500), rand_range(-500, 500), rand_range(-500, 500))
 
