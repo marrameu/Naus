@@ -1,58 +1,35 @@
 extends "AIShipState.gd"
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-var enemy_middle_point = 0.0
-var num_of_enemies = 0
-
-var wait_to_init := true
-
-var target := Vector3.ZERO
-var x := 0.0
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 
 func enter():
-	if wait_to_init: # q facin spawn totes les naus
-		wait_to_init = false
-		return
-	
-	for ship in get_node("/root/Level/Ships").get_children():
-		if owner.pilot_man.blue_team != ship.pilot_man.blue_team:
-			num_of_enemies += 1
-			enemy_middle_point += ship.translation.x
-	enemy_middle_point /= num_of_enemies
-	# potser amb dir-li 1000/-1000 n'hi ha prou 
-	
-	target.y = rand_range(-300, 300)
-	target.z = rand_range(-500, 500)
-	x = rand_range(-500, 500)
-	
-	target.x = enemy_middle_point + x
-	
-	owner.get_node("Input").target = target
-	emit_signal("finished", "attack_enemies")
+	# en procés de millora
+	if get_parent().enemy_cs_shields_dead:
+		emit_signal("finished", "attack_cs")
+	elif get_parent().own_cs_shields_dead:
+		emit_signal("finished", "attack_enemy")
+	else:
+		
+		# DIFERÈNCIA > 1500
+		if get_node("/root/Level").middle_point < rand_range(-1750, -1250):
+			if owner.pilot_man.blue_team:
+				emit_signal("finished", "attack_cs")
+			else:
+				emit_signal("finished", "attack_enemy")
+		elif get_node("/root/Level").middle_point > rand_range(1250, 1750):
+			if not owner.pilot_man.blue_team:
+				emit_signal("finished", "attack_cs")
+			else:
+				emit_signal("finished", "attack_enemy")
+		else:
+			# DIFERÈNCIA < 1500
+			if randi() % 3 < 2:
+				print(owner.name, "attack")
+				emit_signal("finished", "attack_enemy")
+			else:
+				print(owner.name, "go")
+				emit_signal("finished", "attack_cs")
 
 
 func update(_delta):
 	pass
-	"""
-	for ship in get_node("/root/Level/Ships").get_children():
-		if owner.pilot_man.blue_team != ship.pilot_man.blue_team:
-			num_of_enemies += 1
-			enemy_middle_point += ship.translation.x
-	enemy_middle_point /= num_of_enemies
-	
-	target.z = enemy_middle_point + z
-	
-	owner.get_node("Input").target = target
-	"""
 
-func _on_InitTimer_timeout():
-	wait_to_init = false
-	enter()

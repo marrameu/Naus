@@ -163,6 +163,7 @@ func _input(event : InputEvent) -> void:
 func update_center(delta):
 	if $Center.visible:
 		if not Settings.controller_input:
+			cursor.visible = true
 			cursor.rect_position += mouse_movement * delta * Settings.mouse_sensitivity
 			crosshair.rect_position = cursor.rect_position - cursor_center_pos + crosshair_center_pos
 			cursor.rect_position = (cursor.rect_position -  cursor_center_pos).clamped(_cursor_limit) + cursor_center_pos
@@ -175,6 +176,5 @@ func update_center(delta):
 			else:
 				cursor_input = Vector2()
 		else:
-			cursor.rect_position = cursor_center_pos
-			crosshair.rect_position = crosshair_center_pos
-			cursor_input = Vector2()
+			cursor.visible = false
+			crosshair.rect_position = (owner.cam as Camera).unproject_position(owner.global_transform.basis.z * owner.shooting.shoot_range + owner.translation) - $Center.rect_position - crosshair.rect_size/2

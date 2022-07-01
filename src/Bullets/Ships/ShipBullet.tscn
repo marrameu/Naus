@@ -21,7 +21,7 @@ emission_on_uv2 = false
 
 [sub_resource type="CapsuleMesh" id=9]
 material = SubResource( 8 )
-mid_height = 30.0
+mid_height = 70.0
 radial_segments = 4
 rings = 1
 
@@ -42,7 +42,9 @@ length = 1.5
 
 [node name="ShipBullet" type="Spatial" groups=["Bullets"]]
 script = ExtResource( 1 )
-bullet_velocity = 1200.0
+damage = 200
+bullet_velocity = 1500.0
+_time_alive = 3.0
 
 [node name="HitParticles" type="Particles" parent="."]
 pause_mode = 1

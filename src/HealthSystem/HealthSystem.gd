@@ -51,6 +51,8 @@ sync func heal(amount : int) -> void:
 sync func heal_shield(amount : int) -> void:
 	shield += amount
 	shield = min(shield, MAX_SHIELD)
+	if shield == MAX_SHIELD:
+		emit_signal("shield_recovered") # pa q es aquest senyal?
 
 
 func _on_ShieldTimer_timeout():

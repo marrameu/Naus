@@ -18,7 +18,7 @@ func _process(delta):
 		if clear_target_press_time > 1:
 			lock_target = null
 	
-	if Input.is_action_just_pressed("secondary_shoot"):
+	if Input.is_action_just_pressed("secondary_shoot") and can_shoot:
 		if lock_target:
 			prepare_to_shoot_missile()
 		else:

@@ -25,8 +25,7 @@ var des_throttle := 1.0
 
 
 func _ready():
-	$Timer.wait_time = rand_range(5, 14)
-	choose_target()
+	pass
 
 
 func _physics_process(delta):
@@ -42,16 +41,6 @@ func _physics_process(delta):
 		turn(delta)
 	
 	# roll = clamp(lerp(roll, 0, delta * ROLL_SPEED), -1, 1)
-
-
-func choose_target():
-	return
-	if owner.pilot_man.blue_team:
-		var count = randi() % (get_node("/root/Level/BigShipRed/ShipPoints").get_child_count() - 1)
-		target = get_node("/root/Level/BigShipRed/ShipPoints").get_child(count).global_transform.origin
-	else:
-		var count = randi() % (get_node("/root/Level/BigShipBlue/ShipPoints").get_child_count() - 1)
-		target = get_node("/root/Level/BigShipBlue/ShipPoints").get_child(count).global_transform.origin
 
 
 func move_forward(delta):
@@ -101,7 +90,7 @@ func turn(delta):
 	pitch = uwu.x
 	yaw = uwu.y
 	
-	"""
+	
 	var fotut = false
 	
 	boost_multi = 1
@@ -117,7 +106,7 @@ func turn(delta):
 	owner.get_node("ColDetectRight").cast_to = Vector3(-75 * raycast_multiplier, 0, 150 * raycast_multiplier)
 	owner.get_node("ColDetectLeft").cast_to = Vector3(75 * raycast_multiplier, 0, 150 * raycast_multiplier)
 	
-	""
+	"""
 	# fer-ho amb la velocitat?
 	var dist = owner.global_transform.origin.distance_to(target)
 	var multi = clamp(((dist - a_partir_daqui_min)/(distancia_per_comencar_a_frenat - a_partir_daqui_min)), min_raycast_longitude, 1)
@@ -129,7 +118,7 @@ func turn(delta):
 	owner.get_node("ColDetectLeft").cast_to = Vector3(150 * multi, 0, 300 * multi)
 	
 	#owner.get_node("ColDetectForward").force_raycast_update()
-	""
+	"""
 	
 	if (owner.get_node("ColDetectUp") as RayCast).is_colliding():
 		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetectUp").cast_to)), Color.blue)
@@ -194,7 +183,7 @@ func turn(delta):
 				yaw = uwu.y
 			if fotut: # Toca amunt dreta, esquerra i, a més, amunt, avall i endevant
 				boost_multi = 0.25
-	"""
+	
 	
 	owner.get_node("ShipMesh").rotation = Vector3.ZERO
 	

@@ -9,12 +9,6 @@ var enemy_in_range := false
 
 func _ready():
 	pass
-	"""
-	if owner.pilot_man.blue_team:
-		target = get_node("/root/Level/BigShipRed")
-	else:
-		target = get_node("/root/Level/BigShipBlue")
-		"""
 
 
 func _process(delta):

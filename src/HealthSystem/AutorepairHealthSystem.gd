@@ -32,4 +32,3 @@ sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
 
 func _on_ShieldTimer_timeout():
 	recover_shield = true
-	emit_signal("shield_recovered") # pa q es aquest senyal?

@@ -51,10 +51,19 @@ func _process(delta):
 		else:
 			num_of_blues += 1
 			blue_point +=  ship.translation.x
-	red_point /= num_of_reds
-	blue_point /= num_of_blues
+	while num_of_reds < 5:
+		red_point += RED_LIMIT
+		num_of_reds += 1
+	while num_of_blues < 5:
+		blue_point += BLUE_LIMIT
+		num_of_blues += 1
+	red_point /= 5
+	blue_point /= 5
 	middle_point = (red_point + blue_point) / 2
+	$RedPoint.translation.x = red_point
+	$BluePoint.translation.x = blue_point
 	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
+	$Label.text = "MIDDLE_POINT = " + str(middle_point)
 
 
 func _on_BigShip_destroyed(blue_team):
@@ -72,8 +81,13 @@ func _on_PlayerShip_tree_exited():
 
 
 func _on_AIShip_tree_exited(num):
-	# wait 4 s
-	spawn_AI(num)
+	var t = Timer.new()
+	t.set_wait_time(20)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "spawn_AI", [num])
+	t.connect("timeout", t, "queue_free")
 
 
 func spawn_player():
@@ -111,12 +125,22 @@ func spawn_AI(number, blue_team : bool = false):
 	ship.translation = choose_spawn_position(pilot_man.blue_team)
 	ship.rotation_degrees.y = -90 if pilot_man.blue_team else 90
 	$Ships.add_child(ship)
-	#ship.connect("tree_exited", self, "_on_AIShip_tree_exited", [number])
+	
 	ship.connect("ship_died", self, "_on_AIShip_tree_exited", [number])
+	
+	var b = true if pilot_man.blue_team else false
+	var r = false if pilot_man.blue_team else true
+	$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [b])
+	$BigShips/CapitalShipRed/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [r])
 
 
 # això?! endaya
 func choose_spawn_position(blue_team : bool) -> Vector3:
+	if blue_team:
+		return(Vector3(rand_range(BLUE_LIMIT - 50, BLUE_LIMIT + 50), rand_range(-50, 50), rand_range(-500, 500)))
+	else:
+		return(Vector3(rand_range(RED_LIMIT - 50, RED_LIMIT + 50), rand_range(-50, 50), rand_range(-500, 500)))
+	
 	# POTSER cal fer algun clamp
 	if blue_team:
 		var blue_spawn = (BLUE_LIMIT + middle_point) / 2
