@@ -179,3 +179,7 @@ func update_center(delta):
 		else:
 			cursor.visible = false
 			crosshair.rect_position = (owner.cam as Camera).unproject_position(owner.global_transform.basis.z * owner.shooting.shoot_range + owner.translation) - $Center.rect_position - crosshair.rect_size/2
+
+
+func _on_Shooting_shot():
+	$Center/Crosshair/Parts/AnimationPlayer.play("Shoot")

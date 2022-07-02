@@ -1,5 +1,7 @@
 extends Node
 
+signal shot # per a la hud
+
 var shoot_range := 1500
 
 
@@ -45,6 +47,7 @@ func _process(delta : float) -> void:
 
 
 sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
+	emit_signal("shot")
 	# audio
 	#(get_node("Audio" + str(current_bullet + 1)) as AudioStreamPlayer).play()
 	

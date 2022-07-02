@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/interface/crosshair1.png" type="Texture" id=3]
 [ext_resource path="res://assets/interface/point.png" type="Texture" id=4]
 [ext_resource path="res://assets/interface/circle.png" type="Texture" id=5]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=6]
@@ -11,6 +10,65 @@
 [ext_resource path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=10]
 [ext_resource path="res://assets/interface/locking.png" type="Texture" id=11]
+[ext_resource path="res://assets/interface/crosshair_part.png" type="Texture" id=12]
+[ext_resource path="res://assets/interface/crosshair_ammo.png" type="Texture" id=13]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 70, 40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 25, 40 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Shoot"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 70, 40 ), Vector2( 58, 40 ), Vector2( 70, 40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, 40 ), Vector2( 31, 40 ), Vector2( 25, 40 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "LockingTarget"
@@ -35,10 +93,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -62.5
-margin_top = -27.0
-margin_right = 62.5
-margin_bottom = 27.0
+margin_left = -720.0
+margin_top = -253.0
+margin_right = -595.0
+margin_bottom = -199.0
 theme = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
@@ -66,7 +124,7 @@ margin_top = -500.0
 margin_right = 500.0
 margin_bottom = 500.0
 
-[node name="Crosshair" type="TextureRect" parent="Center"]
+[node name="Crosshair" type="Control" parent="Center"]
 modulate = Color( 1, 1, 1, 0.615686 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -77,8 +135,53 @@ margin_top = -60.0
 margin_right = 60.0
 margin_bottom = 60.0
 rect_pivot_offset = Vector2( 27, 27 )
-texture = ExtResource( 3 )
+
+[node name="Ammos" type="TextureRect" parent="Center/Crosshair"]
+modulate = Color( 1, 1, 1, 0.615686 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -60.0
+margin_right = 60.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( 27, 27 )
+texture = ExtResource( 13 )
 expand = true
+
+[node name="Parts" type="Control" parent="Center/Crosshair"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -35.0
+margin_top = -20.0
+margin_right = 35.0
+margin_bottom = 20.0
+
+[node name="TextureRect" type="TextureRect" parent="Center/Crosshair/Parts"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -12.0
+margin_right = 24.0
+margin_bottom = 12.0
+texture = ExtResource( 12 )
+
+[node name="TextureRect2" type="TextureRect" parent="Center/Crosshair/Parts"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -12.0
+margin_bottom = 12.0
+texture = ExtResource( 12 )
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Center/Crosshair/Parts"]
+anims/Idle = SubResource( 3 )
+anims/Shoot = SubResource( 2 )
 
 [node name="Cursor" type="TextureRect" parent="Center"]
 modulate = Color( 1, 1, 1, 0.615686 )
@@ -242,7 +345,7 @@ volume_db = 10.0
 bus = "Sounds"
 
 [node name="LockingTarget" type="Control" parent="."]
-margin_right = 74.0
+margin_right = 164.0
 margin_bottom = 73.0
 
 [node name="TextureRect" type="TextureRect" parent="LockingTarget"]

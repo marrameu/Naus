@@ -58,3 +58,5 @@ bus = "Sounds"
 stream = ExtResource( 11 )
 volume_db = 15.0
 bus = "Sounds"
+
+[connection signal="shot" from="Shooting" to="PlayerHUD" method="_on_Shooting_shot"]
