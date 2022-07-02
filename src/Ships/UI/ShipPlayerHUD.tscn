@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
@@ -11,6 +11,21 @@
 [ext_resource path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=10]
 [ext_resource path="res://assets/interface/locking.png" type="Texture" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "LockingTarget"
+tracks/0/type = "value"
+tracks/0/path = NodePath("LockingTarget:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 164, 73 ), Vector2( 74, 73 ) ]
+}
 
 [node name="PlayerHUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -212,17 +227,6 @@ visible = false
 margin_right = 250.0
 margin_bottom = 134.0
 
-[node name="AmmoBar" parent="." instance=ExtResource( 6 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -101.0
-margin_top = -56.0
-margin_right = 24.0
-margin_bottom = -36.0
-rect_rotation = -90.0
-
 [node name="ThrottleInAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = 10.0
@@ -234,7 +238,7 @@ volume_db = 10.0
 bus = "Sounds"
 
 [node name="LockingTarget" type="Control" parent="."]
-margin_right = 164.0
+margin_right = 119.0
 margin_bottom = 73.0
 
 [node name="TextureRect" type="TextureRect" parent="LockingTarget"]
@@ -263,6 +267,23 @@ expand = true
 flip_h = true
 flip_v = true
 
-[node name="Tween" type="Tween" parent="LockingTarget"]
+[node name="AmmoBars" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -125.0
+margin_top = -44.0
+rect_rotation = -90.0
+
+[node name="AmmoBar" parent="AmmoBars" instance=ExtResource( 6 )]
+
+[node name="AmmoBar2" parent="AmmoBars" instance=ExtResource( 6 )]
+margin_top = 24.0
+margin_bottom = 44.0
+tint_progress = Color( 0, 0.439216, 1, 0.588235 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/LockingTarget = SubResource( 1 )
 
 [editable path="ShieldLifeBar"]

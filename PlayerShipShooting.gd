@@ -17,17 +17,24 @@ func _process(delta):
 			lock_target = null
 	
 	wants_shoots[0] = Input.is_action_pressed(shoot_action)
-	wants_shoots[1] = Input.is_action_pressed("secondary_shoot")
+	wants_shoots[1] = Input.is_action_just_pressed("secondary_shoot")
 	
-	if wants_shoots[1] and can_shoots[1]:
+	if wants_shoots[1]:
 		if not target_locked:
 			if lock_target:
-				lock_target_to_missile()
+				if not locking_target_to_missile:
+					lock_target_to_missile()
+				else:
+					if can_shoots[1]:
+						shoot_bullet(1, shoot_target())
 			else:
-				shoot_bullet(1, shoot_target())
-				target_locked = false
+				if can_shoots[1]:
+					shoot_bullet(1, shoot_target())
 		else:
-			shoot_bullet(1)
+			if can_shoots[1]:
+				shoot_bullet(1)
+	elif wants_shoots[1] and ammos[1] < 1 and not $NoAmmoAudio.playing:
+		$NoAmmoAudio.play()
 	
 	if wants_shoots[0] and can_shoots[0]:
 		shoot_bullet(0, shoot_target())

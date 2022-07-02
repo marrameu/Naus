@@ -3,7 +3,6 @@ extends CanvasLayer
 onready var lock_target_info := $LockTargetInfo
 onready var lock_target_nickname := $LockTargetInfo/Nickname
 onready var lock_target_life_bar := $LockTargetInfo/LifeBar
-onready var locking_target_tween := $LockingTarget/Tween
 
 onready var cursor := $Center/Cursor
 onready var crosshair := $Center/Crosshair
@@ -70,22 +69,22 @@ func _process(delta : float) -> void:
 		else:
 			lock_target_info.hide()
 		
-		# ES POT FER MILLOR EL TWEEN
+		# ES POT FER MILLOR?
 		if owner.shooting.locking_target_to_missile or owner.shooting.target_locked:
 			$LockingTarget.show()
-			if not locking_target_tween.is_active() and $LockingTarget.rect_size.x != 74:
-				locking_target_tween.interpolate_property($LockingTarget, "rect_size:x", 140, 74, owner.shooting.locking_time, Tween.TRANS_QUAD, Tween.EASE_OUT)
-				locking_target_tween.start()
+			if not $AnimationPlayer.is_playing() and owner.shooting.locking_target_to_missile:
+				$AnimationPlayer.playback_speed = 1/owner.shooting.locking_time
+				$AnimationPlayer.play("LockingTarget")
 			$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
 		else:
-			$LockingTarget.rect_size.x != 140
+			#$LockingTarget.rect_size.x = 140 # sembla q no cal
 			$LockingTarget.hide()
-			locking_target_tween.stop_all()
+			$AnimationPlayer.stop(true)
 	else:
-			$LockingTarget.rect_size.x != 140
+			#$LockingTarget.rect_size.x = 140 # sembla q no cal
 			lock_target_info.hide()
 			$LockingTarget.hide()
-			locking_target_tween.stop_all()
+			$AnimationPlayer.stop(true)
 	
 	
 	#$LifeBar.show()
@@ -131,7 +130,9 @@ func _process(delta : float) -> void:
 	if owner.input.drifting:
 		$Label.text += "drifting"
 	
-	$AmmoBar.value = owner.shooting.ammos[0] / owner.shooting.MAX_AMMOS[0] * 100
+	# passar a int
+	$AmmoBars/AmmoBar.value = int(owner.shooting.ammos[0]) / owner.shooting.MAX_AMMOS[0] * 100
+	$AmmoBars/AmmoBar2.value = int(owner.shooting.ammos[1]) / owner.shooting.MAX_AMMOS[1] * 100
 	
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor

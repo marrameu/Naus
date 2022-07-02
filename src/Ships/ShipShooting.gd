@@ -11,10 +11,11 @@ var fire_rates := { 0 : 4.0, 1 : 0.5 }
 var next_times_to_fire := { 0 : 0.0, 1 : 0.0 }
 var time_now := 0.0
 
-var MAX_AMMOS := { 0 : 50.0, 1: 4.0 }
-var ammos := MAX_AMMOS
+const MAX_AMMOS := { 0 : 50.0, 1: 2.0 }
+var ammos := { 0 : 50.0, 1: 2.0 }
 var ease_ammo := { 0 : true, 1 : false}
-var not_eased_ammos := ammos
+var reload_per_sec := { 0 : 4.0, 1: 0.05 }
+var not_eased_ammos := { 0 : 50.0, 1: 2.0 }
 
 
 var wants_shoots := { 0: false, 1: false }
@@ -24,7 +25,7 @@ var can_shoots := { 0: true, 1: true }
 onready var lock_missile_timer : Timer = $LockMissileTimer
 var locking_target_to_missile := false
 var target_locked := false
-var locking_time := 2.0
+var locking_time : float = 1/fire_rates[1]
 var lock_target : Spatial
 
 
@@ -65,10 +66,12 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	
 	# dir
 	if bullet is MissileBullet:
-		if lock_target:
+		if lock_target and target_locked:
 			target_locked = false
 			bullet.target = lock_target
 			return
+	
+	cancel_locking_target()
 	
 	if shoot_target:
 		bullet.direction = (shoot_target - shoot_from).normalized()
@@ -103,6 +106,9 @@ func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- 
 
 
 func lock_target_to_missile():
+	if owner.input.turboing:
+		return
+	
 	if lock_target:
 		locking_target_to_missile = true
 		if lock_missile_timer.is_stopped():
@@ -125,14 +131,14 @@ func update_ammos(delta):
 	for ammo in ammos:
 		if ease_ammo[a]:
 			if not wants_shoots[a]:
-				not_eased_ammos[a] += delta * 5
+				not_eased_ammos[a] += delta * reload_per_sec[a]
 				ammos[a] = clamp(pow(not_eased_ammos[a]/MAX_AMMOS[a], 3.0) * MAX_AMMOS[a], 0, MAX_AMMOS[a])
 			else:
 				var b = pow(ammos[a]/MAX_AMMOS[a], 1.0/3.0)
 				not_eased_ammos[a] = clamp(b*MAX_AMMOS[a], 0, MAX_AMMOS[a])
 		else:
 			if not wants_shoots[a]:
-				ammos[a] += delta
+				ammos[a] += delta * reload_per_sec[a]
 		a += 1
 
 
@@ -146,6 +152,7 @@ func update_can_shoots():
 func cancel_locking_target():
 	$LockMissileTimer.stop()
 	locking_target_to_missile = false
+	target_locked = false
 
 
 func _on_LockMissileTimer_timeout():
