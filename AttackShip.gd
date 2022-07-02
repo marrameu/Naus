@@ -3,6 +3,7 @@ extends "res://BigShip.gd"
 
 onready var target : Vector3 = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))
 
+var can_move := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +11,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if not can_move:
+		return
+	
 	move_and_collide(global_transform.basis.z * 150 * delta)
 	turn(delta)
 	if target.distance_to(translation) < 200 and $ChangePosTimer.is_stopped():
@@ -159,3 +163,7 @@ func turn(delta):
 
 func _on_ChangePosTimer_timeout():
 	target = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))
+
+
+func start():
+	can_move = true

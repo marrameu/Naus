@@ -3,6 +3,7 @@ extends CanvasLayer
 onready var lock_target_info := $LockTargetInfo
 onready var lock_target_nickname := $LockTargetInfo/Nickname
 onready var lock_target_life_bar := $LockTargetInfo/LifeBar
+onready var lock_target_info_center_pos : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))/2 - lock_target_info.rect_size/2
 
 onready var cursor := $Center/Cursor
 onready var crosshair := $Center/Crosshair
@@ -60,14 +61,13 @@ func _process(delta : float) -> void:
 	
 	var target : Spatial = owner.shooting.lock_target
 	if target and weakref(target).get_ref():
-		if not owner.cam.is_position_behind(target.translation):
-			lock_target_info.show()
-			lock_target_nickname.text = target.name
-			lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
-			lock_target_life_bar.get_node("LifeBar").value = (float(target.get_node("HealthSystem").health) / float(target.get_node("HealthSystem").MAX_HEALTH)) * 100
-			lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
-		else:
-			lock_target_info.hide()
+		lock_target_info.show()
+		lock_target_nickname.text = target.name
+		lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
+		lock_target_life_bar.get_node("LifeBar").value = (float(target.get_node("HealthSystem").health) / float(target.get_node("HealthSystem").MAX_HEALTH)) * 100
+		
+		lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
+		lock_target_info.rect_position = (lock_target_info.rect_position - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
 		
 		# ES POT FER MILLOR?
 		if owner.shooting.locking_target_to_missile or owner.shooting.target_locked:
@@ -132,7 +132,9 @@ func _process(delta : float) -> void:
 	
 	# passar a int
 	$AmmoBars/AmmoBar.value = int(owner.shooting.ammos[0]) / owner.shooting.MAX_AMMOS[0] * 100
+	$AmmoBars/AmmoBar.modulate = Color("9bffffff") if not owner.shooting.can_shoots[0] else Color("ffffff")
 	$AmmoBars/AmmoBar2.value = int(owner.shooting.ammos[1]) / owner.shooting.MAX_AMMOS[1] * 100
+	$AmmoBars/AmmoBar2.modulate = Color("9bffffff") if not owner.shooting.can_shoots[1] else Color("ffffff")
 	
 	"""
 	# que no ho comprovi tota l'estona, amb un senyal anirià millor

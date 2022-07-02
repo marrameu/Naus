@@ -35,13 +35,13 @@ func update_lifebars(blue : bool):
 	
 	
 	if blue:
-		$Control/LifeBarBlueShield/LifeBarBlue.value = ship_health / ship_max_health * 100
+		$Control/LifeBarBlueShield/LifeBar.value = ship_health / ship_max_health * 100
 		if ship_shield:
 			$Control/LifeBarBlueShield.value = ship_shield / ship_max_shield * 100
 		else:
 			$Control/LifeBarBlueShield.value = (1.0 - (time_left / wait_time)) * 100
 	else:
-		$Control/LifeBarRedShield/LifeBarRed.value = ship_health / ship_max_health * 100
+		$Control/LifeBarRedShield/LifeBar.value = ship_health / ship_max_health * 100
 		if ship_shield:
 			$Control/LifeBarRedShield.value = ship_shield / ship_max_shield * 100
 		else:

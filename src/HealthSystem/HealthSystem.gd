@@ -43,7 +43,7 @@ sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
 				emit_signal("die")
 
 
-sync func heal(amount : int) -> void:
+sync func heal(amount : float) -> void:
 	health += amount
 	health = min(health, MAX_HEALTH)
 

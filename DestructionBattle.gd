@@ -1,9 +1,11 @@
 extends Spatial
 
+signal battle_started
+
 const player_ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
 
-var ai_num := 0
+var battle_started := false
 
 # middle point
 var middle_point := 0.0
@@ -18,26 +20,12 @@ var BLUE_LIMIT = 4000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$WaittingCam.make_current()
+	$PilotManagers/PlayerManager.blue_team = PlayerInfo.player_blue_team
 	
-	var x = 0
-	while x < 5:
-		x += 1 
-		spawn_AI(ai_num, true)
-		ai_num += 1
-	var y = 0
-	while y < 5:
-		y += 1
-		spawn_AI(ai_num, false)
-		ai_num += 1
+	$WaittingCam.make_current()
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("spawn_ai"):
-		spawn_AI(ai_num, randi() % 2)
-		ai_num += 1
-	
-	
 	middle_point = 0.0
 	blue_point = 0.0
 	num_of_blues = 0
@@ -76,8 +64,9 @@ func _on_BigShip_destroyed(blue_team):
 
 
 func _on_PlayerShip_tree_exited():
-	$SpawnHUD.show()
 	$WaittingCam.make_current()
+	$SpawnHUD.enable_spawn(false)
+	$SpawnHUD.show()
 
 
 func _on_AIShip_tree_exited(num):
@@ -150,3 +139,32 @@ func choose_spawn_position(blue_team : bool) -> Vector3:
 		var red_spawn = (RED_LIMIT + middle_point) / 2
 		return(Vector3(rand_range(red_spawn - 50, red_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
 	"""
+
+
+func start_battle():
+	if battle_started:
+		return
+	
+	battle_started = true
+	emit_signal("battle_started")
+	
+	var blue_ais : int = 5
+	var red_ais : int = 5
+	var ai_num : int = 0
+	
+	if PlayerInfo.player_blue_team:
+		blue_ais -=1
+	else:
+		red_ais -= 1
+	
+	var x : int = 0
+	while x < blue_ais:
+		x += 1 
+		spawn_AI(ai_num, true)
+		ai_num += 1
+	
+	var y : int = 0
+	while y < red_ais:
+		y += 1
+		spawn_AI(ai_num, false)
+		ai_num += 1

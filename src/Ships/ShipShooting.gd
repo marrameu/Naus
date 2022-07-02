@@ -11,11 +11,12 @@ var fire_rates := { 0 : 4.0, 1 : 0.5 }
 var next_times_to_fire := { 0 : 0.0, 1 : 0.0 }
 var time_now := 0.0
 
-const MAX_AMMOS := { 0 : 50.0, 1: 2.0 }
-var ammos := { 0 : 50.0, 1: 2.0 }
-var ease_ammo := { 0 : true, 1 : false}
+const MAX_AMMOS := { 0 : 50.0, 1: 4.0 }
+var ammos := { 0 : 50.0, 1: 4.0 }
+var auto_reload_ammo := { 0 : true, 1 : false}
+var ease_ammos := { 0 : true, 1 : false }
 var reload_per_sec := { 0 : 4.0, 1: 0.05 }
-var not_eased_ammos := { 0 : 50.0, 1: 2.0 }
+var not_eased_ammos := { 0 : 50.0 }
 
 
 var wants_shoots := { 0: false, 1: false }
@@ -114,6 +115,8 @@ func lock_target_to_missile():
 		if lock_missile_timer.is_stopped():
 			lock_missile_timer.wait_time = locking_time
 			lock_missile_timer.start()
+	
+	check_to_cancel_locking() # q decideixi ja si és darrere
 
 
 func check_to_cancel_locking():
@@ -129,16 +132,17 @@ func check_to_cancel_locking():
 func update_ammos(delta):
 	var a : int = 0
 	for ammo in ammos:
-		if ease_ammo[a]:
-			if not wants_shoots[a]:
-				not_eased_ammos[a] += delta * reload_per_sec[a]
-				ammos[a] = clamp(pow(not_eased_ammos[a]/MAX_AMMOS[a], 3.0) * MAX_AMMOS[a], 0, MAX_AMMOS[a])
+		if auto_reload_ammo[a]:
+			if ease_ammos[a]:
+				if not wants_shoots[a]:
+					not_eased_ammos[a] += delta * reload_per_sec[a]
+					ammos[a] = clamp(pow(not_eased_ammos[a]/MAX_AMMOS[a], 3.0) * MAX_AMMOS[a], 0, MAX_AMMOS[a])
+				else:
+					var b = pow(ammos[a]/MAX_AMMOS[a], 1.0/3.0)
+					not_eased_ammos[a] = clamp(b*MAX_AMMOS[a], 0, MAX_AMMOS[a])
 			else:
-				var b = pow(ammos[a]/MAX_AMMOS[a], 1.0/3.0)
-				not_eased_ammos[a] = clamp(b*MAX_AMMOS[a], 0, MAX_AMMOS[a])
-		else:
-			if not wants_shoots[a]:
-				ammos[a] += delta * reload_per_sec[a]
+				if not wants_shoots[a]:
+					ammos[a] += delta * reload_per_sec[a]
 		a += 1
 
 

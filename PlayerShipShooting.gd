@@ -23,7 +23,9 @@ func _process(delta):
 		if not target_locked:
 			if lock_target:
 				if not locking_target_to_missile:
-					lock_target_to_missile()
+					lock_target_to_missile() # SI POT, SI NO Q DISPARI
+					if not locking_target_to_missile and can_shoots[1]: # és darrere
+						shoot_bullet(1, shoot_target())
 				else:
 					if can_shoots[1]:
 						shoot_bullet(1, shoot_target())

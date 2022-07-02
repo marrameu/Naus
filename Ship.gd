@@ -55,7 +55,7 @@ func check_collisions(delta):
 		for body in get_colliding_bodies():
 			#if not body.is_in_group("Bullets"):
 			#Input.start_joy_vibration(0, 0, 1, 1)
-			$HealthSystem.take_damage(delta * 4 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
+			$HealthSystem.take_damage(delta * 8 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
 
 
 func _on_HealthSystem_die():
