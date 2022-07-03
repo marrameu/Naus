@@ -1,13 +1,13 @@
 extends "res://BigShip.gd"
 
 
-onready var target : Vector3 = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))
+onready var target : Vector3
 
 var can_move := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_on_ChangePosTimer_timeout()
 
 
 func _physics_process(delta):
@@ -162,7 +162,19 @@ func turn(delta):
 
 
 func _on_ChangePosTimer_timeout():
-	target = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))
+	"""
+	if get_node("/root/Level").middle_point < rand_range(-1750, -1250):
+			if owner.pilot_man.blue_team:
+				emit_signal("finished", "attack_cs")
+			else:
+				emit_signal("finished", "attack_enemy")
+	elif get_node("/root/Level").middle_point > rand_range(1250, 1750):
+		if not owner.pilot_man.blue_team:
+			emit_signal("finished", "attack_cs")
+	else:
+	"""
+	# si la dif és menor o major, que ataqui la nau capital (voltants)
+	target = Vector3(get_node("/root/Level").middle_point + rand_range(-1000, 1000), rand_range(-350, 350), rand_range(-700, 700))
 
 
 func start():

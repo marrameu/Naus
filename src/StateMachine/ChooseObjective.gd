@@ -24,7 +24,10 @@ func enter():
 			# DIFERÈNCIA < 1500
 			if randi() % 3 < 2:
 				print(owner.name, "attack")
-				emit_signal("finished", "attack_enemy")
+				if randi() % 2:
+					emit_signal("finished", "attack_enemy")
+				else:
+					emit_signal("finished", "attack_big_ship")
 			else:
 				print(owner.name, "go")
 				emit_signal("finished", "attack_cs")

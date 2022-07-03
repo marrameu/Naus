@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipAIInput.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://AIShip.gd" type="Script" id=10]
 [ext_resource path="res://src/StateMachine/Escape.gd" type="Script" id=11]
 [ext_resource path="res://src/StateMachine/DefendCS.gd" type="Script" id=12]
+[ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=13]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -42,6 +43,9 @@ script = ExtResource( 12 )
 
 [node name="Escape" type="Node" parent="StateMachine" index="4"]
 script = ExtResource( 11 )
+
+[node name="AttackBigShip" type="Node" parent="StateMachine" index="5"]
+script = ExtResource( 13 )
 
 [node name="Shooting" parent="." index="9"]
 script = ExtResource( 3 )
@@ -100,8 +104,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -75, 150 )
 
-[connection signal="shield_die" from="HealthSystem" to="StateMachine/AttackEnemy" method="escape"]
-[connection signal="shield_die" from="HealthSystem" to="StateMachine/AttackCS" method="escape"]
 [connection signal="shield_recovered" from="HealthSystem" to="StateMachine/Escape" method="_on_HealthSystem_shield_recovered"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_entered"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="StateMachine/AttackEnemy" method="_on_ShootingArea_body_entered"]

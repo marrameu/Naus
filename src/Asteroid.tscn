@@ -26,7 +26,7 @@ surfaces/0 = {
 radius = 12.8902
 height = 17.249
 
-[node name="Asteroid" type="StaticBody" groups=["Damagable"]]
+[node name="Asteroid" type="StaticBody" groups=["Asteroids", "Damagable"]]
 script = ExtResource( 2 )
 
 [node name="Meteoritlod1" type="MeshInstance" parent="."]

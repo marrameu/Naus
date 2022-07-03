@@ -1,9 +1,7 @@
 extends "res://BigShip.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var original_x = translation.x
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,12 +13,24 @@ func _ready():
 func _process(delta):
 	if blue_team != PlayerInfo.player_blue_team:
 		$SupportArea.hide()
+	#tmb q s'amagui si el jugador és lluny
 
 
 func _physics_process(delta):
-	# en funció de l'estat de la partida o(1 o 2 [o sigui]) la línia
-	#move_and_collide(Vector3(10 * delta, 0, 0))
-	pass
+	var des_x : float
+	if original_x < 0:
+		des_x = max(get_node("/root/Level").middle_point + original_x, original_x)
+	else:
+		des_x = min(get_node("/root/Level").middle_point + original_x, original_x)
+	
+	var collider
+	if translation.x > des_x:
+		move_and_collide(Vector3(-10 * delta, 0, 0))
+	elif translation.x < des_x:
+		move_and_collide(Vector3(10 * delta, 0, 0))
+	#if collider:
+	#	if collider.is_in_group("Asteroids"):
+	#		collider.get_node("HealthSystem").take_damage(99999)
 
 
 func _on_SupportArea_body_entered(body):

@@ -1,9 +1,9 @@
 extends Spatial
 
 var enemies = []
-const bullet_scene : PackedScene = preload("res://src/Bullets/Ships/ShipBullet.tscn")
+const bullet_scene : PackedScene = preload("res://src/Bullets/TurretBullet.tscn")
 
-var fire_rate := 2.0
+var fire_rate := 1.0
 var next_time_to_fire := 0.0
 var time_now := 0.0
 
@@ -46,7 +46,7 @@ func _on_Area_body_entered(body):
 	if body.is_in_group("Ships"):
 		if body.pilot_man.blue_team != owner.blue_team:
 			enemies.push_back(body)
-	elif body.is_in_group("CapitalShips"):
+	elif body.is_in_group("BigShips"):
 		if body.blue_team != owner.blue_team:
 			enemies.push_back(body)
 			# print(name + " a matar " + body.name)

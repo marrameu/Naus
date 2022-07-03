@@ -11,7 +11,7 @@ spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 9.62984e-35
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=11]
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
 albedo_color = Color( 0, 0, 0, 1 )
@@ -22,7 +22,7 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [sub_resource type="CapsuleMesh" id=9]
-material = SubResource( 8 )
+material = SubResource( 11 )
 mid_height = 70.0
 radial_segments = 4
 rings = 1

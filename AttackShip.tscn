@@ -6,7 +6,7 @@
 [sub_resource type="PrismMesh" id=1]
 size = Vector3( 79.2, 199.2, 39.6 )
 
-[node name="AttackShip" instance=ExtResource( 1 )]
+[node name="AttackShip" groups=["AttackShips"] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="HealthSystem" parent="." index="0"]
@@ -104,5 +104,8 @@ one_shot = true
 
 [node name="CollisionShape2" parent="DamageArea" index="0"]
 transform = Transform( -0.4, 6.03983e-08, 2.64009e-15, 0, -1.74846e-08, 0.4, 6.03983e-08, 0.4, 1.74846e-08, 0, 0, 0 )
+
+[node name="ShieldGenerator" parent="." index="15"]
+visible = false
 
 [connection signal="timeout" from="ChangePosTimer" to="." method="_on_ChangePosTimer_timeout"]
