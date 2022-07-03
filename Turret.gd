@@ -28,6 +28,7 @@ func _physics_process(delta):
 
 
 func _process(delta):
+	return
 	time_now += delta
 	
 	# raycast
@@ -71,3 +72,7 @@ func _on_Area_body_exited(body):
 			enemies.remove(a)
 			break
 		a += 1
+
+
+func _on_HealthSystem_die(attacker):
+	queue_free()

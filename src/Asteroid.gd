@@ -16,5 +16,5 @@ func _ready():
 #	pass
 
 
-func _on_HealthSystem_die():
+func _on_HealthSystem_die(attacker):
 	$Destruction.destroy()

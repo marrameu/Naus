@@ -14,7 +14,7 @@ func _physics_process(delta):
 	if not can_move:
 		return
 	
-	move_and_collide(global_transform.basis.z * 150 * delta)
+	move_and_collide(global_transform.basis.z * 75 * delta)
 	turn(delta)
 	if target.distance_to(translation) < 200 and $ChangePosTimer.is_stopped():
 		$ChangePosTimer.wait_time = rand_range(4, 10)

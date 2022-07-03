@@ -95,3 +95,6 @@ monitorable = false
 [node name="CollisionShape2" type="CollisionShape" parent="DamageArea"]
 transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
+
+[connection signal="shield_die" from="HealthSystem" to="." method="_on_HealthSystem_shield_die"]
+[connection signal="shield_recovered" from="HealthSystem" to="." method="_on_HealthSystem_shield_recovered"]

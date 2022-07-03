@@ -58,7 +58,7 @@ func check_collisions(delta):
 			$HealthSystem.take_damage(delta * 8 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
 
 
-func _on_HealthSystem_die():
+func _on_HealthSystem_die(attacker : Node):
 	print(name + "died")
 	
 	# animacions
@@ -66,5 +66,12 @@ func _on_HealthSystem_die():
 	emit_signal("ship_died")
 	
 	queue_free()
-	
-	
+
+
+func _on_damagable_hit():
+	pass
+
+
+func _on_enemy_died(attacker : Node):
+	if attacker == self:
+		pass #print("he matat algú")

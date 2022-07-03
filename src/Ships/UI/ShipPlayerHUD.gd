@@ -63,11 +63,28 @@ func _process(delta : float) -> void:
 	if target and weakref(target).get_ref():
 		lock_target_info.show()
 		lock_target_nickname.text = target.name
-		lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
+		if target.is_in_group("BigShips") and not target.get_node("HealthSystem").shield:
+			var time_left = target.get_node("HealthSystem/ShieldTimer").time_left
+			var wait_time = target.get_node("HealthSystem/ShieldTimer").wait_time
+			lock_target_life_bar.value = (1.0 - (time_left / wait_time)) * 100
+		else:
+			lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
 		lock_target_life_bar.get_node("LifeBar").value = (float(target.get_node("HealthSystem").health) / float(target.get_node("HealthSystem").MAX_HEALTH)) * 100
 		
-		lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
-		lock_target_info.rect_position = (lock_target_info.rect_position - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+		if not (owner.cam as Camera).is_position_behind(target.translation):
+			lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.global_transform.origin) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
+			lock_target_info.rect_position = (lock_target_info.rect_position - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+		else:
+			var direction := Vector3(target.translation - owner.translation).normalized()
+			var x = direction.dot(owner.global_transform.basis.x)
+			var y = direction.dot(owner.global_transform.basis.y)
+			print(x, "    ", y)
+			
+			# així 100% q no
+			#lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
+			#lock_target_info.rect_position = (lock_target_info.rect_position - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+			
+			#lock_target_info.rect_position = (lock_target_info_center_pos + Vector2(x, y)*80000000).clamped(500) + lock_target_info_center_pos
 		
 		# ES POT FER MILLOR?
 		if owner.shooting.locking_target_to_missile or owner.shooting.target_locked:
@@ -75,7 +92,9 @@ func _process(delta : float) -> void:
 			if not $AnimationPlayer.is_playing() and owner.shooting.locking_target_to_missile:
 				$AnimationPlayer.playback_speed = 1/owner.shooting.locking_time
 				$AnimationPlayer.play("LockingTarget")
-			$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
+			if not (owner.cam as Camera).is_position_behind(target.translation):
+				print(randi())
+				$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
 		else:
 			#$LockingTarget.rect_size.x = 140 # sembla q no cal
 			$LockingTarget.hide()
@@ -183,3 +202,13 @@ func update_center(delta):
 
 func _on_Shooting_shot():
 	$Center/Crosshair/Parts/AnimationPlayer.play("Shoot")
+
+
+func on_damagable_hit():
+	$Center/Crosshair/HitMarkerParts/AnimationPlayer.play("hit")
+	$Center/Crosshair/HitMarkerParts/HitAudio.play()
+
+
+func on_enemy_died():
+	$Center/Crosshair/HitMarkerParts/AnimationPlayer.play("killed")
+	$Center/Crosshair/HitMarkerParts/KillAudio.play()

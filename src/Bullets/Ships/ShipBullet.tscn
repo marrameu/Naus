@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Bullets/Ships/ShipBullet.gd" type="Script" id=1]
-[ext_resource path="res://assets/particles/explosion_mat.tres" type="Material" id=2]
+[ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=2]
 [ext_resource path="res://assets/audio/air.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=4]
+[ext_resource path="res://assets/audio/bullet_explosion.wav" type="AudioStream" id=5]
 
 [sub_resource type="ParticlesMaterial" id=1]
 spread = 0.0
@@ -33,12 +35,41 @@ initial_velocity = 0.3
 angular_velocity = 35.0
 angular_velocity_random = 1.0
 
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0, 0, 1 )
+albedo_texture = ExtResource( 4 )
+proximity_fade_enable = true
+proximity_fade_distance = 0.2
+
 [sub_resource type="QuadMesh" id=5]
-material = ExtResource( 2 )
+material = SubResource( 10 )
 size = Vector2( 2, 2 )
 
 [sub_resource type="Animation" id=7]
 length = 1.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
 
 [node name="ShipBullet" type="Spatial" groups=["Bullets"]]
 script = ExtResource( 1 )
@@ -56,8 +87,10 @@ draw_pass_1 = SubResource( 9 )
 
 [node name="Explosion" type="Particles" parent="."]
 visible = false
-lifetime = 1.5
+lifetime = 5.0
+speed_scale = 3.0
 explosiveness = 1.0
+randomness = 0.6
 process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 5 )
 
@@ -86,11 +119,16 @@ aabb = AABB( -1, -1, -4.14208, 2, 2, 8.28415 )
 
 [node name="RayCast" type="RayCast" parent="RayCasts"]
 enabled = true
-cast_to = Vector3( 0, 0, 100 )
+cast_to = Vector3( 0, 0, -100 )
 collision_mask = 8
 collide_with_areas = true
-collide_with_bodies = false
 debug_shape_thickness = 5
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 5 )
+unit_db = 19.622
+unit_size = 100.0
+max_distance = 200.0
 
 [connection signal="screen_entered" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]

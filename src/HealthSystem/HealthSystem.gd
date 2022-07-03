@@ -3,6 +3,7 @@ class_name HealthSystem
 
 signal die
 signal shield_die
+signal shield_started_recovering
 signal shield_recovered
 
 export var MAX_SHIELD : int = 0 # no caldria perquè l'escut, se suposa que no es pot regenerar -ah, calla, amb les caus sí-, però per a les health bars potser convindria
@@ -17,7 +18,8 @@ var health : int = 0
 
 
 func _ready() -> void:
-	$ShieldTimer.wait_time = time_before_shield_repair
+	if get_node_or_null("ShieldTimer"):
+		$ShieldTimer.wait_time = time_before_shield_repair
 	
 	if health == 0:
 		health = MAX_HEALTH
@@ -29,7 +31,7 @@ func _process(delta):
 	pass
 
 
-sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
+sync func take_damage(amount : int, obviar_shield : bool = false, attacker : Node = null) -> void:
 	if not health == 0: #pq si no moriria de nou, per evitar possibles bugs més q res -diria-
 		if shield > 0 and not obviar_shield:
 			shield -= amount
@@ -40,7 +42,7 @@ sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
 			health -= amount
 			health = max(0, health)
 			if health <= 0:
-				emit_signal("die")
+				emit_signal("die", attacker)
 
 
 sync func heal(amount : float) -> void:

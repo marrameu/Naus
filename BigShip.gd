@@ -15,19 +15,23 @@ func _ready():
 		$Mesh.material_override = red_mat
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_HealthSystem_die():
+func _on_HealthSystem_die(attacker : Node):
 	emit_signal("destroyed", blue_team)
 	queue_free()
 
 
 func _on_HealthSystem_shield_die():
 	$ShieldMesh.hide()
+	for turret in $Turrets.get_children():
+		turret.get_node("DamageArea/CollisionShape").disabled = false
 
 
 func _on_HealthSystem_shield_recovered():
 	$ShieldMesh.show()
+	for turret in $Turrets.get_children():
+		turret.get_node("DamageArea/CollisionShape").disabled = true
+
+
+func _on_enemy_died(attacker : Node):
+	if attacker == self:
+		pass #print("he matat algú")

@@ -11,7 +11,7 @@ func _ready():
 	pass # Replace with function body.
 
 
-sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
+sync func take_damage(amount : int, obviar_shield : bool = false, attacker : Node = null) -> void:
 	if not health == 0: #pq si no moriria de nou, per evitar possibles bugs més q res -diria-
 		if shield > 0 and not obviar_shield:
 			shield -= amount
@@ -23,7 +23,7 @@ sync func take_damage(amount : int, obviar_shield : bool = false) -> void:
 			health -= amount
 			health = max(0, health)
 			if health <= 0:
-				emit_signal("die")
+				emit_signal("die", attacker)
 
 
 func _on_ShieldTimer_timeout():

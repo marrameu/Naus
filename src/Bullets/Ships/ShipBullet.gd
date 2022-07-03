@@ -1,6 +1,8 @@
 extends Spatial
 class_name ShipBullet
 
+signal damagable_hit
+
 export var damage := 100
 export var bullet_velocity := 700.0
 
@@ -38,15 +40,22 @@ func check_collisions():
 			var body = ray.get_collider().owner
 			if body != ship:
 				if body.is_in_group("Damagable"):
+					emit_signal("damagable_hit") # s'ha de fer abans, si no es menja l'animació "killed"
+					if not body.get_node("HealthSystem").is_connected("die", ship, "_on_enemy_died"):
+						body.get_node("HealthSystem").connect("die", ship, "_on_enemy_died")
 					if get_tree().has_network_peer():
 						if get_tree().is_network_server():
-							body.get_node("HealthSystem").rpc("take_damage", damage)
+							body.get_node("HealthSystem").rpc("take_damage", damage, false, ship)
 					else:
-						body.get_node("HealthSystem").take_damage(damage)
+						body.get_node("HealthSystem").take_damage(damage, false, ship)
 				
-				queue_free() # $AnimationPlayer.play("explode")
+				translation = ray.get_collision_point()
+				$HitParticles.hide()
+				$Explosion.show()
+				$AudioStreamPlayer3D2.play()
+				$AnimationPlayer.play("explode")
 				_hit = true
-		ray.cast_to = Vector3(0, 0, long)
+		ray.cast_to = Vector3(0, 0, -long)
 
 
 func _on_VisibilityNotifier_screen_entered():

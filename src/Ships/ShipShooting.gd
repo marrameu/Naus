@@ -66,7 +66,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	get_node("/root/Level").add_child(bullet)
 	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
-	
+	bullet.connect("damagable_hit", owner, "_on_damagable_hit")
 	
 	# dir
 	if bullet is MissileBullet:
@@ -99,7 +99,7 @@ func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- 
 				enemies.append(big_ship)
 	
 	for body in enemies:
-		var direction := Vector3(body.translation - owner.translation).normalized()
+		var direction := Vector3(body.global_transform.origin - owner.translation).normalized()
 		var a = direction.dot(owner.global_transform.basis.z)
 		
 		if a > closest_dist:
