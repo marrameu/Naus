@@ -480,18 +480,18 @@ size_flags_vertical = 3
 texture = ExtResource( 7 )
 expand = true
 
-[node name="ThrottleBar" parent="SpeedBars" instance=ExtResource( 6 )]
+[node name="SpeedBar" parent="SpeedBars" instance=ExtResource( 6 )]
 margin_top = 40.0
-margin_bottom = 50.0
+margin_bottom = 60.0
+tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
+
+[node name="ThrottleBar" parent="SpeedBars" instance=ExtResource( 6 )]
+margin_top = 64.0
+margin_bottom = 74.0
 tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
 nine_patch_stretch = true
 stretch_margin_top = 5
 stretch_margin_bottom = 5
-
-[node name="SpeedBar" parent="SpeedBars" instance=ExtResource( 6 )]
-margin_top = 54.0
-margin_bottom = 74.0
-tint_progress = Color( 0.384314, 0.388235, 1, 0.588235 )
 
 [node name="Label" type="Label" parent="."]
 visible = false

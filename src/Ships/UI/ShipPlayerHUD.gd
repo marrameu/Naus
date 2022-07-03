@@ -140,7 +140,7 @@ func _process(delta : float) -> void:
 	var vel : Vector3
 	vel.z = b.z.dot(v_nor) * v_len
 	"""
-	$SpeedBars/SpeedBar.value = owner.linear_velocity.length() / 2
+	$SpeedBars/SpeedBar.value = owner.linear_velocity.length() / owner.physics.linear_force.z * 100
 	$SpeedBars/SpeedBar.tint_progress = Color("966263ff") if not owner.input.turboing else Color("b79b5b")
 	
 	$Label.text = ""

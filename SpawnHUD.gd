@@ -13,7 +13,7 @@ var waiting := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	show()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +34,7 @@ func show():
 func _on_Button_pressed():
 	$Control/StartButton.show()
 	$Control/HBoxContainer.hide()
+	$Control/StartButton.grab_focus()
 
 
 func _on_StartButton_pressed():

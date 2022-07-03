@@ -4,7 +4,7 @@ class_name ShipPhysics
 
 onready var ship = get_parent()
 
-var linear_force := Vector3(0, 0, 200)
+var linear_force := Vector3(0, 0, 150)
 var linear_force_turbo := Vector3(0, 0, 400)
 var angular_force := Vector3(120, 120, 175) / 100.0
 
@@ -16,8 +16,8 @@ var desired_angular_force := Vector3()
 
 var angular_drag := 3.5
 var linear_drag := 5.0 # temps en frenar/accelerar (inèrcia)
-var NORMAL_LINEAR_DRAG := 5.0
-var DRIFTING_LINEAR_DRAG := 15.0
+var NORMAL_LINEAR_DRAG := 6.25 # 7.5 potser
+var DRIFTING_LINEAR_DRAG := 25
 #si accelera de pressa (turbo) es redreça més de pressa (lerp)
 
 var drifting := false
@@ -61,10 +61,10 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	"""
 	
 	
-	if vel_length <= 100:
-		multiplier = (0.005 * vel_length) + 1
+	if vel_length <= linear_force.z/2:
+		multiplier = (1/linear_force.z * vel_length) + 1
 	else: # vel_length <= 400: #vel.z <= 200 si vols que amb el turbo li costi el mateix
-		multiplier = max(2 - (0.005 * vel_length), 0.5)
+		multiplier = max(2 - (1/linear_force.z * vel_length), 0.5)
 		# clamp pq a partir de 300 sigui 0,5 (si no, quan passés de 300 continuaria baixant fins q a 400 seria 0)
 	
 	#if owner.name == "PlayerShip":
