@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=51 format=2]
+[gd_resource type="VisualShader" load_steps=57 format=2]
 
 [ext_resource path="res://addons/Shader Nodes/custom/nodes/voronoi_texture.gd" type="Script" id=1]
 
@@ -60,6 +60,14 @@ default_input_values = [ 0, 0.0, 1, 0.5 ]
 
 [sub_resource type="VisualShaderNodeVectorCompose" id=84]
 
+[sub_resource type="Gradient" id=85]
+
+[sub_resource type="GradientTexture" id=86]
+gradient = SubResource( 85 )
+
+[sub_resource type="VisualShaderNodeTexture" id=87]
+texture = SubResource( 86 )
+
 [sub_resource type="VisualShaderNodeInput" id=55]
 input_name = "uv"
 
@@ -98,6 +106,16 @@ constant = 1.0
 [sub_resource type="VisualShaderNodeVectorOp" id=59]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 3, -0.09, 3 ) ]
 operator = 2
+
+[sub_resource type="Gradient" id=60]
+offsets = PoolRealArray( 0, 0.60199 )
+colors = PoolColorArray( 0.803922, 0.945098, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=61]
+gradient = SubResource( 60 )
+
+[sub_resource type="VisualShaderNodeTexture" id=62]
+texture = SubResource( 61 )
 
 [sub_resource type="VisualShaderNodeVectorOp" id=67]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 3, -0.09, 3 ) ]
@@ -444,7 +462,7 @@ nodes/vertex/15/node = SubResource( 117 )
 nodes/vertex/15/position = Vector2( -780, 540 )
 nodes/vertex/16/node = SubResource( 118 )
 nodes/vertex/16/position = Vector2( -600, 480 )
-nodes/vertex/connections = PoolIntArray( 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1 )
+nodes/vertex/connections = PoolIntArray( 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1, 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1 )
 nodes/fragment/0/position = Vector2( 1140, 20 )
 nodes/fragment/2/node = SubResource( 54 )
 nodes/fragment/2/position = Vector2( -220, 220 )
@@ -458,6 +476,8 @@ nodes/fragment/6/node = SubResource( 58 )
 nodes/fragment/6/position = Vector2( -900, 440 )
 nodes/fragment/7/node = SubResource( 59 )
 nodes/fragment/7/position = Vector2( -480, 160 )
+nodes/fragment/8/node = SubResource( 62 )
+nodes/fragment/8/position = Vector2( 0, 120 )
 nodes/fragment/9/node = SubResource( 67 )
 nodes/fragment/9/position = Vector2( -760, 140 )
 nodes/fragment/10/node = SubResource( 65 )
@@ -498,6 +518,8 @@ nodes/fragment/27/node = SubResource( 83 )
 nodes/fragment/27/position = Vector2( 180, 660 )
 nodes/fragment/28/node = SubResource( 84 )
 nodes/fragment/28/position = Vector2( 360, 560 )
+nodes/fragment/29/node = SubResource( 87 )
+nodes/fragment/29/position = Vector2( 580, 460 )
 nodes/fragment/30/node = SubResource( 88 )
 nodes/fragment/30/position = Vector2( 800, 360 )
 nodes/fragment/31/node = SubResource( 119 )
@@ -512,4 +534,4 @@ nodes/fragment/35/node = SubResource( 123 )
 nodes/fragment/35/position = Vector2( 580, 520 )
 nodes/fragment/36/node = SubResource( 124 )
 nodes/fragment/36/position = Vector2( 20, 200 )
-nodes/fragment/connections = PoolIntArray( 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 30, 0, 0, 1, 32, 0, 31, 1, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 28, 0, 35, 0, 35, 0, 30, 1, 2, 0, 36, 0, 36, 0, 31, 0, 36, 0, 30, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 2, 0, 8, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 28, 0, 29, 0, 8, 0, 30, 0, 29, 0, 30, 1, 30, 0, 0, 1, 32, 0, 31, 1, 8, 0, 31, 0, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 30, 0, 0, 1, 32, 0, 31, 1, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 28, 0, 35, 0, 35, 0, 30, 1, 2, 0, 36, 0, 36, 0, 31, 0, 36, 0, 30, 0 )

@@ -2,6 +2,7 @@ extends RigidBody
 class_name Ship
 
 signal ship_died
+signal killed_enemy
 
 export var red_mat : Material
 export var blue_mat : Material
@@ -72,6 +73,6 @@ func _on_damagable_hit():
 	pass
 
 
-func _on_enemy_died(attacker : Node):
+func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 	if attacker == self:
-		pass #print("he matat algú")
+		emit_signal("killed_enemy")

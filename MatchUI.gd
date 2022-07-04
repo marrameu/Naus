@@ -4,6 +4,7 @@ extends CanvasLayer
 export var blue_ship : NodePath
 export var red_ship : NodePath
 
+var middle_point_value := 100.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +16,7 @@ func _process(delta):
 	# fer-ho per senyals? (a la nau del jugador tmb?) o massa complciat
 	update_lifebars(false)
 	update_lifebars(true)
+	$Control/MiddlePointBar.value = middle_point_value
 
 
 func update_lifebars(blue : bool):

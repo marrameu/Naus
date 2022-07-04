@@ -47,13 +47,16 @@ var camera_up_action := "camera_up"
 var camera_down_action := "camera_down"
 
 
+# temp
+var dead := false
+
 func _ready():
 	init_cam()
 	make_current()
 
 
 func _process(delta):
-	if not ship_wr or not ship_wr.get_ref():
+	if not ship_wr or not ship_wr.get_ref() or dead:
 		return
 	
 	if Input.is_action_just_pressed("change_cam"):
@@ -72,7 +75,7 @@ func _process(delta):
 
 
 func _physics_process(delta : float) -> void:
-	if not ship_wr or not ship_wr.get_ref():
+	if not ship_wr or not ship_wr.get_ref() or dead:
 		fov = 70
 		return
 	
@@ -89,6 +92,8 @@ func _physics_process(delta : float) -> void:
 func init_cam():
 	if not ship:
 		return
+	
+	dead = false
 	
 	if ship_wr and ship_wr.get_ref(): # si no, l'starter position es va canviant tota l'estona
 		target.translation = starter_target_position
@@ -183,3 +188,6 @@ func horizontal_lean(target : Spatial, x_input : float, lean_limit : float = 45 
 	var target_rotation : Vector3 = target.rotation_degrees
 	target.rotation_degrees = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
 
+
+func player_died():
+	dead = true

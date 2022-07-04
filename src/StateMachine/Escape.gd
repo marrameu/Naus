@@ -8,4 +8,5 @@ func enter():
 
 
 func _on_HealthSystem_shield_recovered():
-	emit_signal("finished", "choose_objective")
+	pass
+	#emit_signal("finished", "choose_objective")

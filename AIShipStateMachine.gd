@@ -14,6 +14,8 @@ func _ready():
 		"attack_cs": $AttackCS, # va a la nau capital enemiga i la dispara
 		"defend_cs": $DefendCS, # roman als voltants de la seva nau capital -> attack enemy
 		"attack_big_ship": $AttackBigShip,
+		"patrol_middle_point": $PatrolMiddlePoint,
+		"push_forward": $PushForward,
 		"escape" : $Escape
 		#"dead": $Dead
 	}

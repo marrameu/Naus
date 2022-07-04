@@ -6,6 +6,8 @@ const player_ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
 
 var battle_started := false
+var battle_time := 0.0
+
 
 # middle point
 var middle_point := 0.0
@@ -14,8 +16,8 @@ var num_of_blues : int = 0
 var red_point := 0.0
 var num_of_reds : int = 0
 
-var RED_LIMIT = -4000
-var BLUE_LIMIT = 4000
+var RED_LIMIT = -3000
+var BLUE_LIMIT = 3000
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +28,13 @@ func _ready():
 
 
 func _process(delta):
+	update_middle_point()
+	$MatchUI.middle_point_value = middle_point * 1/30 # o menys, 1500-2000 potser
+	if battle_started:
+		battle_time += delta
+
+
+func update_middle_point(): 
 	middle_point = 0.0
 	blue_point = 0.0
 	num_of_blues = 0
@@ -51,7 +60,7 @@ func _process(delta):
 	$RedPoint.translation.x = red_point
 	$BluePoint.translation.x = blue_point
 	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
-	$Label.text = "MIDDLE_POINT = " + str(middle_point)
+	$Label.text = "MIDDLE_POINT = " + str(int(middle_point))
 
 
 func _on_BigShip_destroyed(blue_team):

@@ -19,35 +19,8 @@ func _ready():
 
 
 func enter():
-	# temporal -> dos estats q estenen i q nomes canvien això
-	var clos_enemy = owner.shooting.most_frontal_enenmy()
-	if clos_enemy:
-		if clos_enemy.translation.distance_to(owner.translation) < 500:
-			set_enemy(clos_enemy)
-			return
-	
-	var own_cs = get_node("/root/Level/BigShips/CapitalShipRed") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipBlue")
-	var closest_dsit := INF#3000
-	for ship in get_tree().get_nodes_in_group("Ships"):
-		if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
-			var a = ship.translation.distance_to(own_cs.translation)
-			if a < closest_dsit:
-				closest_dsit = a
-				clos_enemy = ship
-	set_enemy(clos_enemy)
-	
-	"""
-		if clos_enemy:
-			set_enemy(clos_enemy)
-		else:
-			var t = Timer.new()
-			t.set_wait_time(rand_range(2, 4))
-			self.add_child(t)
-			t.start()
-			t.connect("timeout", self, "enter")
-			connect("finished", t, "queue_free")
-			# emit_signal("finished", "attack_cs") # no hi ha cap enemic a menys de 500m de mi ni a menys de 3000m de la meva CS
-	"""
+	print(owner, " entered ", name)
+	set_enemy()
 
 
 func update(_delta):
@@ -55,7 +28,7 @@ func update(_delta):
 		attack_current_enemy()
 	else:
 		print("no enemy")
-		enter()
+		emit_signal("finished", "choose_objective")
 		"""
 		var t = Timer.new()
 		t.set_wait_time(rand_range(2, 4))
@@ -91,10 +64,9 @@ func attack_current_enemy():
 				total_attack_pos = enemy.translation + attack_rel_pos
 
 
-func set_enemy(new_enemy):
-	enemy = new_enemy
+func set_enemy():
+	enemy = owner.shooting.target
 	enemy_wr = weakref(enemy)
-	owner.shooting.target = enemy
 	has_reached_enemy = false
 	get_away_from_the_enemy = true
 	change_rel_pos()
@@ -116,4 +88,8 @@ func _on_ShootingArea_body_entered(body):
 	return
 	if body != enemy and body.is_in_group("Ships"):
 		if body.pilot_man.blue_team != owner.pilot_man.blue_team:
-			set_enemy(body)
+			set_enemy()
+
+
+func exit():
+	owner.shooting.target = null

@@ -78,7 +78,7 @@ func _process(delta : float) -> void:
 			var direction := Vector3(target.translation - owner.translation).normalized()
 			var x = direction.dot(owner.global_transform.basis.x)
 			var y = direction.dot(owner.global_transform.basis.y)
-			print(x, "    ", y)
+			# print(x, "    ", y)
 			
 			# així 100% q no
 			#lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80

@@ -85,7 +85,6 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01
 
 [node name="ThrusterFlame" parent="ShipMesh" instance=ExtResource( 6 )]
 transform = Transform( 0.00949448, 0, 0.999955, 0, 1, 0, -0.999955, 0, 0.00949448, 0, 0.62, -11.2598 )
-Intensity = 0.1
 Speed = 0.1
 Energy = 0.1
 

@@ -70,7 +70,7 @@ func turn(delta):
 	#yaw = def_rot.y
 	#roll = def_rot.z
 	
-	# DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))
+	DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))
 	
 	# COM AL JOC ANTERIOR
 	# AQUEST PRINT POT SER LA SOLUCIÓ A TOTS ELS MEUS PROBLEMES!!!

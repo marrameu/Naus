@@ -21,3 +21,23 @@ func _on_enemy_died(attacker : Node):
 	if attacker == self:
 		print("eooo")
 		$PlayerHUD.on_enemy_died()
+
+
+func _on_HealthSystem_die(attacker : Node):
+	print("HAS ESTAT MORT PER ", attacker)
+	if attacker:
+		cam.look_at(attacker.translation, Vector3.UP)
+	cam.player_died()
+	
+	# animacions
+	
+	var t = Timer.new()
+	t.set_wait_time(2)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "die")
+
+
+func die():
+	emit_signal("ship_died")
+	queue_free()
