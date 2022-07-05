@@ -128,8 +128,8 @@ func spawn_AI(number, blue_team : bool = false):
 	
 	var b = true if pilot_man.blue_team else false
 	var r = false if pilot_man.blue_team else true
-	$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [b])
-	$BigShips/CapitalShipRed/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [r])
+	#$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [b])
+	#$BigShips/CapitalShipRed/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [r])
 
 
 # això?! endaya

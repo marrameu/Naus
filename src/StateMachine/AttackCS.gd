@@ -9,6 +9,8 @@ func _ready():
 
 
 func enter():
+	print(owner, " entered ", name)
+	
 	if owner.pilot_man.blue_team:
 		enemy_cs = get_node("/root/Level/BigShips/CapitalShipRed")
 		owner.shooting.target = enemy_cs

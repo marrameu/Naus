@@ -9,7 +9,7 @@ var shoot_range := 1500
 var bullets_scenes := { 0 : preload("res://src/Bullets/Ships/ShipBullet.tscn"), 1 : preload("res://src/Bullets/Ships/ShipBullet2.tscn")}
 
 # Timers, fer-ho amb arrays?
-var fire_rates := { 0 : 4.0, 1 : 0.5 }
+var fire_rates := { 0 : 4.0, 1 : 1.0 }
 var next_times_to_fire := { 0 : 0.0, 1 : 0.0 }
 var time_now := 0.0
 
@@ -17,7 +17,7 @@ const MAX_AMMOS := { 0 : 50.0, 1: 4.0 }
 var ammos := { 0 : 50.0, 1: 4.0 }
 var auto_reload_ammo := { 0 : true, 1 : false}
 var ease_ammos := { 0 : true, 1 : false }
-var reload_per_sec := { 0 : 4.0, 1: 0.05 }
+var reload_per_sec := { 0 : 4.0 }
 var not_eased_ammos := { 0 : 50.0 }
 
 

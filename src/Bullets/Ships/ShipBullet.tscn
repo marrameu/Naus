@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=2]
 [ext_resource path="res://assets/audio/air.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=4]
-[ext_resource path="res://assets/audio/bullet_explosion.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/explosion_1.wav" type="AudioStream" id=5]
 
 [sub_resource type="ParticlesMaterial" id=1]
 spread = 0.0
@@ -126,9 +126,9 @@ debug_shape_thickness = 5
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 5 )
-unit_db = 19.622
-unit_size = 100.0
-max_distance = 200.0
+unit_db = -5.0
+unit_size = 80.0
+max_distance = 2000.0
 
 [connection signal="screen_entered" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]

@@ -9,7 +9,8 @@ func enter():
 
 func update(delta):
 	if owner.translation.distance_to(owner.input.target) < 250:
-		update_destination()
+		emit_signal("finished", "choose_objective")
+		#update_destination()
 	
 	var closest_enemy = closest_enemy()
 	if closest_enemy:
