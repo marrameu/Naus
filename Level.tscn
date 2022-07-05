@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://SupportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=12]
 [ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://MatchUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Map/Map.tscn" type="PackedScene" id=15]
 [ext_resource path="res://SpawnHUD.tscn" type="PackedScene" id=16]
 [ext_resource path="res://WorldEnvironment.gd" type="Script" id=17]
 [ext_resource path="res://PilotManager.gd" type="Script" id=18]
@@ -215,6 +216,7 @@ align = 1
 valign = 1
 
 [node name="MatchUI" parent="." instance=ExtResource( 14 )]
+layer = 5
 
 [node name="SpawnHUD" parent="." instance=ExtResource( 16 )]
 layer = 3
@@ -261,10 +263,13 @@ margin_bottom = 14.0
 grow_horizontal = 0
 text = "MIDDLE_POINT = "
 
+[node name="Map" parent="." instance=ExtResource( 15 )]
+
 [connection signal="battle_started" from="." to="BigShips/AttackShip" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip2" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip3" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip4" method="start"]
+[connection signal="ship_added" from="." to="Map" method="add_normal_ship"]
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]

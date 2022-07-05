@@ -1,6 +1,7 @@
 extends Spatial
 
 signal battle_started
+signal ship_added
 
 const player_ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
@@ -105,6 +106,8 @@ func spawn_player():
 	ship.cam = $Camera
 	$Camera.make_current()
 	$Camera.init_cam()
+	
+	emit_signal("ship_added", ship)
 
 
 func spawn_AI(number, blue_team : bool = false):
@@ -130,6 +133,8 @@ func spawn_AI(number, blue_team : bool = false):
 	var r = false if pilot_man.blue_team else true
 	#$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [b])
 	#$BigShips/CapitalShipRed/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [r])
+	
+	emit_signal("ship_added", ship)
 
 
 # això?! endaya

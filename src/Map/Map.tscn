@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/interface/deffend_ship_min.png" type="Texture" id=1]
+[ext_resource path="res://src/Map/NormalShipMin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Map/Map.gd" type="Script" id=3]
+[ext_resource path="res://assets/interface/attack_ship_min.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.442623, 0.967213 )
+colors = PoolColorArray( 0.839216, 0.65098, 0.470588, 1, 0.403922, 0.2, 0.145098, 1, 0.152941, 0.0627451, 0.101961, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 10 )
+
+[node name="Map" type="CanvasLayer"]
+layer = 4
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1920.0
+margin_right = 1080.0
+margin_bottom = 840.0
+rect_rotation = 90.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AttackShipBlue" type="TextureRect" parent="Control"]
+modulate = Color( 0.490196, 0.639216, 1, 1 )
+margin_left = 1728.0
+margin_top = 300.267
+margin_right = 1897.0
+margin_bottom = 431.267
+rect_rotation = -112.5
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="AttackShipBlue2" type="TextureRect" parent="Control"]
+modulate = Color( 0.490196, 0.639216, 1, 1 )
+margin_left = 1143.0
+margin_top = 324.267
+margin_right = 1312.0
+margin_bottom = 455.267
+rect_rotation = -79.1
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="SupportShipBlue" type="TextureRect" parent="Control"]
+modulate = Color( 0.490196, 0.639216, 1, 1 )
+margin_left = 1582.0
+margin_top = 566.267
+margin_right = 1751.0
+margin_bottom = 697.267
+rect_rotation = -90.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="SupportShipBlue2" type="TextureRect" parent="Control"]
+modulate = Color( 0.490196, 0.639216, 1, 1 )
+margin_left = 1182.0
+margin_top = 550.267
+margin_right = 1351.0
+margin_bottom = 681.267
+rect_rotation = -90.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="CapitalShipBlue" type="TextureRect" parent="Control"]
+modulate = Color( 0.490196, 0.639216, 1, 1 )
+margin_left = 1330.0
+margin_top = 796.267
+margin_right = 1707.0
+margin_bottom = 1031.27
+rect_rotation = -90.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="AttackShipRed" type="TextureRect" parent="Control"]
+modulate = Color( 1, 0.490196, 0.490196, 1 )
+margin_left = 416.0
+margin_top = 674.0
+margin_right = 585.0
+margin_bottom = 805.0
+rect_rotation = -243.318
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="AttackShipRed2" type="TextureRect" parent="Control"]
+modulate = Color( 1, 0.490196, 0.490196, 1 )
+margin_left = 660.0
+margin_top = 745.0
+margin_right = 829.0
+margin_bottom = 876.0
+rect_rotation = -304.246
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="SupportShipRed" type="TextureRect" parent="Control"]
+modulate = Color( 1, 0.490196, 0.490196, 1 )
+margin_left = 772.0
+margin_top = 278.0
+margin_right = 941.0
+margin_bottom = 409.0
+rect_rotation = -270.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="SupportShipRed2" type="TextureRect" parent="Control"]
+modulate = Color( 1, 0.490196, 0.490196, 1 )
+margin_left = 402.0
+margin_top = 296.0
+margin_right = 571.0
+margin_bottom = 427.0
+rect_rotation = -270.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="CapitalShipRed" type="TextureRect" parent="Control"]
+modulate = Color( 1, 0.490196, 0.490196, 1 )
+margin_left = 628.0
+margin_top = 160.0
+margin_right = 1005.0
+margin_bottom = 395.0
+rect_rotation = -270.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="NormalShipMin" parent="Control" instance=ExtResource( 2 )]
+margin_left = 947.0
+margin_top = 513.0
+margin_right = 1010.0
+margin_bottom = 578.0
