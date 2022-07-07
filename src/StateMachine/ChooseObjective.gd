@@ -50,6 +50,14 @@ func enter():
 			else:
 			"""
 			
+			if randi() % 2:
+				var closest_attack_ship : Spatial = closest_attack_ship()
+				if closest_attack_ship:
+					if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
+						owner.shooting.target = closest_attack_ship
+						emit_signal("finished", "attack_big_ship")
+						return
+			
 			# porser, si costa molt avançar, fer que si no hi ha més que un o dos enemics vius (i tot l'equip teu viu, ço és, diferència de 3) ja podeu push forward
 			var closest_enemy = closest_enemy()
 			if closest_enemy:

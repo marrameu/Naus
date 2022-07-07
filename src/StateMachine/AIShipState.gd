@@ -40,3 +40,16 @@ func closest_enemy_to_cs() -> Ship:
 				clos_enemy = ship
 	
 	return clos_enemy
+
+
+func closest_attack_ship(): # tot i q només n'hi ha una normalment
+	var closest_dsit := INF
+	var clos_enemy : Spatial
+	for ship in get_tree().get_nodes_in_group("AttackShips"):
+		if ship.blue_team != owner.pilot_man.blue_team:
+			var dist = ship.translation.distance_to(own_cs.translation)
+			if dist < closest_dsit:
+				closest_dsit = dist
+				clos_enemy = ship
+	
+	return closest_enemy()

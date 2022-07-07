@@ -1,6 +1,7 @@
 extends KinematicBody
 
 signal destroyed
+signal shields_down
 
 export var red_mat : Material
 export var blue_mat : Material
@@ -16,11 +17,12 @@ func _ready():
 
 
 func _on_HealthSystem_die(attacker : Node):
-	emit_signal("destroyed", blue_team)
+	emit_signal("destroyed", self, blue_team)
 	queue_free()
 
 
 func _on_HealthSystem_shield_die():
+	emit_signal("shields_down", self)
 	$ShieldMesh.hide()
 	for turret in $Turrets.get_children():
 		turret.get_node("DamageArea/CollisionShape").disabled = false

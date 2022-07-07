@@ -55,9 +55,6 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 
 [node name="SuportShip2" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, -790.848 )
 
-[node name="AttackShip" parent="BigShips" instance=ExtResource( 20 )]
-transform = Transform( -0.919444, 0, 0.39322, 0, 1, 0, -0.39322, 0, -0.919444, -2696.04, -300.505, 1035.16 )
-
 [node name="AttackShip2" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, 431.208, -726.323 )
 
@@ -71,10 +68,6 @@ blue_team = true
 
 [node name="AttackShip3" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2748.31, -300.505, -963.107 )
-blue_team = true
-
-[node name="AttackShip4" parent="BigShips" instance=ExtResource( 20 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2748.31, 431.208, 798.376 )
 blue_team = true
 
 [node name="Camera" type="Camera" parent="."]
@@ -258,6 +251,7 @@ skeleton = NodePath("")
 material/0 = SubResource( 9 )
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -114.0
@@ -267,13 +261,14 @@ text = "MIDDLE_POINT = "
 
 [node name="Map" parent="." instance=ExtResource( 15 )]
 
-[connection signal="battle_started" from="." to="BigShips/AttackShip" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip2" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip3" method="start"]
-[connection signal="battle_started" from="." to="BigShips/AttackShip4" method="start"]
+[connection signal="big_ship_shields_down" from="." to="MatchUI" method="_on_big_ship_shields_down"]
 [connection signal="ship_added" from="." to="Map" method="add_normal_ship"]
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
+[connection signal="shields_down" from="BigShips/AttackShip2" to="." method="_on_BigShip_shields_down"]
+[connection signal="shields_down" from="BigShips/AttackShip3" to="." method="_on_BigShip_shields_down"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 [connection signal="change_spectate" from="SpawnHUD" to="WaittingCam" method="_on_SpawnHUD_change_spectate"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]

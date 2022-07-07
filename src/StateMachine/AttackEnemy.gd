@@ -37,6 +37,12 @@ func update(_delta):
 		t.connect("timeout", self, "enter")
 		connect("finished", t, "queue_free")
 		"""
+	
+	if owner.get_node("HealthSystem").health < 500:
+		pass
+		#print("kk")
+		#escape()
+
 
 
 func attack_current_enemy():

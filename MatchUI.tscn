@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/interface/pilot-bw.png" type="Texture" id=2]
 [ext_resource path="res://MatchUI.gd" type="Script" id=3]
 [ext_resource path="res://assets/interface/pilot.png" type="Texture" id=4]
 [ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=5]
+[ext_resource path="res://assets/interface/themes/default_theme.tres" type="Theme" id=6]
 
 [node name="MatchUI" type="CanvasLayer"]
 layer = 4
@@ -127,3 +128,29 @@ texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 4 )
 fill_mode = 4
 nine_patch_stretch = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -325.0
+margin_top = 82.0
+margin_right = -118.0
+margin_bottom = 347.0
+theme = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 207.0
+margin_bottom = 14.0
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Label"]
+modulate = Color( 0.254902, 0.254902, 0.254902, 1 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true

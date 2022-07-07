@@ -109,5 +109,6 @@ material/0 = null
 [node name="SpectateCamPos" type="Position3D" parent="."]
 transform = Transform( -0.954412, 0.0139672, -0.298164, -4.09074e-09, 0.998905, 0.0467926, 0.298491, 0.0446595, -0.953367, -107.831, 97.3268, -329.539 )
 
+[connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="shield_die" from="HealthSystem" to="." method="_on_HealthSystem_shield_die"]
 [connection signal="shield_recovered" from="HealthSystem" to="." method="_on_HealthSystem_shield_recovered"]

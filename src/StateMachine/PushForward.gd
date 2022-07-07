@@ -12,6 +12,15 @@ func update(delta):
 		emit_signal("finished", "choose_objective")
 		#update_destination()
 	
+	# NO ES POT POSAR TOT AIXÒ AL CHOOSEOBJECTIVE I PROU?
+	if randi() % 2:
+		var closest_attack_ship : Spatial = closest_attack_ship()
+		if closest_attack_ship:
+			if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
+				owner.shooting.target = closest_attack_ship
+				emit_signal("finished", "attack_big_ship")
+				return
+	
 	var closest_enemy = closest_enemy()
 	if closest_enemy:
 		owner.shooting.target = closest_enemy

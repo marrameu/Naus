@@ -5,6 +5,8 @@ onready var target : Vector3
 
 var can_move := false
 
+var rel_position := Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_on_ChangePosTimer_timeout()
@@ -13,6 +15,9 @@ func _ready():
 func _physics_process(delta):
 	if not can_move:
 		return
+	
+	target = rel_position
+	target.x += get_node("/root/Level").middle_point
 	
 	move_and_collide(global_transform.basis.z * 100 * delta)
 	turn(delta)
@@ -174,7 +179,7 @@ func _on_ChangePosTimer_timeout():
 	else:
 	"""
 	# si la dif és menor o major, que ataqui la nau capital (voltants)
-	target = Vector3(get_node("/root/Level").middle_point + rand_range(-1000, 1000), rand_range(-350, 350), rand_range(-700, 700))
+	rel_position = Vector3(rand_range(-1000, 1000), rand_range(-350, 350), rand_range(-700, 700))
 
 
 func start():

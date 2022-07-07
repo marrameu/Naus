@@ -9,7 +9,7 @@ func _ready():
 
 
 func _process(delta):
-	if target:
+	if target and weakref(target).get_ref():
 		translation = target.global_transform.origin
 		rotation = target.global_transform.basis.get_euler()
 

@@ -48,3 +48,7 @@ func update_lifebars(blue : bool):
 			$Control/LifeBarRedShield.value = ship_shield / ship_max_shield * 100
 		else:
 			$Control/LifeBarRedShield.value = (1.0 - (time_left / wait_time)) * 100
+
+
+func _on_big_ship_shields_down(ship):
+	$VBoxContainer/Label.text = "ELS ESCUTS DE " + ship.name + " HAN ESTAT DESACTIVATS"

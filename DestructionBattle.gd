@@ -2,6 +2,7 @@ extends Spatial
 
 signal battle_started
 signal ship_added
+signal big_ship_shields_down
 
 const player_ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
@@ -25,6 +26,7 @@ var BLUE_LIMIT = 3000
 func _ready():
 	for big_ship in $BigShips.get_children():
 		emit_signal("ship_added", big_ship)
+		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
 	
 	$PilotManagers/PlayerManager.blue_team = PlayerInfo.player_blue_team
 	
@@ -60,6 +62,15 @@ func update_middle_point():
 		num_of_blues += 1
 	red_point /= 5
 	blue_point /= 5
+	
+	for attack_ship in get_tree().get_nodes_in_group("AttackShips"):
+		if attack_ship.blue_team:
+			pass
+			blue_point -= 650
+		else:
+			pass
+			red_point += 650
+	
 	middle_point = (red_point + blue_point) / 2
 	$RedPoint.translation.x = red_point
 	$BluePoint.translation.x = blue_point
@@ -185,3 +196,7 @@ func start_battle():
 		y += 1
 		spawn_AI(ai_num, false)
 		ai_num += 1
+
+
+func _on_BigShip_shields_down(ship):
+	emit_signal("big_ship_shields_down", ship)
