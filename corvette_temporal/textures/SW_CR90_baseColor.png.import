@@ -2,15 +2,17 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SW_CR90_baseColor.png-80dca115d2f5c9f5411748fc19806d7c.stex"
+path.s3tc="res://.import/SW_CR90_baseColor.png-80dca115d2f5c9f5411748fc19806d7c.s3tc.stex"
+path.etc2="res://.import/SW_CR90_baseColor.png-80dca115d2f5c9f5411748fc19806d7c.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://corvette_temporal/textures/SW_CR90_baseColor.png"
-dest_files=[ "res://.import/SW_CR90_baseColor.png-80dca115d2f5c9f5411748fc19806d7c.stex" ]
+dest_files=[ "res://.import/SW_CR90_baseColor.png-80dca115d2f5c9f5411748fc19806d7c.s3tc.stex", "res://.import/SW_CR90_baseColor.png-80dca115d2f5c9f5411748fc19806d7c.etc2.stex" ]
 
 [params]
 

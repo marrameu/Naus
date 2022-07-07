@@ -11,7 +11,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	return
 	if not can_move:
 		return
 	

@@ -2,15 +2,17 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SW_CR90_emissive.png-ae25e1dbb24d6a31a6806536c68fec66.stex"
+path.s3tc="res://.import/SW_CR90_emissive.png-ae25e1dbb24d6a31a6806536c68fec66.s3tc.stex"
+path.etc2="res://.import/SW_CR90_emissive.png-ae25e1dbb24d6a31a6806536c68fec66.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://corvette_temporal/textures/SW_CR90_emissive.png"
-dest_files=[ "res://.import/SW_CR90_emissive.png-ae25e1dbb24d6a31a6806536c68fec66.stex" ]
+dest_files=[ "res://.import/SW_CR90_emissive.png-ae25e1dbb24d6a31a6806536c68fec66.s3tc.stex", "res://.import/SW_CR90_emissive.png-ae25e1dbb24d6a31a6806536c68fec66.etc2.stex" ]
 
 [params]
 

@@ -23,6 +23,9 @@ var BLUE_LIMIT = 3000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for big_ship in $BigShips.get_children():
+		emit_signal("ship_added", big_ship)
+	
 	$PilotManagers/PlayerManager.blue_team = PlayerInfo.player_blue_team
 	
 	$WaittingCam.make_current()
@@ -50,10 +53,10 @@ func update_middle_point():
 			num_of_blues += 1
 			blue_point +=  ship.translation.x
 	while num_of_reds < 5:
-		red_point += RED_LIMIT
+		red_point += RED_LIMIT - 1000
 		num_of_reds += 1
 	while num_of_blues < 5:
-		blue_point += BLUE_LIMIT
+		blue_point += BLUE_LIMIT + 1000
 		num_of_blues += 1
 	red_point /= 5
 	blue_point /= 5

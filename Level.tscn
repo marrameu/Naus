@@ -1,9 +1,9 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://SupportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=3]
-[ext_resource path="res://BigShip.tscn" type="PackedScene" id=4]
+[ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/LevelWorldEnvironment.tres" type="Environment" id=6]
 [ext_resource path="res://assets/audio/gustav_holst_mars.ogg" type="AudioStream" id=7]
@@ -20,6 +20,7 @@
 [ext_resource path="res://PilotManager.gd" type="Script" id=18]
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=19]
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=20]
+[ext_resource path="res://WaittingCam.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -55,7 +56,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, -790.848 )
 
 [node name="AttackShip" parent="BigShips" instance=ExtResource( 20 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, -300.505, 1035.16 )
+transform = Transform( -0.919444, 0, 0.39322, 0, 1, 0, -0.39322, 0, -0.919444, -2696.04, -300.505, 1035.16 )
 
 [node name="AttackShip2" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, 431.208, -726.323 )
@@ -227,6 +228,7 @@ transform = Transform( 0.967628, -0.173311, 0.183468, 0.0746351, 0.890927, 0.447
 cull_mask = 1048571
 current = true
 far = 6000.0
+script = ExtResource( 21 )
 
 [node name="Ships" type="Spatial" parent="."]
 
@@ -273,5 +275,6 @@ text = "MIDDLE_POINT = "
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
+[connection signal="change_spectate" from="SpawnHUD" to="WaittingCam" method="_on_SpawnHUD_change_spectate"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]
