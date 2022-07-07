@@ -11,6 +11,11 @@ func _ready():
 	pass
 
 
+func _physics_process(delta):
+	if $RayCast.is_colliding():
+		enemy_in_range = $RayCast.get_collider() == target
+
+
 func _process(delta):
 	wants_shoots[0] = false
 	"""
@@ -39,10 +44,12 @@ func _process(delta):
 
 
 func _on_ShootingArea_body_entered(body):
+	return
 	if body == target:
 		enemy_in_range = true
 
 
 func _on_ShootingArea_body_exited(body):
+	return
 	if body == target:
 		enemy_in_range = false

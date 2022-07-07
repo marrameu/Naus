@@ -52,4 +52,4 @@ func closest_attack_ship(): # tot i q només n'hi ha una normalment
 				closest_dsit = dist
 				clos_enemy = ship
 	
-	return closest_enemy()
+	return clos_enemy

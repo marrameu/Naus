@@ -267,8 +267,6 @@ text = "MIDDLE_POINT = "
 [connection signal="ship_added" from="." to="Map" method="add_normal_ship"]
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
-[connection signal="shields_down" from="BigShips/AttackShip2" to="." method="_on_BigShip_shields_down"]
-[connection signal="shields_down" from="BigShips/AttackShip3" to="." method="_on_BigShip_shields_down"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 [connection signal="change_spectate" from="SpawnHUD" to="WaittingCam" method="_on_SpawnHUD_change_spectate"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]

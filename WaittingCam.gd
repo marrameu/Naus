@@ -30,7 +30,6 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 			target_ships = get_tree().get_nodes_in_group("SupportShips")
 		4:
 			target_ships = get_tree().get_nodes_in_group("Ships")
-			return
 	
 	if target_ships:
 		if index < 0:

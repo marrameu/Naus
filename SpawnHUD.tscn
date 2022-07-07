@@ -91,7 +91,7 @@ text = "ESPECTA:"
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Spectate"]
 margin_top = 34.0
 margin_right = 217.0
-margin_bottom = 110.0
+margin_bottom = 90.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -105,7 +105,7 @@ text = "<-"
 
 [node name="Button2" type="Button" parent="Control/Spectate/HBoxContainer"]
 margin_right = 217.0
-margin_bottom = 76.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAU CAPITAL"
@@ -120,9 +120,9 @@ size_flags_vertical = 3
 text = "->"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/Spectate"]
-margin_top = 114.0
+margin_top = 94.0
 margin_right = 217.0
-margin_bottom = 191.0
+margin_bottom = 151.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -136,7 +136,7 @@ text = "<-"
 
 [node name="Button2" type="Button" parent="Control/Spectate/HBoxContainer2"]
 margin_right = 217.0
-margin_bottom = 77.0
+margin_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAUS D'ATAC"
@@ -151,9 +151,9 @@ size_flags_vertical = 3
 text = "->"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Control/Spectate"]
-margin_top = 195.0
+margin_top = 155.0
 margin_right = 217.0
-margin_bottom = 272.0
+margin_bottom = 211.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -167,7 +167,7 @@ text = "<-"
 
 [node name="Button3" type="Button" parent="Control/Spectate/HBoxContainer3"]
 margin_right = 217.0
-margin_bottom = 77.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAUS DE SUPORT"
@@ -182,7 +182,6 @@ size_flags_vertical = 3
 text = "->"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Control/Spectate"]
-visible = false
 margin_top = 215.0
 margin_right = 217.0
 margin_bottom = 272.0

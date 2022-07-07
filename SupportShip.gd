@@ -17,11 +17,12 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	# si els escuts de la nau capital enemiga o la pròpia estan desactivats -> màx endavant o màx enradere
 	var des_x : float
 	if original_x < 0:
-		des_x = max(get_node("/root/Level").middle_point + original_x, original_x - 600)
+		des_x = max(get_node("/root/Level").middle_point * 1.5 + original_x, original_x - 600)
 	else:
-		des_x = min(get_node("/root/Level").middle_point + original_x, original_x + 600)
+		des_x = min(get_node("/root/Level").middle_point * 1.5 + original_x, original_x + 600)
 	
 	var collider
 	if translation.x > des_x:
