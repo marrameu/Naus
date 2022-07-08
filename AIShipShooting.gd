@@ -17,7 +17,6 @@ func _physics_process(delta):
 
 
 func _process(delta):
-	wants_shoots[0] = false
 	"""
 	enemy_in_range = false
 	# cal la weakref? si pot ser evitat millor
@@ -35,12 +34,13 @@ func _process(delta):
 	"""
 	# cal la weakref? si pot ser evitat millor
 	if weakref(target).get_ref():
-		if can_shoots[0] and enemy_in_range:
-			wants_shoots[0] = true
-			if get_tree().has_network_peer():
-				rpc("shoot", target.translation)
-			else:
-				shoot_bullet(0, target.translation)
+		if enemy_in_range:
+			for value in wants_shoots:
+				if wants_shoots[value] and can_shoots[value]:
+					if get_tree().has_network_peer():
+						rpc("shoot", target.translation)
+					else:
+						shoot_bullet(value, target.translation)
 
 
 func _on_ShootingArea_body_entered(body):

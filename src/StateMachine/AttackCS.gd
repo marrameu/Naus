@@ -18,6 +18,9 @@ func enter():
 		enemy_cs = get_node("/root/Level/BigShips/CapitalShipBlue")
 		owner.shooting.target = enemy_cs
 	
+	owner.shooting.wants_shoots[0] = true
+	owner.shooting.wants_shoots[1] = true
+	
 	var t = Timer.new()
 	t.set_wait_time(rand_range(7, 14))
 	self.add_child(t)

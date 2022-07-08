@@ -22,6 +22,9 @@ func update(delta):
 		emit_signal("finished", "choose_objective")
 		return
 	
+	owner.shooting.wants_shoots[0] = true
+	owner.shooting.wants_shoots[1] = true
+	
 	if not get_away_from_the_enemy:
 		if owner.translation.distance_to(enemy_bs.translation) < 500:
 			owner.input.target = owner.translation + attack_rel_pos

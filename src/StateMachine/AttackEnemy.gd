@@ -46,6 +46,9 @@ func update(_delta):
 
 
 func attack_current_enemy():
+	owner.shooting.wants_shoots[0] = true
+	owner.shooting.wants_shoots[1] = false
+	
 	if enemy_wr and enemy_wr.get_ref():
 		if has_reached_enemy:
 			if get_away_from_the_enemy:
