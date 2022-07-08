@@ -4,6 +4,12 @@ extends CanvasLayer
 export var blue_ship : NodePath
 export var red_ship : NodePath
 
+export var blue_support_ship1 : NodePath
+export var blue_support_ship2 : NodePath
+
+export var red_support_ship1 : NodePath
+export var red_support_ship2 : NodePath
+
 var middle_point_value := 100.0
 
 # Called when the node enters the scene tree for the first time.
@@ -14,13 +20,17 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# fer-ho per senyals? (a la nau del jugador tmb?) o massa complciat
-	update_lifebars(false)
-	update_lifebars(true)
+	update_lifebars(blue_ship, $Control/LifeBarBlueShield)
+	update_lifebars(red_ship, $Control/LifeBarRedShield)
+	update_lifebars(blue_support_ship1, $Control/BlueSupportShips/LifeBarBluedShield)
+	update_lifebars(blue_support_ship2, $Control/BlueSupportShips/LifeBarBlueShield2)
+	update_lifebars(red_support_ship1, $Control/RedSupportShips/LifeBarRedShield)
+	update_lifebars(red_support_ship2, $Control/RedSupportShips/LifeBarRedShield2)
 	$Control/MiddlePointBar.value = middle_point_value
 
 
-func update_lifebars(blue : bool):
-	var ship = get_node(blue_ship) if blue else get_node(red_ship)
+func update_lifebars(ship_path : NodePath, shield_life_bar):
+	var ship = get_node(ship_path)
 	
 	if not ship:
 		return
@@ -36,18 +46,11 @@ func update_lifebars(blue : bool):
 	
 	
 	
-	if blue:
-		$Control/LifeBarBlueShield/LifeBar.value = ship_health / ship_max_health * 100
-		if ship_shield:
-			$Control/LifeBarBlueShield.value = ship_shield / ship_max_shield * 100
-		else:
-			$Control/LifeBarBlueShield.value = (1.0 - (time_left / wait_time)) * 100
+	shield_life_bar.get_node("LifeBar").value = ship_health / ship_max_health * 100
+	if ship_shield:
+		shield_life_bar.value = ship_shield / ship_max_shield * 100
 	else:
-		$Control/LifeBarRedShield/LifeBar.value = ship_health / ship_max_health * 100
-		if ship_shield:
-			$Control/LifeBarRedShield.value = ship_shield / ship_max_shield * 100
-		else:
-			$Control/LifeBarRedShield.value = (1.0 - (time_left / wait_time)) * 100
+		shield_life_bar.value = (1.0 - (time_left / wait_time)) * 100
 
 
 func _on_big_ship_shields_down(ship):

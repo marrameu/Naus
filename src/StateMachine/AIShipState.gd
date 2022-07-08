@@ -12,8 +12,7 @@ func _get_configuration_warning() -> String:
 
 
 func escape():
-	pass
-	#emit_signal("finished", "escape")
+	emit_signal("finished", "escape")
 
 
 func closest_enemy(min_dist : float = 750.0) -> Ship:
@@ -42,10 +41,10 @@ func closest_enemy_to_cs() -> Ship:
 	return clos_enemy
 
 
-func closest_attack_ship(): # tot i q només n'hi ha una normalment
+func closest_big_ship(type : String): # tot i q només n'hi ha una normalment
 	var closest_dsit := INF
 	var clos_enemy : Spatial
-	for ship in get_tree().get_nodes_in_group("AttackShips"):
+	for ship in get_tree().get_nodes_in_group(type):
 		if ship.blue_team != owner.pilot_man.blue_team:
 			var dist = ship.translation.distance_to(own_cs.translation)
 			if dist < closest_dsit:

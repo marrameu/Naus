@@ -8,12 +8,14 @@ func enter():
 
 
 func update(delta):
+	# turbo, si en té
+	
 	if owner.translation.distance_to(owner.input.target) < 250:
 		emit_signal("finished", "choose_objective")
 		#update_destination()
 	
 	# NO ES POT POSAR TOT AIXÒ AL CHOOSEOBJECTIVE I PROU?
-	var closest_attack_ship : Spatial = closest_attack_ship()
+	var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
 	if closest_attack_ship:
 		var attack_big_ship := true
 		if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
@@ -42,6 +44,6 @@ func update(delta):
 
 func update_destination():
 	if owner.pilot_man.blue_team:
-		owner.input.target = Vector3(get_node("/root/Level").middle_point - 2000, rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(-2000, rand_range(-350, 350), rand_range(-700, 700))
 	else:
-		owner.input.target = Vector3(get_node("/root/Level").middle_point + 2000, rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(2000, rand_range(-350, 350), rand_range(-700, 700))

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 onready var lock_target_info := $LockTargetInfo
 onready var lock_target_nickname := $LockTargetInfo/Nickname
+onready var lock_target_dist := $LockTargetInfo/Distance
 onready var lock_target_life_bar := $LockTargetInfo/LifeBar
 onready var lock_target_info_center_pos : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))/2 - lock_target_info.rect_size/2
 
@@ -63,6 +64,7 @@ func _process(delta : float) -> void:
 	if target and weakref(target).get_ref():
 		lock_target_info.show()
 		lock_target_nickname.text = target.name
+		lock_target_dist.text = str(int(owner.translation.distance_to(target.translation)))
 		if target.is_in_group("BigShips") and not target.get_node("HealthSystem").shield:
 			var time_left = target.get_node("HealthSystem/ShieldTimer").time_left
 			var wait_time = target.get_node("HealthSystem/ShieldTimer").wait_time

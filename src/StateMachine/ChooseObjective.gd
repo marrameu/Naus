@@ -5,7 +5,7 @@ extends "AIShipState.gd"
 func enter():
 	print(owner, " entered ", name)
 	# en procés de millora
-	if get_parent().enemy_cs_shields_dead:
+	if get_parent().enemy_cs_shields_dead: # o de les de suport
 		emit_signal("finished", "attack_cs")
 	elif get_parent().own_cs_shields_dead:
 		emit_signal("finished", "attack_enemy")
@@ -24,6 +24,19 @@ func enter():
 				us_van_guanyant = true
 		
 		if us_van_guanyant:
+			var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
+			if closest_attack_ship:
+				var attack_big_ship := true
+				if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
+						attack_big_ship = false
+				elif closest_attack_ship.get_node("HealthSystem").shield:
+					if randi() % 2:
+						attack_big_ship = false
+				if attack_big_ship:
+					owner.shooting.target = closest_attack_ship
+					emit_signal("finished", "attack_big_ship")
+					return
+			
 			var closest_enemy = closest_enemy()
 			if closest_enemy:
 				owner.shooting.target = closest_enemy
@@ -39,7 +52,24 @@ func enter():
 				print("malament ray")
 			
 		elif aneu_guanyant:
-			emit_signal("finished", "attack_cs")
+			print("nemg uanyant")
+			var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
+			if closest_attack_ship:
+				var attack_big_ship := true
+				if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
+					attack_big_ship = false
+				if attack_big_ship:
+					owner.shooting.target = closest_attack_ship
+					emit_signal("finished", "attack_big_ship")
+					return
+			
+			var closest_support_ship : Spatial = closest_big_ship("SupportShip")
+			if closest_support_ship:
+				owner.shooting.target = closest_support_ship
+				print("support ship, fora!!")
+				emit_signal("finished", "attack_big_ship")
+			else:
+				emit_signal("finished", "attack_cs")
 		else:
 			# DIFERÈNCIA < 1500
 			"""
@@ -50,7 +80,7 @@ func enter():
 			else:
 			"""
 			
-			var closest_attack_ship : Spatial = closest_attack_ship()
+			var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
 			if closest_attack_ship:
 				var attack_big_ship := true
 				if closest_attack_ship.translation.distance_to(owner.translation) > 1000:

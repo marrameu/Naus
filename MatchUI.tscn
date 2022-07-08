@@ -19,13 +19,31 @@ anchor_right = 0.5
 margin_left = -276.0
 margin_top = 82.0
 margin_right = 276.0
-margin_bottom = 180.0
+margin_bottom = 149.0
 
 [node name="LifeBarRedShield" parent="Control" instance=ExtResource( 1 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -20.0
-margin_bottom = 0.0
+margin_top = -38.0
+margin_bottom = -18.0
+
+[node name="RedSupportShips" type="HBoxContainer" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+margin_right = 125.0
+
+[node name="LifeBarRedShield" parent="Control/RedSupportShips" instance=ExtResource( 1 )]
+margin_right = 60.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LifeBarRedShield2" parent="Control/RedSupportShips" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="LifeBarBlueShield" parent="Control" instance=ExtResource( 1 )]
 anchor_left = 1.0
@@ -33,9 +51,29 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -125.0
-margin_top = -20.0
+margin_top = -38.0
 margin_right = 0.0
-margin_bottom = 0.0
+margin_bottom = -18.0
+
+[node name="BlueSupportShips" type="HBoxContainer" parent="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -125.0
+margin_top = -14.0
+
+[node name="LifeBarBluedShield" parent="Control/BlueSupportShips" instance=ExtResource( 1 )]
+margin_right = 60.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LifeBarBlueShield2" parent="Control/BlueSupportShips" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control"]
 margin_right = 40.0
@@ -51,12 +89,10 @@ text = "BLUE:"
 
 [node name="MiddlePointBar" type="TextureProgress" parent="Control"]
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
 margin_left = -88.0
-margin_top = -14.0
 margin_right = 88.0
+margin_bottom = 14.0
 min_value = -100.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 5 )

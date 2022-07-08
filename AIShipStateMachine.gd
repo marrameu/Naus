@@ -26,3 +26,9 @@ func capital_ship_shield_died(own_team : bool):
 		own_cs_shields_dead = true
 	else:
 		enemy_cs_shields_dead = true
+
+
+func _process(_delta):
+	# fer-ho amb senyals
+	if owner.get_node("HealthSystem").health < 700 and current_state != states_map["escape"]:
+		current_state.escape()

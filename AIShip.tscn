@@ -109,7 +109,6 @@ cast_to = Vector3( 0, -75, 150 )
 shape = SubResource( 2 )
 
 [connection signal="enemy_attack_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_AIShip_enemy_attack_ship_shields_down"]
-[connection signal="shield_recovered" from="HealthSystem" to="StateMachine/Escape" method="_on_HealthSystem_shield_recovered"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_entered"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="StateMachine/AttackEnemy" method="_on_ShootingArea_body_entered"]
 [connection signal="body_exited" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_exited"]

@@ -34,14 +34,17 @@ func _ready():
 
 
 func _process(delta):
-	update_middle_point()
 	$MatchUI.middle_point_value = middle_point * 1/30 # o menys, 1500-2000 potser
 	if battle_started:
 		battle_time += delta
 
 
-func update_middle_point(): 
-	middle_point = 0.0
+func _physics_process(delta):
+	update_middle_point(delta)
+
+
+func update_middle_point(delta): 
+	#middle_point = 0.0
 	blue_point = 0.0
 	num_of_blues = 0
 	red_point = 0.0
@@ -71,11 +74,14 @@ func update_middle_point():
 			pass
 			red_point += 650
 	
-	middle_point = (red_point + blue_point) / 2
+	var des_middle_point = (red_point + blue_point) / 2
+	var dif = des_middle_point - middle_point
+	# middle_point += clamp(dif, -5, 5) * delta
+	middle_point = lerp(middle_point, des_middle_point, 0.3 * delta)
 	$RedPoint.translation.x = red_point
 	$BluePoint.translation.x = blue_point
 	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
-	$Label.text = "MIDDLE_POINT = " + str(int(middle_point))
+	$Label.text = "MIDDLE_POINT = " + str(int(middle_point), "    ", str(int(des_middle_point)))
 
 
 func _on_BigShip_destroyed(blue_team):
@@ -182,10 +188,10 @@ func start_battle():
 	var red_ais : int = 5
 	var ai_num : int = 0
 	
-	if PlayerInfo.player_blue_team:
-		blue_ais -=1
-	else:
-		red_ais -= 1
+	#if PlayerInfo.player_blue_team:
+	#	blue_ais -=1
+	#else:
+	#	red_ais -= 1
 	
 	var x : int = 0
 	while x < blue_ais:
