@@ -3,7 +3,7 @@ extends "AIShipState.gd"
 var enemy_bs : Spatial
 var attack_rel_pos : Vector3
 
-var get_away_from_the_enemy := true
+var get_away_from_the_enemy := false
 
 
 # Called when the node enters the scene tree for the first time.

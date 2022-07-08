@@ -21,12 +21,6 @@ func _ready():
 	}
 
 
-func initialize(start_state):
-	states_stack.push_front(get_node(start_state))
-	current_state = states_stack[0]
-	current_state.enter()
-
-
 func capital_ship_shield_died(own_team : bool):
 	if own_team:
 		own_cs_shields_dead = true

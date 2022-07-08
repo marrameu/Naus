@@ -136,6 +136,8 @@ func spawn_AI(number, blue_team : bool = false):
 		pilot_man.blue_team = blue_team
 	
 	ship.pilot_man = pilot_man
+	ship.battle_man = self
+	connect("big_ship_shields_down", ship, "_on_BigShip_shields_down")
 	
 	ship.translation = choose_spawn_position(pilot_man.blue_team)
 	ship.rotation_degrees.y = -90 if pilot_man.blue_team else 90
