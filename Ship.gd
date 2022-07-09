@@ -34,6 +34,7 @@ func set_team_color():
 
 
 func update_thruster_flame():
+	$ShipMesh/ThrusterFlame.TextureUniform2.gradient = $ShipMesh/ThrusterFlame.turbo_gradient if input.do_turbo else $ShipMesh/ThrusterFlame.normal_gradient
 	$ShipMesh/ThrusterFlame.visible = !input.drifting
 	var b = transform.basis
 	var v_len = linear_velocity.length()

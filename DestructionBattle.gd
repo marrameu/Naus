@@ -159,7 +159,7 @@ func spawn_AI(number, blue_team : bool = false):
 	emit_signal("ship_added", ship)
 
 
-# això?! endaya
+# això?! endaya. q dius?
 func choose_spawn_position(blue_team : bool) -> Vector3:
 	if blue_team:
 		return(Vector3(rand_range(BLUE_LIMIT - 50, BLUE_LIMIT + 50), rand_range(-250, -350), rand_range(-500, 500)))

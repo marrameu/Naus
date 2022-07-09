@@ -29,45 +29,8 @@ func _process(delta : float) -> void:
 	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - 
 		Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
 	
-	# BLOC 1
-	if not drifting: # aquesta comprovació potser sorba una mica
-		if turboing and wants_turbo: # espera q arribi a turboing
-			if $DrainTurboTimer.is_stopped():
-				$DrainTurboTimer.start()
-		elif turboing and not wants_turbo: # player has stopped pressing or run out of turbos
-			pass
-			# t'esperes q acabi crac, per flipat, maquina, tità, mastodont (?), fera, bèstia
-			"""
-			if not $DrainTurboTimer.is_stopped():
-				$DrainTurboTimer.stop()
-				avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
-			"""
-		else:
-			_recover_turbo()
-	else:
-		if $DriftTimer.is_stopped():
-			$DriftTimer.start() # fer-ho per temps o quan la vel arribi a gairebé 0
-		if not $DrainTurboTimer.is_stopped():
-			$DrainTurboTimer.stop()
-			avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
-		#if not drifting: # ha deixat de premer
-		#	$DriftTimer.stop() # per evitar possibles problemes
-		if Input.is_action_just_pressed(turbo_action) and avaliable_turbos:
-			drifting = false
-			$DriftTimer.stop() # per evitar possibles problemes
-			wants_turbo = true
-	
-	# BLOC 2 (ha d'anar sempre després, si no amb el comandament s'activa el turbo immediatament)
-	if not turboing:
-		if Input.is_action_just_pressed(turbo_action) and avaliable_turbos:
-			wants_turbo = true
-			$TurboAudio.play()
-	else:
-		if Input.is_action_just_pressed(drift_action):
-			drifting = true
-			wants_turbo = false
-			$DriftAudio.play()
-		# drifting = Input.is_action_pressed(drift_action) # just?
+	wants_turbo = Input.is_action_just_pressed(turbo_action)
+	wants_drift = Input.is_action_just_pressed(drift_action)
 	
 	zooming = Input.is_action_pressed(zoom_action) and not turboing and not drifting # ferho a la cam tmb
 	
@@ -90,7 +53,7 @@ func update_yaw_and_ptich() -> void:
 func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:
 	var target := throttle
 	var turbo_clamp := 2.0
-	if wants_turbo:
+	if do_turbo:
 		target += delta
 	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
 		target -= delta
@@ -116,7 +79,8 @@ func update_throttle(increase_action : String, decrease_action : String, delta :
 func _on_DrainTurboTimer_timeout():
 	$TurboSwitchAudio.play()
 	avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
-	wants_turbo = Input.is_action_pressed(turbo_action) and avaliable_turbos
+	wants_turbo = Input.is_action_pressed(turbo_action)
+	do_turbo = wants_turbo and avaliable_turbos
 
 
 """

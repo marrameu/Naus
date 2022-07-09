@@ -28,6 +28,10 @@ func _ready():
 	pass
 
 
+func _process(delta):
+	DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))
+
+
 func _physics_process(delta):
 	entered = true
 	
@@ -69,8 +73,6 @@ func turn(delta):
 	#pitch = def_rot.x
 	#yaw = def_rot.y
 	#roll = def_rot.z
-	
-	DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))
 	
 	# COM AL JOC ANTERIOR
 	# AQUEST PRINT POT SER LA SOLUCIÓ A TOTS ELS MEUS PROBLEMES!!!
