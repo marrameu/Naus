@@ -12,6 +12,11 @@ func _process(delta):
 	if target and weakref(target).get_ref():
 		translation = target.global_transform.origin
 		rotation = target.global_transform.basis.get_euler()
+		
+		if target.owner.is_in_group("Ships"):
+			var text : String
+			text = target.owner.name + "\n" + target.owner.get_node("StateMachine").current_state.name
+			$CanvasLayer/Label.text = text
 
 
 func _on_SpawnHUD_change_spectate(location : int, index : int = 0):

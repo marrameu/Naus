@@ -24,7 +24,7 @@ func enter():
 				us_van_guanyant = true
 		
 		if us_van_guanyant:
-			var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
+			var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
 			if closest_attack_ship:
 				var attack_big_ship := true
 				if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
@@ -48,12 +48,10 @@ func enter():
 				owner.shooting.target = closest_enemy_to_cs
 				emit_signal("finished", "attack_enemy")
 				return
-			else:
-				print("malament ray")
 			
 		elif aneu_guanyant:
 			print("nemg uanyant")
-			var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
+			var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
 			if closest_attack_ship:
 				var attack_big_ship := true
 				if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
@@ -61,9 +59,10 @@ func enter():
 				if attack_big_ship:
 					owner.shooting.target = closest_attack_ship
 					emit_signal("finished", "attack_big_ship")
+					print("atacemlahiun4")
 					return
 			
-			var closest_support_ship : Spatial = closest_big_ship("SupportShip")
+			var closest_support_ship : Spatial = closest_big_ship("SupportShips")
 			if closest_support_ship:
 				owner.shooting.target = closest_support_ship
 				print("support ship, fora!!")
@@ -72,15 +71,8 @@ func enter():
 				emit_signal("finished", "attack_cs")
 		else:
 			# DIFERÈNCIA < 1500
-			"""
-			if get_node("/root/Level").battle_time < 30:
-				print(owner.name, "patrol<30")
-				emit_signal("finished", "patrol_middle_point")
-				# go to middle point -> attack_clos_enemy
-			else:
-			"""
 			
-			var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
+			var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
 			if closest_attack_ship:
 				var attack_big_ship := true
 				if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
@@ -93,7 +85,7 @@ func enter():
 					emit_signal("finished", "attack_big_ship")
 					return
 			
-			# porser, si costa molt avançar, fer que si no hi ha més que un o dos enemics vius (i tot l'equip teu viu, ço és, diferència de 3) ja podeu push forward
+			# potser, si costa molt avançar, fer que si no hi ha més que un o dos enemics vius (i tot l'equip teu viu, ço és, diferència de 3) ja podeu push forward
 			var closest_enemy = closest_enemy()
 			if closest_enemy:
 				owner.shooting.target = closest_enemy
@@ -102,10 +94,9 @@ func enter():
 			
 			var closest_enemy_to_cs = closest_enemy_to_cs()
 			if closest_enemy_to_cs:
-				if closest_enemy_to_cs.translation.distance_to(own_cs.translation) < owner.translation.distance_to(own_cs.translation) + 500:
-					owner.shooting.target = closest_enemy_to_cs
-					emit_signal("finished", "attack_enemy")
-					return
+				owner.shooting.target = closest_enemy_to_cs
+				emit_signal("finished", "attack_enemy")
+				return
 			
 			emit_signal("finished", "push_forward")
 			

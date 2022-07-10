@@ -28,8 +28,8 @@ func closest_enemy(min_dist : float = 750.0) -> Ship:
 	return clos_enemy
 
 
-func closest_enemy_to_cs() -> Ship:
-	var closest_dsit := INF
+func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
+	var closest_dsit : float = owner.translation.distance_to(own_cs.translation) + plus_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
@@ -41,7 +41,7 @@ func closest_enemy_to_cs() -> Ship:
 	return clos_enemy
 
 
-func closest_big_ship(type : String): # tot i q només n'hi ha una normalment
+func closest_big_ship(type : String):
 	var closest_dsit := INF
 	var clos_enemy : Spatial
 	for ship in get_tree().get_nodes_in_group(type):

@@ -14,36 +14,23 @@ func update(delta):
 		emit_signal("finished", "choose_objective")
 		#update_destination()
 	
-	# NO ES POT POSAR TOT AIXÒ AL CHOOSEOBJECTIVE I PROU?
-	var closest_attack_ship : Spatial = closest_big_ship("AttackShip")
+	# No sé si això és pot optimitzar més (amb el ChooseObj)
+	var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
 	if closest_attack_ship:
-		var attack_big_ship := true
-		if closest_attack_ship.translation.distance_to(owner.translation) > 1000:
-				attack_big_ship = false
-		elif closest_attack_ship.get_node("HealthSystem").shield:
-			if randi() % 2:
-				attack_big_ship = false
-		if attack_big_ship:
-			owner.shooting.target = closest_attack_ship
-			emit_signal("finished", "attack_big_ship")
-			return
+		if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
+			emit_signal("finished", "choose_objective")
 	
 	var closest_enemy = closest_enemy()
 	if closest_enemy:
-		owner.shooting.target = closest_enemy
-		emit_signal("finished", "attack_enemy")
-		return
+		emit_signal("finished", "choose_objective")
 	
 	var closest_enemy_to_cs = closest_enemy_to_cs()
 	if closest_enemy_to_cs:
-		if closest_enemy_to_cs.translation.distance_to(own_cs.translation) < owner.translation.distance_to(own_cs.translation) + 500:
-			owner.shooting.target = closest_enemy_to_cs
-			emit_signal("finished", "attack_enemy")
-			return
+		emit_signal("finished", "choose_objective")
 
 
 func update_destination():
 	if owner.pilot_man.blue_team:
-		owner.input.target = Vector3(-2000, rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(-1500, rand_range(-350, 350), rand_range(-700, 700))
 	else:
-		owner.input.target = Vector3(2000, rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(1500, rand_range(-350, 350), rand_range(-700, 700))

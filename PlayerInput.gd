@@ -1,7 +1,5 @@
 extends "res://ShipInput.gd"
 
-signal activated_turboing
-
 const THROTTLE_SPEED := 2.5
 const ROLL_SPEED := 2.5
 
@@ -35,7 +33,7 @@ func _process(delta : float) -> void:
 	zooming = Input.is_action_pressed(zoom_action) and not turboing and not drifting # ferho a la cam tmb
 	
 	update_yaw_and_ptich()
-	update_throttle(move_forward_action, move_backward_action, delta)
+	update_throttle(Input.get_action_strength(move_forward_action) - Input.get_action_strength(move_backward_action), delta)
 
 
 func update_yaw_and_ptich() -> void:
@@ -48,32 +46,6 @@ func update_yaw_and_ptich() -> void:
 	if zooming: # fer que quan faci zoom la velocitat de girar és sempre la minima encara q sigui al mig?
 		pitch /= 2
 		yaw /= 2
-
-
-func update_throttle(increase_action : String, decrease_action : String, delta : float) -> void:
-	var target := throttle
-	var turbo_clamp := 2.0
-	if do_turbo:
-		target += delta
-	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
-		target -= delta
-		if drifting:
-			target = 0.0
-			throttle = 0.0
-			emit_signal("activated_turboing", false)
-	else:
-		turbo_clamp = 1.0
-		target += (Input.get_action_strength(increase_action) - Input.get_action_strength(decrease_action)) * delta / 2
-	
-	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
-	
-	turboing = target > 1
-	if target > 1 and throttle <= 1: # s'acaba d'activar el turbo
-		emit_signal("activated_turboing", true)
-	elif throttle > 1 and target <= 1:
-		emit_signal("activated_turboing", false)
-	
-	throttle = target
 
 
 func _on_DrainTurboTimer_timeout():

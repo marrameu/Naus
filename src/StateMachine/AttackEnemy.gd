@@ -25,6 +25,8 @@ func enter():
 
 func update(_delta):
 	if enemy_wr and enemy_wr.get_ref():
+		if enemy.translation.distance_to(owner.translation) > 1500:
+			emit_signal("finished", "choose_objective")
 		attack_current_enemy()
 	else:
 		print("no enemy")

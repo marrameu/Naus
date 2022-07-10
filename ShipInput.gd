@@ -1,5 +1,7 @@
 extends Node
 
+signal activated_turboing
+
 var pitch := 0.0
 var yaw := 0.0
 var roll := 0.0
@@ -10,7 +12,7 @@ export(float, -1, 1) var MIN_THROTTLE := 0.3
 # TURBO
 var TURBO_RECHARGE_TIME := 3.0
 var MAX_AVALIABLE_TURBOS : int = 5
-var avaliable_turbos : int = 0
+var avaliable_turbos : int = 5#0
 
 var turboing := false
 var do_turbo = false
@@ -53,6 +55,32 @@ func _process(delta):
 			avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
 
 
+func update_throttle(des_value : float, delta : float) -> void:
+	var target := throttle
+	var turbo_clamp := 2.0
+	if do_turbo:
+		target += delta
+	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
+		target -= delta
+		if drifting:
+			target = 0.0
+			throttle = 0.0
+			emit_signal("activated_turboing", false)
+	else:
+		turbo_clamp = 1.0
+		target += des_value * delta / 2
+	
+	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
+	
+	turboing = target > 1
+	if target > 1 and throttle <= 1: # s'acaba d'activar el turbo
+		emit_signal("activated_turboing", true)
+	elif throttle > 1 and target <= 1:
+		emit_signal("activated_turboing", false)
+	
+	throttle = target
+
+
 func _on_ReloadTurboTimer_timeout():
 	avaliable_turbos = clamp(avaliable_turbos + 1, 0, MAX_AVALIABLE_TURBOS)
 
@@ -67,6 +95,7 @@ func _recover_turbo():
 
 
 func _on_DrainTurboTimer_timeout():
+	#$TurboSwitchAudio.play()
 	avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
 	do_turbo = wants_turbo and avaliable_turbos
 

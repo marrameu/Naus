@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/Materials/red_ship_mat.tres" type="Material" id=13]
 [ext_resource path="res://assets/audio/drift.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/audio/turbo.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/effects/ThrusterFlameGradient.tres" type="Gradient" id=16]
 
 [sub_resource type="PhysicsMaterial" id=6]
 bounce = 0.5
@@ -24,6 +25,9 @@ extents = Vector3( 3.70997, 1.34271, 7.36319 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 7.10742, 4.44127, 10.355 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = ExtResource( 16 )
 
 [sub_resource type="CubeMesh" id=4]
 
@@ -97,6 +101,7 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01
 transform = Transform( 0.00949448, 0, 0.999955, 0, 1, 0, -0.999955, 0, 0.00949448, 0, 0.62, -11.2598 )
 Speed = 0.1
 Energy = 0.1
+TextureUniform2 = SubResource( 8 )
 
 [node name="Shooting" type="Spatial" parent="."]
 script = ExtResource( 3 )

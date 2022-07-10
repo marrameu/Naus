@@ -49,7 +49,12 @@ func _physics_process(delta):
 
 func move_forward(delta):
 	var dist = owner.global_transform.origin.distance_to(target)
-	update_throttle(des_throttle, delta) #dist - a_partir_daqui_min/distancia_per_comencar_a_frenat - a_partir_daqui_min, delta)
+	var input_strenght : float = 0 # com si el jugador cliqués W/S
+	if des_throttle > throttle:
+		input_strenght = 1
+	elif des_throttle < throttle:
+		input_strenght = -1
+	update_throttle(input_strenght, delta) #dist - a_partir_daqui_min/distancia_per_comencar_a_frenat - a_partir_daqui_min, delta)
 
 
 # Va una mica ebri!, però fa el fet. S'hauria de fer amb matemàtiques, passant la desired_oirent a local, com ho feia al del 2017 (amb l'Slerp però amb pitch, yaw i roll)
@@ -184,7 +189,8 @@ func turn(delta):
 			else: # Si són a la mateixa distància, és a dir, una paret plana per exemple
 				yaw = uwu.y
 			if fotut: # Toca amunt dreta, esquerra i, a més, amunt, avall i endevant
-				boost_multi = 0.25
+				pass
+				#boost_multi = 0.25
 	
 	
 	owner.get_node("ShipMesh").rotation = Vector3.ZERO
@@ -192,10 +198,3 @@ func turn(delta):
 	# COM AL JOC ANTERIOR
 	#owner.global_transform.basis = owner.global_transform.basis.slerp(desired_oirent.basis, 0.7 * delta)
 	#owner.translation += owner.global_transform.basis.z * 100 * delta
-
-
-func update_throttle(value : float, delta : float) -> void:
-	var targett := throttle
-	targett = clamp(value * boost_multi, MIN_THROTTLE, 1)
-	# Change to move_towards
-	throttle = clamp(lerp(throttle, targett, delta * THROTTLE_SPEED), -1, 1)

@@ -12,12 +12,12 @@ func _ready():
 
 
 func _physics_process(delta):
-	if $RayCast.is_colliding():
-		enemy_in_range = $RayCast.get_collider() == target
+	pass
+	#if $RayCast.is_colliding():
+	#	enemy_in_range = $RayCast.get_collider() == target
 
 
 func _process(delta):
-	"""
 	enemy_in_range = false
 	# cal la weakref? si pot ser evitat millor
 	# si ho faig amb body_entered/exited el problema esq si canvia d'enemic i l'anterior no ha sortit de l'àrea...
@@ -25,13 +25,7 @@ func _process(delta):
 		for body in $ShootingArea.get_overlapping_bodies():
 			if body == target:
 				enemy_in_range = true
-		if can_shoot and enemy_in_range:
-			wants_shoot = true
-			if get_tree().has_network_peer():
-				rpc("shoot", target.translation)
-			else:
-				shoot(target.translation)
-	"""
+	
 	# cal la weakref? si pot ser evitat millor
 	if weakref(target).get_ref():
 		if enemy_in_range:

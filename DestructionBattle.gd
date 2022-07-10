@@ -30,7 +30,7 @@ func _ready():
 	
 	$PilotManagers/PlayerManager.blue_team = PlayerInfo.player_blue_team
 	
-	$WaittingCam.make_current()
+	$WaitingCam.make_current()
 
 
 func _process(delta):
@@ -94,7 +94,7 @@ func _on_BigShip_destroyed(blue_team):
 
 
 func _on_PlayerShip_tree_exited():
-	$WaittingCam.make_current()
+	$WaitingCam.make_current()
 	$SpawnHUD.enable_spawn(false)
 	$SpawnHUD.show()
 
@@ -187,12 +187,12 @@ func start_battle():
 	var blue_ais : int = 5
 	var red_ais : int = 5
 	var ai_num : int = 0
-	
-	#if PlayerInfo.player_blue_team:
-	#	blue_ais -=1
-	#else:
-	#	red_ais -= 1
-	
+	"""
+	if PlayerInfo.player_blue_team:
+		blue_ais -=1
+	else:
+		red_ais -= 1
+	"""
 	var x : int = 0
 	while x < blue_ais:
 		x += 1 

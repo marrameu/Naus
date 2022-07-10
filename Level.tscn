@@ -20,7 +20,7 @@
 [ext_resource path="res://PilotManager.gd" type="Script" id=18]
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=19]
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=20]
-[ext_resource path="res://WaittingCam.gd" type="Script" id=21]
+[ext_resource path="res://WaitingCam.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -220,12 +220,29 @@ red_support_ship2 = NodePath("../BigShips/SuportShip2")
 layer = 3
 battle_state_path = NodePath("..")
 
-[node name="WaittingCam" type="Camera" parent="."]
+[node name="WaitingCam" type="Camera" parent="."]
 transform = Transform( 0.967628, -0.173311, 0.183468, 0.0746351, 0.890927, 0.447971, -0.241094, -0.419776, 0.875021, 1060.39, 1512.45, 2512.19 )
 cull_mask = 1048571
 current = true
 far = 6000.0
 script = ExtResource( 21 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="WaitingCam"]
+layer = 80
+
+[node name="Label" type="Label" parent="WaitingCam/CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -44.0
+margin_top = -24.0
+margin_bottom = 24.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "asddsa
+asddas
+"
 
 [node name="Ships" type="Spatial" parent="."]
 
@@ -271,6 +288,6 @@ text = "MIDDLE_POINT = "
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
-[connection signal="change_spectate" from="SpawnHUD" to="WaittingCam" method="_on_SpawnHUD_change_spectate"]
+[connection signal="change_spectate" from="SpawnHUD" to="WaitingCam" method="_on_SpawnHUD_change_spectate"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]
