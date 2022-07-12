@@ -93,7 +93,7 @@ func update_middle_point(delta):
 	elif middle_point < -1250 and not blue_take_over:
 		blue_take_over = true
 		emit_signal("match_msg", "ELS VERMELLS SÓN REPRIMITS", true)
-	else:
+	elif middle_point < 1250 and middle_point > -1250:
 		blue_take_over = false
 		red_take_over = false
 
@@ -229,4 +229,4 @@ func start_battle():
 func _on_BigShip_shields_down(ship):
 	emit_signal("big_ship_shields_down", ship)
 	var msg_blue : bool = !ship.blue_team
-	emit_signal("match_msg", "ELS ESCUTS DE " + ship.name + " HAN ESTAT DESACTIVATS", msg_blue)
+	emit_signal("match_msg", ship.name + " HA PERDUT ELS ESCUTS", msg_blue)

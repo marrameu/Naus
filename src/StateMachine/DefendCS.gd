@@ -5,7 +5,7 @@ var target_ship : Spatial
 
 
 func update(_delta):
-	if not target_ship or weakref(target_ship).get_ref():
+	if not target_ship or not weakref(target_ship).get_ref():
 		emit_signal("finished", "choose_objective")
 		return
 	
