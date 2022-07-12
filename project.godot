@@ -132,7 +132,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/destruction/plugin.cfg", "res://addons/lod/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/destruction/plugin.cfg", "res://addons/lod/plugin.cfg", "res://addons/silicon.vfx.lens_flare/plugin.cfg" )
 
 [input]
 

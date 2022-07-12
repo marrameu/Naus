@@ -6,7 +6,7 @@ onready var asteroid = preload("res://src/AsteroidFieldTest/Lod/AsteroidLod.tscn
 
 onready var SizeEditValues = $SizeEdit.mesh.size
 
-var start_roids = 1000
+export var start_roids = 1000
 var max_roids = 1000000
 var max_dist = 200.0
 
