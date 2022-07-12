@@ -63,7 +63,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	
 	bullet.ship = owner
 	
-	get_node("/root/Level").add_child(bullet)
+	get_tree().current_scene.add_child(bullet)
 	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.connect("damagable_hit", owner, "_on_damagable_hit")

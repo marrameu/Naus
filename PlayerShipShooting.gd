@@ -52,7 +52,7 @@ func _process(delta):
 
 func shoot_target() -> Vector3:
 	# Camera
-	var current_cam : Camera = get_node("/root/Level/Camera")
+	var current_cam : Camera = owner.cam
 	var space_state = get_parent().get_world().direct_space_state
 	
 	var camera_width_center := 0.0
