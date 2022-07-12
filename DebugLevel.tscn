@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ShipCamera.gd" type="Script" id=1]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=2]
@@ -10,12 +10,14 @@
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=8]
 [ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/AsteroidFieldTest/AsteroidField.tscn" type="PackedScene" id=11]
 
 [node name="DebugLevel" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1750.77 )
 script = ExtResource( 3 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 10 )]
+layer = 15
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.307423, 0, 0.951573, 0, 1, 0, -0.951573, 0, 0.307423, 0, 0, 0 )
@@ -28,6 +30,7 @@ script = ExtResource( 4 )
 [node name="Environment" type="Spatial" parent="."]
 
 [node name="Asteroids" type="Spatial" parent="Environment"]
+visible = false
 
 [node name="Asteroide" parent="Environment/Asteroids" instance=ExtResource( 2 )]
 transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, -1947.09, -64.5744, 0 )
@@ -86,6 +89,8 @@ transform = Transform( -0.822639, 0.568473, 0.0102285, 0.564158, 0.813896, 0.138
 [node name="Asteroide19" parent="Environment/Asteroids" instance=ExtResource( 2 )]
 transform = Transform( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, 577.669, 327.103, -127.898 )
 
+[node name="AsteroidField" parent="Environment" instance=ExtResource( 11 )]
+
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.70866, 0.457789, 0.53687, -0.635008, 0.0821853, 0.768122, 0.307515, -0.885254, 0.348941, 0, 57.0278, 0 )
 light_energy = 2.0
@@ -109,3 +114,5 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 388.19,
 
 [node name="AttackShip" parent="." instance=ExtResource( 8 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2800.04 )
+
+[editable path="Environment/AsteroidField"]

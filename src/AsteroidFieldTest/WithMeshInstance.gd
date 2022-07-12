@@ -1,7 +1,7 @@
 extends Spatial
 
-#onready var asteroid = preload("res://src/Asteroid.tscn")
-onready var asteroid = preload("res://src/AsteroidFieldTest/Asteroid_Debug.tscn")
+onready var asteroid = preload("res://src/Asteroid.tscn")
+#onready var asteroid = preload("res://src/AsteroidFieldTest/Asteroid_Debug.tscn")
 
 onready var SizeEditValues = $SizeEdit.mesh.size
 
@@ -43,11 +43,8 @@ func add_roids():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_roids()
+	print(SizeEditValues)
 
-# React to our spacebar
-func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		add_roids()
 
 func _process(delta):
 	pass
