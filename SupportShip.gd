@@ -18,6 +18,9 @@ func _process(delta):
 
 func _physics_process(delta):
 	# si els escuts de la nau capital enemiga o la pròpia estan desactivats -> màx endavant o màx enradere
+	if not get_node_or_null("/root/Level"):
+		return # DebugLVl
+	
 	var des_x : float
 	if original_x < 0:
 		des_x = max(get_node("/root/Level").middle_point * 4 + original_x, original_x - 600)
