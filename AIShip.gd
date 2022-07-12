@@ -1,6 +1,6 @@
 extends Ship
 
-signal enemy_attack_ship_shields_down
+signal big_ship_shields_down
 
 var battle_man
 
@@ -11,4 +11,4 @@ func _ready():
 
 
 func _on_BigShip_shields_down(ship):
-	emit_signal("enemy_attack_ship_shields_down", ship)
+	emit_signal("big_ship_shields_down", ship)

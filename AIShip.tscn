@@ -108,7 +108,8 @@ cast_to = Vector3( 0, -75, 150 )
 [node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea" index="0"]
 shape = SubResource( 2 )
 
-[connection signal="enemy_attack_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_AIShip_enemy_attack_ship_shields_down"]
+[connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
+[connection signal="big_ship_shields_down" from="." to="StateMachine/PushForward" method="_on_big_ship_shields_down"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_entered"]
 [connection signal="body_entered" from="Shooting/ShootingArea" to="StateMachine/AttackEnemy" method="_on_ShootingArea_body_entered"]
 [connection signal="body_exited" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_exited"]

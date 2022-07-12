@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://SupportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=19]
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=20]
 [ext_resource path="res://WaitingCam.gd" type="Script" id=21]
-[ext_resource path="res://src/AsteroidFieldTest/AsteroidField.tscn" type="PackedScene" id=22]
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -81,7 +80,6 @@ script = ExtResource( 2 )
 [node name="Environment" type="Spatial" parent="."]
 
 [node name="Asteroids" type="Spatial" parent="Environment"]
-visible = false
 
 [node name="Asteroide" parent="Environment/Asteroids" instance=ExtResource( 3 )]
 transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, -1947.09, -64.5744, 0 )
@@ -283,8 +281,6 @@ text = "MIDDLE_POINT = "
 
 [node name="Map" parent="." instance=ExtResource( 15 )]
 
-[node name="AsteroidField" parent="." instance=ExtResource( 22 )]
-
 [connection signal="battle_started" from="." to="BigShips/AttackShip2" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip3" method="start"]
 [connection signal="match_msg" from="." to="MatchUI" method="add_match_message"]
@@ -295,5 +291,3 @@ text = "MIDDLE_POINT = "
 [connection signal="change_spectate" from="SpawnHUD" to="WaitingCam" method="_on_SpawnHUD_change_spectate"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]
-
-[editable path="AsteroidField"]

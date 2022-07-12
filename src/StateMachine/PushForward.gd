@@ -10,6 +10,11 @@ func enter():
 func update(delta):
 	# turbo, si en té
 	
+	enemy_big_ships_wo_shields = clean_bigships_w_shields(enemy_big_ships_wo_shields)
+	my_team_big_ships_wo_shields = clean_bigships_w_shields(my_team_big_ships_wo_shields)
+	if enemy_big_ships_wo_shields or my_team_big_ships_wo_shields:
+		emit_signal("finished", "choose_objective")
+	
 	if owner.translation.distance_to(owner.input.target) < 250:
 		emit_signal("finished", "choose_objective")
 		#update_destination()

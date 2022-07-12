@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ShipCamera.gd" type="Script" id=1]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=8]
 [ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/AsteroidFieldTest/AsteroidField.tscn" type="PackedScene" id=11]
 
 [node name="DebugLevel" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1750.77 )
@@ -27,7 +28,10 @@ script = ExtResource( 4 )
 
 [node name="Environment" type="Spatial" parent="."]
 
+[node name="AsteroidField" parent="Environment" instance=ExtResource( 11 )]
+
 [node name="Asteroids" type="Spatial" parent="Environment"]
+visible = false
 
 [node name="Asteroide" parent="Environment/Asteroids" instance=ExtResource( 2 )]
 transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, -1947.09, -64.5744, 0 )
@@ -109,3 +113,5 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 388.19,
 
 [node name="AttackShip" parent="." instance=ExtResource( 8 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2800.04 )
+
+[editable path="Environment/AsteroidField"]
