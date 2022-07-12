@@ -49,3 +49,4 @@ func hide_default():
 func _on_Button_pressed():
 	if owner.has_node("Ships/PlayerShip") == true:
 		owner.get_node("Ships/PlayerShip/HealthSystem").take_damage(INF, true)
+	_on_Reprendre_pressed()

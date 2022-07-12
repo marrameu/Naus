@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const match_msg_scene : PackedScene = preload("res://src/HUD/MatchMessage.tscn")
 
 export var blue_ship : NodePath
 export var red_ship : NodePath
@@ -55,3 +56,10 @@ func update_lifebars(ship_path : NodePath, shield_life_bar):
 
 func _on_big_ship_shields_down(ship):
 	$VBoxContainer/Label.text = "ELS ESCUTS DE " + ship.name + " HAN ESTAT DESACTIVATS"
+
+
+func add_match_message(msg : String, blue : bool):
+	var new_match_msg = match_msg_scene.instance()
+	new_match_msg.text = msg
+	new_match_msg.get_node("TextureRect").modulate = Color("9b5454") if not blue else Color("545c9b")
+	$MatchMessages.add_child(new_match_msg)

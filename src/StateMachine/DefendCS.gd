@@ -1,16 +1,22 @@
 extends "AIShipState.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var target_ship : Spatial
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func update(_delta):
+	if not target_ship or weakref(target_ship).get_ref():
+		emit_signal("finished", "choose_objective")
+		return
+	
+	if target_ship.get_node("HealthSystem").shield:
+		emit_signal("finished", "choose_objective")
+		return
+	
+	owner.input.target = target_ship.translation
+	owner.input.des_throttle = 1.0 # turbo tmb
+	if owner.translation.distance_to(target_ship.translation) < 1000:
+		var closest_enemy = closest_enemy()
+		if closest_enemy:
+			owner.shooting.target = closest_enemy
+			emit_signal("finished", "attack_enemy")

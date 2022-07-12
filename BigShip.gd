@@ -2,6 +2,7 @@ extends KinematicBody
 
 signal destroyed
 signal shields_down
+signal shields_recovered
 
 export var red_mat : Material
 export var blue_mat : Material
@@ -32,6 +33,7 @@ func _on_HealthSystem_shield_recovered():
 	$ShieldMesh.show()
 	for turret in $Turrets.get_children():
 		turret.get_node("DamageArea/CollisionShape").disabled = true
+	emit_signal("shields_recovered", self)
 
 
 func _on_enemy_died(attacker : Node):

@@ -14,15 +14,19 @@ func update(delta):
 		emit_signal("finished", "choose_objective")
 		#update_destination()
 	
+	if get_node("/root/Level").middle_point < -get_parent().point_of_change or get_node("/root/Level").middle_point > get_parent().point_of_change:
+		emit_signal("finished", "choose_objective")
+	
 	# No sé si això és pot optimitzar més (amb el ChooseObj)
 	var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
 	if closest_attack_ship:
 		if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
 			emit_signal("finished", "choose_objective")
 	
-	var closest_enemy = closest_enemy()
-	if closest_enemy:
-		emit_signal("finished", "choose_objective")
+	if number_of_my_team_ships() - number_of_enemy_ships() <= 2: # millor fer-ho en funció del middle point
+		var closest_enemy = closest_enemy()
+		if closest_enemy:
+			emit_signal("finished", "choose_objective")
 	
 	var closest_enemy_to_cs = closest_enemy_to_cs()
 	if closest_enemy_to_cs:

@@ -283,7 +283,7 @@ text = "MIDDLE_POINT = "
 
 [connection signal="battle_started" from="." to="BigShips/AttackShip2" method="start"]
 [connection signal="battle_started" from="." to="BigShips/AttackShip3" method="start"]
-[connection signal="big_ship_shields_down" from="." to="MatchUI" method="_on_big_ship_shields_down"]
+[connection signal="match_msg" from="." to="MatchUI" method="add_match_message"]
 [connection signal="ship_added" from="." to="Map" method="add_normal_ship"]
 [connection signal="destroyed" from="BigShips/CapitalShipRed" to="." method="_on_BigShip_destroyed"]
 [connection signal="destroyed" from="BigShips/CapitalShipBlue" to="." method="_on_BigShip_destroyed"]

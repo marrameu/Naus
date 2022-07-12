@@ -3,6 +3,7 @@ extends Spatial
 signal battle_started
 signal ship_added
 signal big_ship_shields_down
+signal match_msg
 
 const player_ship_scene : PackedScene = preload("res://PlayerShip.tscn")
 const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
@@ -20,6 +21,9 @@ var num_of_reds : int = 0
 
 var RED_LIMIT = -3000
 var BLUE_LIMIT = 3000
+
+var blue_take_over := false
+var red_take_over := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -82,6 +86,16 @@ func update_middle_point(delta):
 	$BluePoint.translation.x = blue_point
 	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
 	$Label.text = "MIDDLE_POINT = " + str(int(middle_point), "    ", str(int(des_middle_point)))
+	
+	if middle_point > 1250 and not red_take_over:
+		red_take_over = true
+		emit_signal("match_msg", "ELS BLAUS SÓN REPRIMITS", false)
+	elif middle_point < -1250 and not blue_take_over:
+		blue_take_over = true
+		emit_signal("match_msg", "ELS VERMELLS SÓN REPRIMITS", true)
+	else:
+		blue_take_over = false
+		red_take_over = false
 
 
 func _on_BigShip_destroyed(blue_team):
@@ -97,6 +111,9 @@ func _on_PlayerShip_tree_exited():
 	$WaitingCam.make_current()
 	$SpawnHUD.enable_spawn(false)
 	$SpawnHUD.show()
+	
+	var msg_blue : bool = !PlayerInfo.player_blue_team # potser ferho amb el pilotman
+	emit_signal("match_msg", "PLAYERSHIP HA ESTAT ELIMINADA", msg_blue)
 
 
 func _on_AIShip_tree_exited(num):
@@ -107,6 +124,9 @@ func _on_AIShip_tree_exited(num):
 	t.start()
 	t.connect("timeout", self, "spawn_AI", [num])
 	t.connect("timeout", t, "queue_free")
+	
+	var msg_blue : bool = !get_node_or_null("PilotManagers/AIManager" + str(num)).blue_team
+	emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", msg_blue)
 
 
 func spawn_player():
@@ -208,3 +228,5 @@ func start_battle():
 
 func _on_BigShip_shields_down(ship):
 	emit_signal("big_ship_shields_down", ship)
+	var msg_blue : bool = !ship.blue_team
+	emit_signal("match_msg", "ELS ESCUTS DE " + ship.name + " HAN ESTAT DESACTIVATS", msg_blue)

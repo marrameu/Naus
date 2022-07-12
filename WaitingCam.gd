@@ -15,7 +15,7 @@ func _process(delta):
 		
 		if target.owner.is_in_group("Ships"):
 			var text : String
-			text = target.owner.name + "\n" + target.owner.get_node("StateMachine").current_state.name
+			text = target.owner.name + "\n" + target.owner.get_node("StateMachine").current_state.name + "\n" + str(target.owner.input.des_throttle) + " " + str(target.owner.input.wants_turbo)
 			$CanvasLayer/Label.text = text
 
 

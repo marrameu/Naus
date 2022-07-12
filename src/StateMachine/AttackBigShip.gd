@@ -15,9 +15,13 @@ func enter():
 	print(owner, " entered ", name)
 	
 	enemy_bs = owner.shooting.target
+	enemy_bs.connect("shields_recovered", self, "_on_BigShip_shields_recovered")
 
 
 func update(delta):
+	# DESPRÉS DE X SEGONS, FER Q PASSI?
+	# SI ALGUNA DE LES SEVES NAUS CAPITALS HA PERDUT ELS ESCUTS, PASSA A DEFENSAR-LES IMMEDIATAMENT? (SENYALS?)
+	
 	if not weakref(enemy_bs).get_ref():
 		emit_signal("finished", "choose_objective")
 		return
@@ -44,3 +48,9 @@ func change_rel_pos():
 	var y : float = rand_range(-1000, -500) if randi() % 2 else rand_range(500, 1000)
 	var z : float = rand_range(-1000, -500) if randi() % 2 else rand_range(500, 1000)
 	attack_rel_pos = Vector3(x, y, z)
+
+
+func _on_BigShip_shields_recovered(ship : Spatial):
+	if ship == enemy_bs:
+		ship.disconnect("shields_recovered", self, "_on_BigShip_shields_recovered")
+		emit_signal("finished", "choose_objective")

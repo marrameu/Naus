@@ -21,6 +21,8 @@ var states_stack = []
 var current_state = null
 var _active = false setget set_active
 
+onready var point_of_change := rand_range(1000, 1500)
+
 
 func _ready():
 	for child in get_children():

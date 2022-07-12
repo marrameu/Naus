@@ -12,7 +12,7 @@ func _ready():
 		"choose_objective": $ChooseObjective,
 		"attack_enemy": $AttackEnemy, # li dius l'enemic i l'ataca, en acabar de matar-lo, torna a l'objectiu (convindria un timer pq no shi passi massa estona)
 		"attack_cs": $AttackCS, # va a la nau capital enemiga i la dispara
-		"defend_cs": $DefendCS, # roman als voltants de la seva nau capital -> attack enemy
+		"defend_bs": $DefendBS, # roman als voltants de la seva nau capital -> attack enemy
 		"attack_big_ship": $AttackBigShip,
 		"patrol_middle_point": $PatrolMiddlePoint,
 		"push_forward": $PushForward,

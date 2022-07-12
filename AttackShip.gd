@@ -10,6 +10,10 @@ var rel_position := Vector3.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_on_ChangePosTimer_timeout()
+	if blue_team:
+		$TeamIndicator.material_override = blue_mat
+	else:
+		$TeamIndicator.material_override = red_mat
 
 
 func _physics_process(delta):
@@ -179,7 +183,7 @@ func _on_ChangePosTimer_timeout():
 	else:
 	"""
 	# si la dif és menor o major, que ataqui la nau capital (voltants)
-	rel_position = Vector3(rand_range(-1000, 1000), rand_range(-350, 350), rand_range(-700, 700))
+	rel_position = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))
 
 
 func start():

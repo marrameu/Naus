@@ -38,7 +38,7 @@ script = ExtResource( 6 )
 [node name="AttackCS" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 9 )
 
-[node name="DefendCS" type="Node" parent="StateMachine" index="3"]
+[node name="DefendBS" type="Node" parent="StateMachine" index="3"]
 script = ExtResource( 12 )
 
 [node name="Escape" type="Node" parent="StateMachine" index="4"]

@@ -4,7 +4,7 @@ class_name ShipPhysics
 
 onready var ship = get_parent()
 
-var linear_force := Vector3(0, 0, 150)
+var linear_force := Vector3(0, 0, 140)
 var linear_force_turbo := Vector3(0, 0, 400)
 var angular_force := Vector3(120, 120, 175) / 100.0
 
