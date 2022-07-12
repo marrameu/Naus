@@ -81,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Naus"
-run/main_scene="res://Level.tscn"
+run/main_scene="res://src/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
