@@ -1,6 +1,7 @@
 extends Spatial
 
-onready var asteroid = preload("res://src/Asteroid.tscn")
+#onready var asteroid = preload("res://src/Asteroid.tscn")
+onready var asteroid = preload("res://src/AsteroidFieldTest/Lod/AsteroidLod.tscn")
 #onready var asteroid = preload("res://src/AsteroidFieldTest/Asteroid_Debug.tscn")
 
 onready var SizeEditValues = $SizeEdit.mesh.size
@@ -48,7 +49,5 @@ func _ready():
 
 func _process(delta):
 	pass
-	#$DrawCalls.set_text(str(Performance.get_monitor(Performance.TIME_FPS)))
-	#print(Performance.get_monitor(Performance.RENDER_DRAW_CALLS_IN_FRAME))
 	
 

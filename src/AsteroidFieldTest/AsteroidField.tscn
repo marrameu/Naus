@@ -1,7 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/AsteroidFieldTest/Asteroid_Debug.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/AsteroidFieldTest/WithMeshInstance.gd" type="Script" id=4]
 
 [sub_resource type="CubeMesh" id=3]
@@ -16,13 +14,6 @@ albedo_color = Color( 1, 1, 1, 0 )
 
 [node name="AsteroidField" type="Spatial"]
 script = ExtResource( 4 )
-
-[node name="Asteroid" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 0.997123, 0.0757967, 0, -0.0757967, 0.997123, 0, 0, -10 )
-visible = false
-
-[node name="Asteroid_Debug" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [node name="SizeEdit" type="MeshInstance" parent="."]
 mesh = SubResource( 3 )
