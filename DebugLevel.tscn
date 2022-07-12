@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ShipCamera.gd" type="Script" id=1]
 [ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=2]
@@ -9,10 +9,13 @@
 [ext_resource path="res://SupportShip.tscn" type="PackedScene" id=7]
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=8]
 [ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=10]
 
 [node name="DebugLevel" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1750.77 )
 script = ExtResource( 3 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 10 )]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.307423, 0, 0.951573, 0, 1, 0, -0.951573, 0, 0.307423, 0, 0, 0 )

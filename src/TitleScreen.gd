@@ -66,3 +66,8 @@ func update_progress() -> void:
 	var progress : float = float(loader.get_stage()) / loader.get_stage_count()
 	$LoadingScreen/ProgressBar.value = progress * 100
 
+
+
+func _on_Debug_pressed():
+	show_loading_screen(false)
+	load_scene("res://DebugLevel.tscn", true)

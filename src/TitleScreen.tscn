@@ -70,14 +70,23 @@ __meta__ = {
 
 [node name="Play" type="Button" parent="MainMenu/VBoxContainer"]
 margin_right = 388.0
-margin_bottom = 103.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 text = "JUGA"
 
+[node name="Debug" type="Button" parent="MainMenu/VBoxContainer"]
+margin_top = 82.0
+margin_right = 388.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+text = "DEBUG"
+
 [node name="Quit" type="Button" parent="MainMenu/VBoxContainer"]
-margin_top = 123.0
+margin_top = 164.0
 margin_right = 388.0
 margin_bottom = 226.0
 size_flags_horizontal = 3
@@ -146,6 +155,7 @@ light_energy = 0.4
 shadow_enabled = true
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Debug" to="." method="_on_Debug_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 
 [editable path="CombatShip1"]
