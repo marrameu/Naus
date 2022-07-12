@@ -1,6 +1,9 @@
 extends Spatial
 
-onready var asteroid = preload("res://src/Asteroid.tscn")
+#onready var asteroid = preload("res://src/Asteroid.tscn")
+onready var asteroid = preload("res://src/AsteroidFieldTest/Asteroid_Debug.tscn")
+
+onready var SizeEditValues = $SizeEdit.mesh.size
 
 var start_roids = 1000
 var max_roids = 1000000
@@ -21,13 +24,17 @@ func add_roids():
 		#var new_meshinstance = MeshInstance.new()
 		#new_meshinstance.mesh = $Asteroid/Meteoritlod1.mesh
 		
-		var t = Transform().scaled(Vector3(0.1, 0.1, 0.1))
-		t.origin = Vector3(randf() * max_dist, randf() * max_dist, randf() * max_dist) - Vector3(0.5 * max_dist, 0.5 * max_dist, 0.5 * max_dist)
+		var s = (randf() + 0.1) * 2
+		
+		var r = Vector3(randf()*360, randf()*360, randf()*360)
+		var t = Transform().scaled(Vector3(s, s, s))
+		t.origin = Vector3(randf() * SizeEditValues.x, randf() * SizeEditValues.y, randf() * SizeEditValues.z) - Vector3(0.5 * SizeEditValues.x, 0.5 * SizeEditValues.y, 0.5 * SizeEditValues.z)
 		
 		var AsteroidInstance = new_meshinstance.instance()
 		
 		add_child(AsteroidInstance)
 		AsteroidInstance.global_transform = t
+		AsteroidInstance.rotation_degrees = r
 	
 	current_roids = needed_roids
 	#$UI.text("current_roids")
@@ -43,6 +50,8 @@ func _input(event):
 		add_roids()
 
 func _process(delta):
-	$DrawCalls.set_text(str(Performance.get_monitor(Performance.TIME_FPS)))
-	print(Performance.get_monitor(Performance.RENDER_DRAW_CALLS_IN_FRAME))
+	pass
+	#$DrawCalls.set_text(str(Performance.get_monitor(Performance.TIME_FPS)))
+	#print(Performance.get_monitor(Performance.RENDER_DRAW_CALLS_IN_FRAME))
 	
+
