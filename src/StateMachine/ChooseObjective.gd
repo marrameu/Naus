@@ -53,14 +53,20 @@ func enter():
 			emit_signal("finished", "attack_enemy")
 			return
 		
-		var closest_enemy_to_cs = closest_enemy_to_cs()
+		var closest_enemy_to_cs = closest_enemy_to_cs() # no hauria de comprovar si és més a prop que ella
 		if closest_enemy_to_cs:
 			owner.shooting.target = closest_enemy_to_cs
 			emit_signal("finished", "attack_enemy")
 			return
 		
+		closest_enemy = closest_enemy(INF)
+		if closest_enemy:
+			owner.shooting.target = closest_enemy
+			emit_signal("finished", "attack_enemy")
+			return
+		
 	elif aneu_guanyant:
-		print("nemg uanyant")
+		print("nem guanyant")
 		var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
 		if closest_attack_ship:
 			if closest_attack_ship.translation.distance_to(owner.translation) < 1000:

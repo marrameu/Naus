@@ -81,27 +81,27 @@ __meta__ = {
 [node name="ColDetectLeft" type="RayCast" parent="." index="10"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
 enabled = true
-cast_to = Vector3( 75, 0, 150 )
+cast_to = Vector3( 150, 0, 300 )
 
 [node name="ColDetectRight" type="RayCast" parent="." index="11"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
 enabled = true
-cast_to = Vector3( -75, 0, 150 )
+cast_to = Vector3( -150, 0, 300 )
 
 [node name="ColDetectForward" type="RayCast" parent="." index="12"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
 enabled = true
-cast_to = Vector3( 0, 0, 150 )
+cast_to = Vector3( 0, 0, 300 )
 
 [node name="ColDetectUp" type="RayCast" parent="." index="13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 enabled = true
-cast_to = Vector3( 0, 75, 150 )
+cast_to = Vector3( 0, 150, 300 )
 
 [node name="ColDetectDown" type="RayCast" parent="." index="14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
-cast_to = Vector3( 0, -75, 150 )
+cast_to = Vector3( 0, -150, 300 )
 
 [node name="EnemyDetectArea" type="Area" parent="." index="18"]
 

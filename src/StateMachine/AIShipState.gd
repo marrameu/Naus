@@ -19,8 +19,6 @@ func escape():
 
 
 func closest_enemy(min_dist : float = 750.0) -> Ship:
-	if min_dist > 1400:
-		print("No utilitzis valors propers o superiors al límit de l'attackenemy")
 	var clos_dist := min_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):

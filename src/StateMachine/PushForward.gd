@@ -16,8 +16,16 @@ func update(delta):
 		emit_signal("finished", "choose_objective")
 	
 	if owner.translation.distance_to(owner.input.target) < 250:
-		emit_signal("finished", "choose_objective")
-		#update_destination()
+		var closest_support_ship : Spatial = closest_big_ship("SupportShips")
+		if closest_support_ship:
+			owner.shooting.target = closest_support_ship
+			print("support ship, fora!!")
+			emit_signal("finished", "attack_big_ship")
+		else:
+			emit_signal("finished", "attack_cs")
+		# emit_signal("finished", "choose_objective")
+		# no faig choose_obj pq q passa si fa push forward i hi arriba però el middle point encara no?
+		# i doncs si ja ha arribat a aquest punt i no sha trobat cap enemic, q ataqui les naus grans
 	
 	if get_node("/root/Level").middle_point < -get_parent().point_of_change or get_node("/root/Level").middle_point > get_parent().point_of_change:
 		emit_signal("finished", "choose_objective")
