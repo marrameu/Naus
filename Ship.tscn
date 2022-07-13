@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/audio/drift.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/audio/turbo.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/effects/ThrusterFlameGradient.tres" type="Gradient" id=16]
+[ext_resource path="res://SpectateCamPivot.gd" type="Script" id=17]
 
 [sub_resource type="PhysicsMaterial" id=6]
 bounce = 0.5
@@ -144,7 +145,10 @@ autoplay = true
 max_distance = 600.0
 doppler_tracking = 2
 
-[node name="SpectateCamPos" type="Position3D" parent="."]
+[node name="SpectateCamPivot" type="Spatial" parent="."]
+script = ExtResource( 17 )
+
+[node name="SpectateCamPos" type="Position3D" parent="SpectateCamPivot"]
 transform = Transform( -0.982648, 0.0210385, -0.184281, -9.91625e-09, 0.993546, 0.113429, 0.185478, 0.11146, -0.976307, -5.0953, 10.1634, -29.3627 )
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

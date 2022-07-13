@@ -26,8 +26,20 @@ func _process(delta):
 			if body == target:
 				enemy_in_range = true
 	
-	# cal la weakref? si pot ser evitat millor
-	if weakref(target).get_ref():
+		if wants_shoots[1] and ammos[1]: # for cada wantsshoot comprovar si és míssil
+			if not target_locked:
+				if not locking_target_to_missile:
+					lock_target = target
+					lock_target_to_missile() # SI POT, SI NO Q DISPARI
+				return
+			else:
+				if can_shoots[1]:
+					shoot_bullet(1, target.translation)
+				return
+		
+		#if not ammos[0]
+		ammos[0] = MAX_AMMOS[0] # temporal
+		
 		if enemy_in_range:
 			for value in wants_shoots:
 				if wants_shoots[value] and can_shoots[value]:

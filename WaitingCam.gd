@@ -13,9 +13,12 @@ func _process(delta):
 		translation = target.global_transform.origin
 		rotation = target.global_transform.basis.get_euler()
 		
+		var pivot : Spatial = target.get_parent()
+		pivot.rotation += Vector3((Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down")), (Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left")), 0) * delta
+		
 		if target.owner.is_in_group("Ships"):
 			var text : String
-			text = target.owner.name + "\n" + target.owner.get_node("StateMachine").current_state.name + "\n" + str(target.owner.input.des_throttle) + " " + str(target.owner.input.wants_turbo)
+			text = target.owner.name + "\n" + target.owner.get_node("StateMachine").current_state.name + "\n" + str(target.owner.input.des_throttle) + " " + str(target.owner.input.wants_turbo) + " " + str(target.owner.input.do_turbo)
 			$CanvasLayer/Label.text = text
 
 
@@ -38,7 +41,6 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 	
 	if target_ships:
 		if index < 0:
-			print(index)
 			if index < -target_ships.size() + 1:
 				index = int(abs(index))
 				index %= target_ships.size()
@@ -47,5 +49,5 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 				index = target_ships.size() - index
 		elif index > target_ships.size() - 1:
 			index %= target_ships.size()
-		print(index)
-		target = target_ships[index].get_node("SpectateCamPos")
+		target = target_ships[index].get_node("SpectateCamPivot/SpectateCamPos")
+		target.get_parent().rotation = Vector3.ZERO

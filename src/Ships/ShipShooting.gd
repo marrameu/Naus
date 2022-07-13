@@ -71,11 +71,11 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	# dir
 	if bullet is MissileBullet:
 		if lock_target and target_locked:
-			target_locked = false
+			#target_locked = false
 			bullet.target = lock_target
 			return
-	
-	cancel_locking_target()
+	else:
+		cancel_locking_target()
 	
 	if shoot_target:
 		bullet.direction = (shoot_target - shoot_from).normalized()

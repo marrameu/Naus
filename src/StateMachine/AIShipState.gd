@@ -3,6 +3,9 @@ extends "res://src/StateMachine/State.gd"
 
 onready var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
 
+var my_team_big_ships_wo_shields : Array
+var enemy_big_ships_wo_shields : Array
+
 
 func _get_configuration_warning() -> String:
 	var warning := ""
@@ -16,8 +19,6 @@ func escape():
 
 
 func closest_enemy(min_dist : float = 750.0) -> Ship:
-	if min_dist > 1400:
-		print("No utilitzis valors propers o superiors al límit de l'attackenemy")
 	var clos_dist := min_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):
@@ -70,3 +71,27 @@ func number_of_my_team_ships() -> int:
 		if ship.pilot_man.blue_team == owner.pilot_man.blue_team:
 			num += 1
 	return num
+
+
+func _on_big_ship_shields_down(ship):
+	if ship.blue_team == owner.pilot_man.blue_team:
+		my_team_big_ships_wo_shields.append(ship)
+	else:
+		enemy_big_ships_wo_shields.append(ship)
+
+
+func clean_bigships_w_shields(ships_array) -> Array:
+	var pos : int = 0
+	while pos < ships_array.size():
+		var remove := false
+		if not ships_array[pos]:
+			remove = true
+		elif not weakref(ships_array[pos]).get_ref():
+			remove = true
+		elif ships_array[pos].get_node("HealthSystem").shield:
+			remove = true
+		if remove:
+			ships_array.remove(pos)
+			pos -= 1
+		pos += 1
+	return ships_array

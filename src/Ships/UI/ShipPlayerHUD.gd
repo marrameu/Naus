@@ -95,7 +95,6 @@ func _process(delta : float) -> void:
 				$AnimationPlayer.playback_speed = 1/owner.shooting.locking_time
 				$AnimationPlayer.play("LockingTarget")
 			if not (owner.cam as Camera).is_position_behind(target.translation):
-				print(randi())
 				$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
 		else:
 			#$LockingTarget.rect_size.x = 140 # sembla q no cal
