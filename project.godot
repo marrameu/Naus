@@ -19,6 +19,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Troops/Player/InputManager.gd"
 }, {
+"base": "CPUParticles",
+"class": "LODCPUParticles",
+"language": "GDScript",
+"path": "res://addons/lod/lod_cpu_particles.gd"
+}, {
+"base": "OmniLight",
+"class": "LODOmniLight",
+"language": "GDScript",
+"path": "res://addons/lod/lod_omni_light.gd"
+}, {
+"base": "Particles",
+"class": "LODParticles",
+"language": "GDScript",
+"path": "res://addons/lod/lod_particles.gd"
+}, {
+"base": "Spatial",
+"class": "LODSpatial",
+"language": "GDScript",
+"path": "res://addons/lod/lod_spatial.gd"
+}, {
+"base": "SpotLight",
+"class": "LODSpotLight",
+"language": "GDScript",
+"path": "res://addons/lod/lod_spot_light.gd"
+}, {
 "base": "ShipBullet",
 "class": "MissileBullet",
 "language": "GDScript",
@@ -67,6 +92,11 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "HealthSystem": "",
 "InputManager": "",
+"LODCPUParticles": "res://addons/lod/lod_cpu_particles.svg",
+"LODOmniLight": "res://addons/lod/lod_omni_light.svg",
+"LODParticles": "res://addons/lod/lod_particles.svg",
+"LODSpatial": "res://addons/lod/lod_spatial.svg",
+"LODSpotLight": "res://addons/lod/lod_spot_light.svg",
 "MissileBullet": "",
 "PilotManager": "",
 "Ship": "",
@@ -102,7 +132,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/destruction/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/destruction/plugin.cfg", "res://addons/lod/plugin.cfg", "res://addons/silicon.vfx.lens_flare/plugin.cfg" )
 
 [input]
 
