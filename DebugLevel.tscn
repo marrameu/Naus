@@ -80,13 +80,17 @@ shadow_enabled = true
 environment = ExtResource( 5 )
 script = ExtResource( 6 )
 
-[node name="CapitalShip" parent="." instance=ExtResource( 9 )]
+[node name="Ships" type="Spatial" parent="."]
+
+[node name="BigShips" type="Spatial" parent="."]
+
+[node name="CapitalShip" parent="BigShips" instance=ExtResource( 9 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 792.743, 0, 2800.04 )
 
-[node name="SupportShip" parent="." instance=ExtResource( 7 )]
+[node name="SupportShip" parent="BigShips" instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 388.19, 0, 2800.04 )
 
-[node name="AttackShip" parent="." instance=ExtResource( 8 )]
+[node name="AttackShip" parent="BigShips" instance=ExtResource( 8 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2800.04 )
 
 [editable path="Environment/AsteroidField"]

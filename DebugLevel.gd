@@ -9,7 +9,7 @@ func _ready():
 	$Camera.ship = ship
 	ship.pilot_man = $PilotManager
 	ship.cam = $Camera
-	add_child(ship)
+	$Ships.add_child(ship)
 	$Camera.make_current()
 	$Camera.init_cam()
 

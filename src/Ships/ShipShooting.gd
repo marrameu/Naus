@@ -47,6 +47,9 @@ func _process(delta : float) -> void:
 
 
 sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
+	if owner.dead:
+		return
+	
 	emit_signal("shot")
 	# audio
 	#(get_node("Audio" + str(current_bullet + 1)) as AudioStreamPlayer).play()

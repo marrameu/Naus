@@ -52,5 +52,9 @@ func change_rel_pos():
 
 func _on_BigShip_shields_recovered(ship : Spatial):
 	if ship == enemy_bs:
-		ship.disconnect("shields_recovered", self, "_on_BigShip_shields_recovered")
 		emit_signal("finished", "choose_objective")
+
+
+func exit():
+	if weakref(enemy_bs).get_ref():
+		enemy_bs.disconnect("shields_recovered", self, "_on_BigShip_shields_recovered")

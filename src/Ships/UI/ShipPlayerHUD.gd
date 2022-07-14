@@ -43,6 +43,12 @@ func _process(delta : float) -> void:
 			if get_parent().player_id != get_tree().get_network_unique_id():
 				return
 	
+	if owner.dead:
+		for child in get_children():
+			if child.has_method("hide"):
+				child.hide()
+		return
+	
 	#Utilities.canvas_scaler(get_parent().number_of_player, self)
 	
 	if Input.is_key_pressed(KEY_F1):

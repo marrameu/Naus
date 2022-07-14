@@ -24,10 +24,10 @@ func _on_enemy_died(attacker : Node):
 
 
 func _on_HealthSystem_die(attacker : Node):
+	dead = true
 	print("HAS ESTAT MORT PER ", attacker)
 	if attacker:
-		cam.look_at(attacker.translation, Vector3.UP)
-	cam.player_died()
+		cam.killer = (attacker)
 	
 	# animacions
 	
@@ -37,7 +37,3 @@ func _on_HealthSystem_die(attacker : Node):
 	t.start()
 	t.connect("timeout", self, "die")
 
-
-func die():
-	emit_signal("ship_died")
-	queue_free()

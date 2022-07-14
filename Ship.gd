@@ -13,6 +13,8 @@ onready var shooting : Node = $Shooting
 
 var  pilot_man : PilotManager
 
+var dead := false
+
 
 func _ready():
 	set_team_color()
@@ -61,12 +63,20 @@ func check_collisions(delta):
 
 
 func _on_HealthSystem_die(attacker : Node):
+	dead = true
 	print(name + "died")
 	
 	# animacions
 	
+	var t = Timer.new()
+	t.set_wait_time(2)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "die")
+
+
+func die():
 	emit_signal("ship_died")
-	
 	queue_free()
 
 

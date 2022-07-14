@@ -31,6 +31,10 @@ var DESIRED_DESCENSE_VEL := 5.0
 
 
 func _process(delta : float) -> void:
+	if owner.dead:
+		add_torque(Vector3(0, 0, 10), delta)
+		return
+	
 	drifting = ship.input.drifting
 	
 	linear_drag = NORMAL_LINEAR_DRAG if !drifting else DRIFTING_LINEAR_DRAG

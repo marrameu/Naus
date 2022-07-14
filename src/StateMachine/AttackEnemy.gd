@@ -54,7 +54,7 @@ func attack_current_enemy():
 					get_away_from_the_enemy = false
 			else: # disa
 				if not owner.shooting.enemy_in_range and out_of_range_timer.is_stopped():
-					out_of_range_timer.wait_time = rand_range(5, 14)
+					out_of_range_timer.wait_time = 10#rand_range(5, 14)
 					out_of_range_timer.start()
 					#no cal - elif owner.get_node("Shooting").enemy_in_range:
 					#	timer.stop()
@@ -64,7 +64,7 @@ func attack_current_enemy():
 		else:
 			owner.input.des_throttle = 1.0
 			owner.input.target = enemy.translation + attack_rel_pos # q si no sumes la relativa es xoquen
-			if owner.translation.distance_to(enemy.translation) < 400: # distancia a l'enemic
+			if owner.translation.distance_to(enemy.translation) < 700:#400: # distancia a l'enemic
 				has_reached_enemy = true
 				total_attack_pos = enemy.translation + attack_rel_pos
 
