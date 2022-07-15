@@ -33,7 +33,9 @@ func _process(delta : float) -> void:
 	zooming = Input.is_action_pressed(zoom_action) and not turboing and not drifting # ferho a la cam tmb
 	
 	update_yaw_and_ptich()
-	update_throttle(Input.get_action_strength(move_forward_action) - Input.get_action_strength(move_backward_action), delta)
+	var input_strenght := Input.get_action_strength(move_forward_action) - Input.get_action_strength(move_backward_action)
+	var des_throttle := 0.5 * input_strenght + 0.5
+	update_throttle(des_throttle, delta)
 
 
 func update_yaw_and_ptich() -> void:

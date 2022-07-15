@@ -51,11 +51,7 @@ func _physics_process(delta):
 func move_forward(delta):
 	var dist = owner.global_transform.origin.distance_to(target)
 	var input_strenght : float = 0 # com si el jugador cliqués W/S
-	if des_throttle > throttle:
-		input_strenght = 1
-	elif des_throttle < throttle:
-		input_strenght = -1
-	update_throttle(input_strenght, delta) #dist - a_partir_daqui_min/distancia_per_comencar_a_frenat - a_partir_daqui_min, delta)
+	update_throttle(des_throttle, delta) #dist - a_partir_daqui_min/distancia_per_comencar_a_frenat - a_partir_daqui_min, delta)
 
 
 # Va una mica ebri!, però fa el fet. S'hauria de fer amb matemàtiques, passant la desired_oirent a local, com ho feia al del 2017 (amb l'Slerp però amb pitch, yaw i roll)

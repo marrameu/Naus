@@ -6,7 +6,7 @@ var pitch := 0.0
 var yaw := 0.0
 var roll := 0.0
 var strafe := 0.0
-var throttle := 0.0
+var throttle := 0.5
 export(float, -1, 1) var MIN_THROTTLE := 0.3
 
 # TURBO
@@ -56,19 +56,27 @@ func _process(delta):
 
 
 func update_throttle(des_value : float, delta : float) -> void:
+	des_value = clamp(des_value, MIN_THROTTLE, 1.0)
+	
 	var target := throttle
 	var turbo_clamp := 2.0
-	if do_turbo:
+	
+	if drifting:
+		target = 0.0
+		throttle = 0.0
+	elif do_turbo:
 		target += delta
 	elif throttle > 1: # espera abans de fer el clamp, si no, baixa a 1 de cop
 		target -= delta
-		if drifting:
-			target = 0.0
-			throttle = 0.0
-			emit_signal("activated_turboing", false)
+		# emit_signal("activated_turboing", false)
 	else:
 		turbo_clamp = 1.0
-		target += des_value * delta / 2
+		if des_value > throttle:
+			target += delta / 2
+			target = max(throttle, target) # per si es passa
+		elif des_value < throttle:
+			target -= delta / 2
+			target = min(throttle, target) # per si es passa
 	
 	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
 	
