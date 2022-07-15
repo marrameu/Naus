@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/interface/crosshair_ammo.png" type="Texture" id=13]
 [ext_resource path="res://assets/audio/enemy_kill.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/audio/hitmarker.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=16]
 
 [sub_resource type="Animation" id=3]
 resource_name = "Idle"
@@ -560,5 +561,28 @@ tint_progress = Color( 0, 0.439216, 1, 0.588235 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/LockingTarget = SubResource( 1 )
+
+[node name="DieInfo" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -182.0
+margin_top = -211.0
+margin_right = 182.0
+margin_bottom = -167.0
+theme = ExtResource( 10 )
+text = "HEU ESTAT MORT PER JAUMA"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="DieInfo"]
+modulate = Color( 0.494118, 0.223529, 0.223529, 1 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 16 )
+expand = true
 
 [editable path="ShieldLifeBar"]

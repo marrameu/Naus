@@ -60,9 +60,10 @@ func _process(delta):
 		return
 	
 	if ship.dead:
+		translation += transform.basis.z * 100 * delta
 		if killer:
-			var rot_transform = transform.looking_at(killer.translation, Vector3.UP)
-			transform = Quat(transform.basis).slerp(rot_transform.basis, 0.2)
+			var rot_transform = transform.looking_at(killer.translation, transform.basis.y)
+			transform.basis = Basis(Quat(transform.basis).slerp(rot_transform.basis, 3 * delta))
 		return
 	
 	if Input.is_action_just_pressed("change_cam"):

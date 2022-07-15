@@ -19,7 +19,6 @@ func _on_damagable_hit():
 
 func _on_enemy_died(attacker : Node):
 	if attacker == self:
-		print("eooo")
 		$PlayerHUD.on_enemy_died()
 
 
