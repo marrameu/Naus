@@ -5,12 +5,8 @@ var cam : Camera
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Utilities.first_person:
-		$ShipMesh.visible = false
-		$PlayerShipInterior.visible = true
-	else:
-		$ShipMesh.visible = true
-		$PlayerShipInterior.visible = false
+	$ShipMesh.visible = !Utilities.first_person or dead
+	$PlayerShipInterior.visible = Utilities.first_person and not dead
 
 
 func _on_damagable_hit():
