@@ -384,6 +384,12 @@ rect_pivot_offset = Vector2( 30, 30 )
 texture = ExtResource( 5 )
 expand = true
 
+[node name="DamageIndicators" type="Control" parent="Center"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
 [node name="LifeBar" parent="." instance=ExtResource( 6 )]
 visible = false
 anchor_left = 0.5

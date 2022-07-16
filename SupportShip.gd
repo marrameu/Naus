@@ -23,15 +23,15 @@ func _physics_process(delta):
 	
 	var des_x : float
 	if original_x < 0:
-		des_x = max(get_node("/root/Level").middle_point * 4 + original_x, original_x - 600)
+		des_x = max(get_node("/root/Level").middle_point * 1.75 + original_x, original_x - 500)
 	else:
-		des_x = min(get_node("/root/Level").middle_point * 4 + original_x, original_x + 600)
+		des_x = min(get_node("/root/Level").middle_point * 1.75 + original_x, original_x + 500)
 	
 	var collider
 	if translation.x > des_x:
-		move_and_collide(Vector3(-10 * delta, 0, 0))
+		move_and_collide(Vector3(-30 * delta, 0, 0))
 	elif translation.x < des_x:
-		move_and_collide(Vector3(10 * delta, 0, 0))
+		move_and_collide(Vector3(30 * delta, 0, 0))
 	#if collider:
 	#	if collider.is_in_group("Asteroids"):
 	#		collider.get_node("HealthSystem").take_damage(99999)

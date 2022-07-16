@@ -53,5 +53,9 @@ stream = ExtResource( 11 )
 volume_db = 15.0
 bus = "Sounds"
 
+[node name="Pito" parent="." index="12"]
+transform = Transform( -0.746258, -0.254745, 0.614983, -0.164444, 0.965791, 0.200514, -0.645025, 0.0485047, -0.76262, 0, 7.75062, 0 )
+
+[connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_die"]
 [connection signal="shot" from="Shooting" to="PlayerHUD" method="_on_Shooting_shot"]

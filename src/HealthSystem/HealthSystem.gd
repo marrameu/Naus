@@ -5,6 +5,7 @@ signal die
 signal shield_die
 signal shield_started_recovering
 signal shield_recovered
+signal damage_taken
 
 export var MAX_SHIELD : int = 0 # no caldria perquè l'escut, se suposa que no es pot regenerar -ah, calla, amb les caus sí-, però per a les health bars potser convindria
 var shield : float = 0

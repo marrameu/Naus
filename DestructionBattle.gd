@@ -11,6 +11,8 @@ const ai_ship_scene : PackedScene = preload("res://AIShip.tscn")
 var battle_started := false
 var battle_time := 0.0
 
+var num_of_players := 5
+var num_of_temp_ai := 0
 
 # middle point
 var middle_point := 0.0
@@ -31,6 +33,7 @@ func _ready():
 	for big_ship in $BigShips.get_children():
 		emit_signal("ship_added", big_ship)
 		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
+		big_ship.connect("destroyed", self, "_on_BigShip_destroyed")
 	
 	$PilotManagers/PlayerManager.blue_team = PlayerInfo.player_blue_team
 	
@@ -41,6 +44,9 @@ func _process(delta):
 	$MatchUI.middle_point_value = middle_point * 1/30 # o menys, 1500-2000 potser
 	if battle_started:
 		battle_time += delta
+	if Input.is_action_just_pressed("test"):
+		spawn_AI(100 + num_of_temp_ai, randi() % 2)
+		num_of_temp_ai += 1
 
 
 func _physics_process(delta):
@@ -48,27 +54,17 @@ func _physics_process(delta):
 
 
 func update_middle_point(delta): 
-	#middle_point = 0.0
 	blue_point = 0.0
-	num_of_blues = 0
 	red_point = 0.0
-	num_of_reds = 0
 	
 	for ship in $Ships.get_children():
 		if not ship.pilot_man.blue_team:
-			num_of_reds += 1
-			red_point += ship.translation.x
+			red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 		else:
-			num_of_blues += 1
-			blue_point +=  ship.translation.x
-	while num_of_reds < 5:
-		red_point += RED_LIMIT - 1000
-		num_of_reds += 1
-	while num_of_blues < 5:
-		blue_point += BLUE_LIMIT + 1000
-		num_of_blues += 1
-	red_point /= 5
-	blue_point /= 5
+			blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
+	
+	red_point /= num_of_players + num_of_temp_ai
+	blue_point /= num_of_players + num_of_temp_ai
 	
 	for attack_ship in get_tree().get_nodes_in_group("AttackShips"):
 		if attack_ship.blue_team:
@@ -79,8 +75,6 @@ func update_middle_point(delta):
 			red_point += 650
 	
 	var des_middle_point = (red_point + blue_point) / 2
-	var dif = des_middle_point - middle_point
-	# middle_point += clamp(dif, -5, 5) * delta
 	middle_point = lerp(middle_point, des_middle_point, 0.3 * delta)
 	$RedPoint.translation.x = red_point
 	$BluePoint.translation.x = blue_point
@@ -98,12 +92,14 @@ func update_middle_point(delta):
 		red_take_over = false
 
 
-func _on_BigShip_destroyed(blue_team):
-	$Results/Control.show()
-	if not blue_team:
-		$Results/Control/RichTextLabel.show()
-	else:
-		$Results/Control/RichTextLabel2.show()
+func _on_BigShip_destroyed(ship : Spatial):
+	emit_signal("match_msg", ship.name + " HA ESTAT DESTRUÏDA", !ship.blue_team)
+	if ship.is_in_group("CapitalShips"):
+		$Results/Control.show()
+		if not ship.blue_team:
+			$Results/Control/RichTextLabel.show()
+		else:
+			$Results/Control/RichTextLabel2.show()
 	# stop tot
 
 
@@ -204,15 +200,15 @@ func start_battle():
 	battle_started = true
 	emit_signal("battle_started")
 	
-	var blue_ais : int = 5
-	var red_ais : int = 5
+	var blue_ais : int = num_of_players
+	var red_ais : int = num_of_players
 	var ai_num : int = 0
-	"""
+	
 	if PlayerInfo.player_blue_team:
 		blue_ais -=1
 	else:
 		red_ais -= 1
-	"""
+	
 	var x : int = 0
 	while x < blue_ais:
 		x += 1 

@@ -11,6 +11,9 @@ onready var crosshair := $Center/Crosshair
 onready var cursor_center_pos : Vector2 = $Center.rect_size / 2 - cursor.rect_size / 2
 onready var crosshair_center_pos : Vector2 = $Center.rect_size / 2 - crosshair.rect_size / 2
 
+onready var damage_indicators := $Center/DamageIndicators
+
+const damage_indicator_scene : PackedScene = preload("res://src/HUD/DamageIndicator.tscn")
 
 # Tots els nodes de la nau agafen l'input des d'aquí, millor que l'agafin des del node PlayerInput
 var cursor_input := Vector2()
@@ -87,7 +90,8 @@ func _process(delta : float) -> void:
 			var direction := Vector3(target.translation - owner.translation).normalized()
 			var x = direction.dot(owner.global_transform.basis.x)
 			var y = direction.dot(owner.global_transform.basis.y)
-			# print(x, "    ", y)
+			var prova = Vector2(-x, -y).normalized()
+			lock_target_info.rect_position = (prova * 1000 - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
 			
 			# així 100% q no
 			#lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
@@ -225,3 +229,17 @@ func on_enemy_died():
 
 func _on_HealthSystem_die(attacker):
 	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
+
+
+func _on_HealthSystem_damage_taken(attacker : Spatial):
+	if not attacker or not weakref(attacker).get_ref():
+		return
+	
+	for child in damage_indicators.get_children():
+		if child.attacker == attacker:
+			child.restart_timer()
+			return
+	
+	var damage_indicator = damage_indicator_scene.instance()
+	damage_indicator.attacker = attacker
+	damage_indicators.add_child(damage_indicator)

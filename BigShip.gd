@@ -18,7 +18,7 @@ func _ready():
 
 
 func _on_HealthSystem_die(attacker : Node):
-	emit_signal("destroyed", self, blue_team)
+	emit_signal("destroyed", self)
 	queue_free()
 
 
