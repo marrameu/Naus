@@ -4,6 +4,7 @@ extends "AIShipState.gd"
 
 func enter():
 	print(owner, " entered ", name)
+	return
 	
 	my_team_big_ships_wo_shields = clean_bigships_w_shields(my_team_big_ships_wo_shields)
 	enemy_big_ships_wo_shields = clean_bigships_w_shields(enemy_big_ships_wo_shields)

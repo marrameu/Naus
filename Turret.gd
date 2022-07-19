@@ -59,7 +59,7 @@ sync func shoot() -> void:
 	var bullet : Spatial
 	bullet = bullet_scene.instance()
 	
-	get_node("/root/Level").add_child(bullet)
+	get_tree().current_scene.add_child(bullet)
 	var shoot_from : Vector3 = global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = -$Spatial.global_transform.basis.z

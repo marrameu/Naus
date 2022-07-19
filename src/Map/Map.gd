@@ -31,6 +31,8 @@ func add_normal_ship(ship : Spatial, is_player := false):
 		elif ship.is_in_group("CapitalShips"):
 			new_ship_min = cs_min_scene.instance()
 		new_ship_min.modulate = Color.cornflower if ship.blue_team else Color.indianred
+	if not new_ship_min:
+		return # SpaceStation
 	$Control.add_child(new_ship_min)
 	new_ship_min.true_self = ship
 	# new_ship_min.rect_position = Vector2(rand_range(0, 1000), rand_range(0, 1000))

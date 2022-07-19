@@ -8,10 +8,15 @@ signal finished_loading
 
 
 func _ready() -> void:
-	$MainMenu/VBoxContainer/Play.grab_focus()
+	$MainMenu/VBoxContainer/FleetBattle.grab_focus()
 
 
-func _on_Play_pressed() -> void:
+func _on_SpaceStationBattle_pressed():
+	show_loading_screen(false)
+	load_scene("res://SpaceStationLevel.tscn", true)
+
+
+func _on_FleetBattle_pressed():
 	# Utilities.play_button_audio()
 	# LocalMultiplayer.remap_inputs()
 	show_loading_screen(false)
@@ -65,7 +70,6 @@ func load_scene(path : String, instant_load : bool) -> void:
 func update_progress() -> void:
 	var progress : float = float(loader.get_stage()) / loader.get_stage_count()
 	$LoadingScreen/ProgressBar.value = progress * 100
-
 
 
 func _on_Debug_pressed():

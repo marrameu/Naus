@@ -71,27 +71,6 @@ transform = Transform( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336,
 [node name="Turret7" parent="Turrets" instance=ExtResource( 3 )]
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
 
-[node name="ShipPoints" type="Spatial" parent="."]
-transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
-
-[node name="AttackPos2" type="Position3D" parent="ShipPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.2106, -3.05176e-05, -564.878 )
-
-[node name="AttackPos3" type="Position3D" parent="ShipPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -427.03, -3.05176e-05, -390.446 )
-
-[node name="AttackPos4" type="Position3D" parent="ShipPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -555.769, -3.05176e-05, -5.8555 )
-
-[node name="AttackPos5" type="Position3D" parent="ShipPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -271.116, -3.05176e-05, 420.47 )
-
-[node name="AttackPos6" type="Position3D" parent="ShipPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 206.02, -3.05176e-05, 335.4 )
-
-[node name="AttackPos" type="Position3D" parent="ShipPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 610.084, 0, 0 )
-
 [node name="DamageArea" type="Area" parent="."]
 collision_layer = 8
 monitoring = false

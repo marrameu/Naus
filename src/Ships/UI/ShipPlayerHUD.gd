@@ -91,7 +91,7 @@ func _process(delta : float) -> void:
 			var x = direction.dot(owner.global_transform.basis.x)
 			var y = direction.dot(owner.global_transform.basis.y)
 			var prova = Vector2(-x, -y).normalized()
-			lock_target_info.rect_position = (prova * 1000 - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+			lock_target_info.rect_position = (prova * 500 - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
 			
 			# així 100% q no
 			#lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
